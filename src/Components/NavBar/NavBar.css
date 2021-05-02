@@ -1,0 +1,21 @@
+.c-navbar #button-warper{
+    justify-content: flex-end !important;
+}
+
+
+.c-navbar button{
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.button-warper{
+    display: flex;
+    justify-content: flex-end;
+    flex: auto;
+}
+
+svg{ 
+    color: white;
+    font-size: 20px;
+    margin-right: 10px;
+}
