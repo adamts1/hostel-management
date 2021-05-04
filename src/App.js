@@ -1,17 +1,10 @@
 import './App.css';
-import { HashRouter, Switch, Route } from 'react-router-dom';
-import LandingPage from './Pages/LandingPage'
+import { HashRouter, Switch, Route, Link } from 'react-router-dom';
+import LandingPage from './Pages/LandingPage/LandingPage'
+import SignInUp from './Pages/SignInUp/SignInUp'
 import NavBar from './Components/NavBar/NavBar'
+import Footer from './Components/Footer/Footer'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-// import ReactDOM from 'react-dom'
-// import { library } from '@fortawesome/fontawesome-svg-core'
-// import { fab } from '@fortawesome/free-brands-svg-icons'
-// import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
-
-// library.add(fab, faCheckSquare, faCoffee)
-
-
 
 
 function App() {
@@ -20,7 +13,19 @@ function App() {
       <HashRouter>
        
         <Switch>
-          <Route exact path="/"> <NavBar/><LandingPage/></Route>
+          <Route exact path="/">
+             <NavBar/>
+             <LandingPage/>
+             <Footer/>
+          </Route>
+          <Route exact path="/login">
+             <SignInUp type="Login"/>
+             <Footer/>
+          </Route>
+          <Route exact path="/signup">
+             <SignInUp type="Signup"/>
+             <Footer/>
+          </Route>
         </Switch>
       </HashRouter>
     </>

@@ -1,0 +1,87 @@
+.p-login{
+
+       height: calc(100vh - 289px);
+}
+
+
+.p-login form{
+    width: 300px;
+    margin: 0 auto;
+}
+
+.p-login form h3{
+
+    margin-bottom: 40px;
+    text-align: center;
+    color: gray;
+    font-size: 24px;
+
+}
+
+.p-login form input[type='email'], form input[type='password'], form input[type='text']{
+    max-width: 300px;
+    margin: 0 auto;
+    font-size: 14px;
+    background-color: #FAFBFC;
+    border: 2px solid #DFE1E6;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 3px;
+    height: 44px;
+    -webkit-transition: background-color .2s ease-in-out 0s,border-color .2s ease-in-out 0s;
+    transition: background-color .2s ease-in-out 0s,border-color .2s ease-in-out 0s;
+}
+
+
+.p-login .form-check{
+    text-align: left;
+
+}
+
+
+.p-login .form-warper{
+
+    max-width: 553px;
+    text-align: center;
+    margin: 0 auto;
+    background-color: white;
+    box-shadow: rgba(0,0,0,0.1) 0 0 10px;
+    padding: 36px 30px 55px 30px;
+}
+
+.p-login button{
+    width: 300px;
+}
+
+.p-login button{
+    width: 300px;
+}
+
+.p-login .container{
+    margin-top: 100px;
+}
+
+.p-login span{
+    display: block;
+    margin-bottom: 14px;
+    font-weight: bold;
+    font-size: 13px;
+
+
+}
+
+@media (max-width: 481px){ 
+
+    .p-login .form-warper{
+        padding: 0;
+        box-shadow: none
+    }
+
+    .p-login{
+
+        height: calc(100vh - 333px);
+    }
+    
+    
+
+    }

@@ -1,5 +1,16 @@
+.c-navbar header{
+    background-image: linear-gradient(#008B8B -8%, white 102%);
+    color: #5E6C84;
+}
+
+
 .c-navbar #button-warper{
     justify-content: flex-end !important;
+}
+
+.c-navbar .brand a{
+    color: #5E6C84;
+
 }
 
 
@@ -18,4 +29,24 @@ svg{
     color: white;
     font-size: 20px;
     margin-right: 10px;
+    margin-bottom: 7px;
+    color:#5E6C84
 }
+
+.navbar-brand{
+    font-weight: bold;  
+}
+
+
+
+@media (max-width: 980px){ 
+
+    .c-navbar .brand{
+        display: none;
+    }
+
+    .buttons{
+        margin: 0 auto;
+    }
+
+    }

@@ -1,8 +1,9 @@
 import './NavBar.css'
 import { Navbar, Nav, NavDropdown, Button } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-import { IoTrashOutline, IoHomeOutline } from "react-icons/io5";
+import { HashRouter, Switch, Route, Link } from 'react-router-dom';
+
+
+import { BsHouseFill } from 'react-icons/bs';
 
 
 
@@ -11,14 +12,22 @@ import { IoTrashOutline, IoHomeOutline } from "react-icons/io5";
 function NavBar() {
     return (
         <div className="c-navbar">
-            <Navbar  bg="dark" variant="dark">
-            <IoHomeOutline className="iconWarper"className="icon" />
-            <Navbar.Brand href="#home">HOSTEL MANAGMENT</Navbar.Brand>
-                <div className="button-warper">
-                    <Button variant="outline-light">Log in</Button>
-                    <Button variant="primary">Sign up</Button>    
-                </div>                    
-            </Navbar>
+            <header className="fixed-top">
+                <Navbar className="p-3">
+                    <div className='brand'>
+                        <BsHouseFill className="iconWarper" className="icon" />
+                        <Navbar.Brand href="#home">HOSTEL MANAGMENT</Navbar.Brand>
+                    </div>
+                    <div className="float-right buttons">
+                        <Link to="/login"> 
+                            <Button variant="outline-light text-dark">Log in</Button>
+                        </Link>
+                        <Link to="/signup">
+                            <Button variant="primary text-white">Sign up</Button>
+                        </Link>
+                    </div>
+                </Navbar>
+            </header>
         </div>
     );
 }
