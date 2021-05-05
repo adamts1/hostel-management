@@ -9,7 +9,8 @@ import { BsHouseFill } from 'react-icons/bs';
 
 
 
-function NavBar() {
+function NavBar({onLogout, activeUser}) {
+    console.log("sss", activeUser)
     return (
         <div className="c-navbar">
             <header className="fixed-top">
@@ -25,6 +26,9 @@ function NavBar() {
                         <Link to="/signup">
                             <Button variant="primary text-white">Sign up</Button>
                         </Link>
+                        {activeUser ?<Link to="/"><Button variant="primary text-white" onClick={onLogout}>Logout</Button></Link>: null}
+                            
+                        
                     </div>
                 </Navbar>
             </header>
