@@ -1,12 +1,7 @@
 import './NavBar.css'
 import { Navbar, Nav, NavDropdown, Button } from 'react-bootstrap';
 import { HashRouter, Switch, Route, Link } from 'react-router-dom';
-
-
 import { BsHouseFill } from 'react-icons/bs';
-
-
-
 
 
 function NavBar({onLogout, activeUser}) {
@@ -21,7 +16,7 @@ function NavBar({onLogout, activeUser}) {
                     <div className="float-right buttons">
                         {!activeUser ?<Link to="/login"> <Button variant="outline-light text-dark">Log in</Button></Link>: null}
                         {!activeUser ?<Link to="/signup"><Button variant="primary text-white">Sign up</Button></Link>: null}
-                        {activeUser ?<Link to="/"><Button variant="primary text-white" onClick={onLogout}>Logout</Button></Link>: null}
+                        {activeUser ?<Link to="/"><Button variant="outline-light text-dark" onClick={onLogout}>Logout</Button></Link>: null}
                     </div>
                 </Navbar>
             </header>

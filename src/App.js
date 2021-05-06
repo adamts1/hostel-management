@@ -10,8 +10,6 @@ import { useState } from 'react';
 import UserModel from './Model/UserModel';
 import Parse from 'parse'
 
-
-
 function App() {
   const [activeUser ,setActiveUser] = useState(UserModel.loadActiveUser());
 
@@ -21,7 +19,7 @@ function App() {
   }
   
   return (
-    <>
+    <div className="App">
       <HashRouter>
         <Switch>
           <Route exact path="/">
@@ -44,7 +42,7 @@ function App() {
           </Route>
         </Switch>
       </HashRouter>
-    </>
+    </div>
   );
 }
 

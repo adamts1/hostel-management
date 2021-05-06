@@ -6,7 +6,6 @@ import { BsHouseFill } from 'react-icons/bs';
 import { Link, Redirect } from 'react-router-dom';
 import { useState } from 'react';
 
-
 function SignInUp({ onLogin, activeUser, type }) {
   const [email, setEmail] = useState("")
   const [pwd, setPwd] = useState("")
@@ -78,8 +77,10 @@ function SignInUp({ onLogin, activeUser, type }) {
             <Form onSubmit={login}>
               <h3><BsHouseFill className="iconWarper" className="icon" />{type}</h3>
               {showInvalidLogin ? <Alert variant="danger">Invalid Credentials!</Alert> : null}
+
               <SignInUpInput type="email" placeHolder="Enter Email" value={email} onChange={e => setEmail(e.target.value)} />
               <SignInUpInput type="password" placeHolder="Enter Password" value={pwd} onChange={e => setPwd(e.target.value)} />
+              
               <hr />
               <Link to="/signup"><span><a href="">Can't log in? Sign up for an account</a></span></Link>
               <Button variant="primary" type="submit">
@@ -91,9 +92,6 @@ function SignInUp({ onLogin, activeUser, type }) {
       </Container>
     </div >
   );
-
-
-
 }
 
 export default SignInUp;
