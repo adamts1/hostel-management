@@ -1,9 +1,13 @@
 import './AdminMainPage.css'
+import NewHostelModel from '../../Components/NewHostelModel/NewHostelModel'
 import { Container, Accordion, Card, Row, Button, Col } from 'react-bootstrap';
 import { BsPlusCircle } from 'react-icons/bs';
+import { useState } from 'react';
 
 
 function AdminMainPage() {
+const [showNewHostelModel, setShowNewHostelModel] = useState(false);
+
   return (
     <div className='p-adminmainpage'>
       <Container>
@@ -12,7 +16,7 @@ function AdminMainPage() {
             <h1>Hostels</h1>
           </Col>
           <Col>
-           <Button id="add-new" variant="outline-secondary" type="submit">Add New Hostel</Button>
+           <Button id="add-new" variant="outline-secondary" type="submit" onClick={()=>setShowNewHostelModel(true)} >Add New Hostel</Button>
           </Col>
         </Row>
         <hr />
@@ -37,8 +41,8 @@ function AdminMainPage() {
               <Card.Body>Hello! I'm another body</Card.Body>
             </Accordion.Collapse>
           </Card>
-
         </Accordion>
+        <NewHostelModel show={showNewHostelModel} onClose={() => setShowNewHostelModel(false)}/>
       </Container>
     </div>
   );
