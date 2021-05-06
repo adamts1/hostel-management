@@ -13,12 +13,11 @@ import Parse from 'parse'
 
 
 function App() {
-  const [activeUser ,setActiveUser] = useState(Parse.User.current() ? new UserModel(Parse.User.current()) : null);
+  const [activeUser ,setActiveUser] = useState(UserModel.loadActiveUser);
 
   const logoutHanler = () => {
     setActiveUser(null);
     Parse.User.logOut();
-
   }
   
   return (
