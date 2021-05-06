@@ -2,13 +2,11 @@ import './SignInUpInput.css'
 import { Form } from 'react-bootstrap';
 
 
-
-
-function SignInUpInput(props) {
+function SignInUpInput({type, placeHolder, onChange}) {
     return (
-        <div className='c-signinupinput'>
+        <div className=''>
             <Form.Group controlId="formBasicCheckbox">
-                <Form.Control type={props.type} placeHolder={props.placeHolder} />
+                <Form.Control type={type} placeholder={placeHolder} onChange={onChange} />
             </Form.Group>
         </div>
     );
