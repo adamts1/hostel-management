@@ -37,7 +37,7 @@ function SignInUp({ onLogin, activeUser, type }) {
 
   }
 
-  if (type == "Signup") {
+  if (type === "Signup") {
     return (
       <div className='p-login'>
         <Container>

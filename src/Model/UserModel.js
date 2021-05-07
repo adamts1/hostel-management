@@ -1,4 +1,5 @@
 import Parse from 'parse';
+import HostelsModel from '../Model/HostelsModel'
 
 export default class UserModel {
     #parseUser  // storing the parseUser object as a private field (might need to use it)
@@ -32,6 +33,24 @@ export default class UserModel {
         UserModel.activeUser = new UserModel(parseUser)
         return UserModel.activeUser
         
+    }
+
+    async createHostel(name, addrees, numOfRooms) {
+     
+
+        console.log(name, addrees, numOfRooms)
+        const HostelTable = Parse.Object.extend('Hostel');
+        const newHostel= new HostelTable();
+        console.log(newHostel)
+
+        newHostel.set('hostelName', name);
+        newHostel.set('hostelAddress', addrees);
+        newHostel.set('numberOfRooms', numOfRooms);
+        newHostel.set('userId', this.#parseUser);
+
+        const parseHostel = await newHostel.save();
+        const hostel = new HostelsModel(parseHostel);
+        return hostel;
     }
 
     static loadActiveUser() {

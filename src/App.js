@@ -37,7 +37,7 @@ function App() {
           </Route>
           <Route exact path="/adminMain">
              <NavBar activeUser={activeUser} onLogout={logoutHanler}/>
-             <AdminMain />
+             <AdminMain activeUser={activeUser} />
              <Footer/>
           </Route>
         </Switch>

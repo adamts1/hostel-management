@@ -5,8 +5,17 @@ import { BsPlusCircle } from 'react-icons/bs';
 import { useState } from 'react';
 
 
-function AdminMainPage() {
+function AdminMainPage({activeUser}) {
 const [showNewHostelModel, setShowNewHostelModel] = useState(false);
+const [hostels, setHostels] = useState([]);
+
+
+
+async function handleNewHostel(name, address, numOfRooms) {
+  const newHostel = await activeUser.createHostel(name, address, numOfRooms);
+  console.log(newHostel)
+  setHostels(hostels.concat(newHostel));
+}
 
   return (
     <div className='p-adminmainpage'>
@@ -42,7 +51,7 @@ const [showNewHostelModel, setShowNewHostelModel] = useState(false);
             </Accordion.Collapse>
           </Card>
         </Accordion>
-        <NewHostelModel show={showNewHostelModel} onClose={() => setShowNewHostelModel(false)}/>
+        <NewHostelModel onCreate={handleNewHostel} show={showNewHostelModel} onClose={() => setShowNewHostelModel(false)}/>
       </Container>
     </div>
   );

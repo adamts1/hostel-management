@@ -1,10 +1,55 @@
 import './NewHostelModel.css'
 import SignInUpInput from '../../Components/SignInUpInput/SignInUpInput'
 import { Modal, Button, Form } from 'react-bootstrap';
+import Parse from 'parse';
+import { useState } from 'react';
 
 
 
-function NewHostelModel({ show, onClose }) {
+
+
+function NewHostelModel({ show, onClose, onCreate }) {
+    const [name, setName] = useState("");
+    const [address, setAddress] = useState("");
+    const [nuberOfRooms, setNuberOfRooms] = useState("");
+
+    function clearForm() {
+      setName("");
+      setAddress("");
+      setNuberOfRooms("");
+  }
+
+
+
+
+    const createHostel = () => {
+
+    // const Hostel = Parse.Object.extend('Hostel');
+    // const myNewObject = new Hostel();
+    //   console.log(Parse.User.current())
+    //   console.log(Parse.User.current()["id"])
+
+    //   myNewObject.set('numberOfRooms', 2 );
+    //   myNewObject.set('hostelName', name);
+    //   myNewObject.set('hostelAddress', address);
+    //   myNewObject.set('userId', Parse.User.current());
+
+    //   myNewObject.save().then(
+    //   (result) => {
+    //     console.log('Hostel created', result);
+    //   },
+    //   (error) => {
+    //     console.error('Error while creating Hostel: ', error);
+    //   } );
+
+        onCreate(name, address, nuberOfRooms);
+        clearForm();
+        onClose();
+
+  }
+
+
+
   return (
     <div className='c-newhostelmodel'>
 
@@ -14,11 +59,10 @@ function NewHostelModel({ show, onClose }) {
         </Modal.Header>
         <Modal.Body>
           <Form.Group>
-      
-            <SignInUpInput type="text" placeHolder="Hostel Name"  />
-            <SignInUpInput type="text" placeHolder="Hostel Address" />
-            <SignInUpInput type="number" placeHolder="# Rooms"  />
 
+            <SignInUpInput   value={name} type="text" placeHolder="Hostel Name" onChange={e => setName(e.target.value)} />
+            <SignInUpInput   value={address} type="text" placeHolder="Hostel Address" onChange={e => setAddress(e.target.value)}/>
+            <SignInUpInput   value={nuberOfRooms} type="text" placeHolder="# Rooms" onChange={e => setNuberOfRooms(e.target.value)} />
 
           </Form.Group>
         </Modal.Body>
@@ -26,7 +70,7 @@ function NewHostelModel({ show, onClose }) {
           <Button variant="secondary" onClick={onClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={onClose}>
+          <Button variant="primary" onClick={createHostel}>
             Save Changes
           </Button>
         </Modal.Footer>
