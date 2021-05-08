@@ -14,7 +14,7 @@ function SignInUp({ onLogin, activeUser, type }) {
   const [showInvalidLogin, setShowInvalidLogin] = useState(false);
 
   if (activeUser) {
-    return <Redirect to="/adminMain" />
+    return <Redirect to="/hostelpage" />
   }
 
   async function login(e) {

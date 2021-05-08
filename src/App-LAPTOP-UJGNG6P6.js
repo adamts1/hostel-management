@@ -1,8 +1,8 @@
 import './App.css';
-import { HashRouter, Switch, Route, Link } from 'react-router-dom';
+import { HashRouter, Switch, Route } from 'react-router-dom';
 import LandingPage from './Pages/LandingPage/LandingPage'
 import SignInUp from './Pages/SignInUp/SignInUp'
-import HostelPage from './Pages/HostelPage/HostelPage'
+import AdminMain from './Pages/AdminMainPage/AdminMainPage'
 import NavBar from './Components/NavBar/NavBar'
 import Footer from './Components/Footer/Footer'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -35,9 +35,9 @@ function App() {
              <SignInUp type="Signup" activeUser={activeUser} onLogin={user => setActiveUser(user)}/>
              <Footer/>
           </Route>
-          <Route exact path="/hostelpage">
+          <Route exact path="/adminMain">
              <NavBar activeUser={activeUser} onLogout={logoutHanler}/>
-             <HostelPage activeUser={activeUser} />
+             <AdminMain activeUser={activeUser} />
              <Footer/>
           </Route>
         </Switch>

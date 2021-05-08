@@ -1,5 +1,5 @@
 import Parse from 'parse';
-import HostelsModel from '../Model/HostelsModel'
+import HostelModel from '../Model/HostelModel'
 
 export default class UserModel {
     #parseUser  // storing the parseUser object as a private field (might need to use it)
@@ -35,13 +35,18 @@ export default class UserModel {
         
     }
 
-    async createHostel(name, addrees, numOfRooms) {
-     
+    async getMyHostel() {
+        const HostelTable = Parse.Object.extend('Hostel');
+        const query = new Parse.Query(HostelTable);
+        query.equalTo("userId", this.#parseUser);
+        const parseHostes = await query.find();
+        const hostels = parseHostes.map(parseHoste => new HostelModel(parseHoste));
+        return hostels;
+    }
 
-        console.log(name, addrees, numOfRooms)
+    async createHostel(name, addrees, numOfRooms) {
         const HostelTable = Parse.Object.extend('Hostel');
         const newHostel= new HostelTable();
-        console.log(newHostel)
 
         newHostel.set('hostelName', name);
         newHostel.set('hostelAddress', addrees);
@@ -49,7 +54,7 @@ export default class UserModel {
         newHostel.set('userId', this.#parseUser);
 
         const parseHostel = await newHostel.save();
-        const hostel = new HostelsModel(parseHostel);
+        const hostel = new HostelModel(parseHostel);
         return hostel;
     }
 

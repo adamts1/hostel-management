@@ -1,17 +1,17 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@600&display=swap'); */
-.p-adminmainpage{
+.p-hostelpage{
 
     height: calc(100vh - 289px);
     /* font-family: 'Archivo Narrow', sans-serif; */
 }
 
 
-.p-adminmainpage svg{
+.p-hostelpage svg{
     margin: 0 0 2px 7px;
 }
 
 
-.p-adminmainpage #add-new{
+.p-hostelpage #add-new{
     float: right;
     height: 49px;
     font-weight: bold;

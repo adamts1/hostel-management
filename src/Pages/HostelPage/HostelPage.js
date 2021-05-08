@@ -1,13 +1,23 @@
-import './AdminMainPage.css'
+import './HostelPage.css'
 import NewHostelModel from '../../Components/NewHostelModel/NewHostelModel'
 import { Container, Accordion, Card, Row, Button, Col } from 'react-bootstrap';
-import { BsPlusCircle } from 'react-icons/bs';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 function AdminMainPage({activeUser}) {
 const [showNewHostelModel, setShowNewHostelModel] = useState(false);
 const [hostels, setHostels] = useState([]);
+
+useEffect(() => {
+  async function fetchData() {
+      const hostels = await activeUser.getMyHostel();
+      setHostels(hostels);
+  }
+  
+  if (activeUser) {
+      fetchData();
+  }
+}, [activeUser])
 
 
 
@@ -18,7 +28,7 @@ async function handleNewHostel(name, address, numOfRooms) {
 }
 
   return (
-    <div className='p-adminmainpage'>
+    <div className='p-hostelpage'>
       <Container>
         <Row className="p-1 align-items-center">
           <Col>
@@ -28,6 +38,13 @@ async function handleNewHostel(name, address, numOfRooms) {
            <Button id="add-new" variant="outline-secondary" type="submit" onClick={()=>setShowNewHostelModel(true)} >Add New Hostel</Button>
           </Col>
         </Row>
+        {/* <Row>
+                {hostels.map(hostel => 
+                    <Col key={hostel.id} md={3} sm={6}>
+                        <h1>{hostel.hostelAddress}</h1>
+                    </Col>
+                )}
+            </Row> */}
         <hr />
         <Accordion defaultActiveKey="0">
           <Card>
