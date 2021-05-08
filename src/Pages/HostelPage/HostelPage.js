@@ -1,5 +1,6 @@
 import './HostelPage.css'
 import NewHostelModel from '../../Components/NewHostelModel/NewHostelModel'
+import HostelAccordion from '../../Components/HostelAccordion/HostelAccordion'
 import { Container, Accordion, Card, Row, Button, Col } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 
@@ -23,7 +24,6 @@ useEffect(() => {
 
 async function handleNewHostel(name, address, numOfRooms) {
   const newHostel = await activeUser.createHostel(name, address, numOfRooms);
-  console.log(newHostel)
   setHostels(hostels.concat(newHostel));
 }
 
@@ -38,36 +38,22 @@ async function handleNewHostel(name, address, numOfRooms) {
            <Button id="add-new" variant="outline-secondary" type="submit" onClick={()=>setShowNewHostelModel(true)} >Add New Hostel</Button>
           </Col>
         </Row>
-        {/* <Row>
-                {hostels.map(hostel => 
-                    <Col key={hostel.id} md={3} sm={6}>
-                        <h1>{hostel.hostelAddress}</h1>
-                    </Col>
-                )}
-            </Row> */}
         <hr />
-        <Accordion defaultActiveKey="0">
-          <Card>
-            <Card.Header>
-              <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                Click me!
-              </Accordion.Toggle>
-            </Card.Header>
-            <Accordion.Collapse eventKey="0">
-              <Card.Body>Hello! I'm the body</Card.Body>
-            </Accordion.Collapse>
-          </Card>
-          <Card>
-            <Card.Header>
-              <Accordion.Toggle as={Button} variant="link" eventKey="1">
-                Click me!
-              </Accordion.Toggle>
-            </Card.Header>
-            <Accordion.Collapse eventKey="1">
-              <Card.Body>Hello! I'm another body</Card.Body>
-            </Accordion.Collapse>
-          </Card>
-        </Accordion>
+        {hostels.length != 0
+          ?        <Accordion defaultActiveKey="0">
+                      {hostels.map(hostel => 
+                      <HostelAccordion 
+                        key={hostel.id}
+                        hostelKey={hostel.id}
+                        hostelAddress={hostel.hostelAddress}
+                        hostelName={hostel.hostelName}
+                        numberOfRooms={hostel.numberOfRooms}/> 
+                  )}
+          </Accordion>
+          : <h1>No Hostels Yet..</h1>
+}
+
+ 
         <NewHostelModel onCreate={handleNewHostel} show={showNewHostelModel} onClose={() => setShowNewHostelModel(false)}/>
       </Container>
     </div>
@@ -75,3 +61,5 @@ async function handleNewHostel(name, address, numOfRooms) {
 }
 
 export default AdminMainPage;
+
+

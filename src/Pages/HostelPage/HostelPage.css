@@ -1,8 +1,14 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@600&display=swap'); */
 .p-hostelpage{
 
-    height: calc(100vh - 289px);
+    /* height: calc(100vh - 289px); */
     /* font-family: 'Archivo Narrow', sans-serif; */
+    position:absolute;
+    top:50px;
+    bottom:120px;
+    left:0px;
+    right:0px;
+    overflow:auto;
 }
 
 
@@ -15,6 +21,9 @@
     float: right;
     height: 49px;
     font-weight: bold;
+}
 
+.p-hostelpage .container{
+    margin-top: 50px !important;
 }
 

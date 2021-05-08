@@ -1,0 +1,76 @@
+
+.c-hostelaccordion{
+ 
+}
+
+.c-hostelaccordion button{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 19px;
+}
+
+
+.c-hostelaccordion .card-header{
+    background-color: darkcyan;
+    
+}
+
+
+
+
+
+.p-hostelpage .crud-icons svg{
+    color: darkcyan !important;
+}
+
+
+.c-hostelaccordion .col-sm-12{
+    text-align: center;
+}
+
+.c-hostelaccordion span{
+    font-weight: bold;
+}
+
+.c-hostelaccordion .card-header span{
+    margin-left: 12px;
+}
+
+
+@media (max-width: 980px){ 
+
+    .c-hostelaccordion button{
+      /* margin: 0 auto; */
+      display: block;
+    }
+
+    .p-hostelpage svg {
+        margin: 0 18px 6px 0px;
+        font-size: x-large;
+        margin-left: 5px;
+    }
+
+    .c-hostelaccordion .card-header span {
+        margin-left: 0px;
+    }
+
+    .p-hostelpage #add-new {
+        float: right;
+        height: 58px;
+        font-weight: bold;
+        display: block;
+    }
+
+    .p-hostelpage .crud-icons{
+        margin-top: 19px;
+        text-align: center !important;
+    }
+
+    .c-hostelaccordion .col-sm-12 {
+        text-align: start;
+    }
+    
+
+    }
+
