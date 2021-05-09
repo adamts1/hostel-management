@@ -1,6 +1,8 @@
 
-.c-hostelaccordion{
+.c-hostelaccordion .card{
  
+    padding: 10px;
+    border: none;
 }
 
 .c-hostelaccordion button{
@@ -13,15 +15,18 @@
 
 .c-hostelaccordion .card-header{
     background-color: darkcyan;
+    border-radius: 10px !important;
+    box-shadow: 4px 3px 8px grey;
     
 }
 
 
-
-
-
 .p-hostelpage .crud-icons svg{
     color: darkcyan !important;
+}
+
+.p-hostelpage .crud-icons{
+    text-align: end !important;
 }
 
 
