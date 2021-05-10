@@ -59,16 +59,6 @@ export default class UserModel {
     }
 
 
-    async deleteHostel(hostelId) {
-        const HostelTable = Parse.Object.extend('Hostel');
-        const query = new Parse.Query(HostelTable);
-        // here you put the objectId that you want to delete
-        const parseHostel = await query.get(hostelId);
-        const hostel =  parseHostel.destroy();
-        return hostel;
-    }
-    
-
     static loadActiveUser() {
         UserModel.activeUser = Parse.User.current() ? new UserModel(Parse.User.current()) : null;
         return UserModel.activeUser;

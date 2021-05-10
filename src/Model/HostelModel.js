@@ -12,4 +12,29 @@ export default class HostelModel {
 
     static HostelModel = null;
 
+
+
+    static async deleteHostel(hostelId) {
+        const HostelTable = Parse.Object.extend('Hostel');
+        const query = new Parse.Query(HostelTable);
+        // here you put the objectId that you want to delete
+        const parseHostel = await query.get(hostelId);
+        const hostel =  parseHostel.destroy();
+        return hostel;
+    }
+
+
+    static async updateHostel(name, address, numOfRooms, hostelId) {
+        const HostelTable = Parse.Object.extend('Hostel');
+        const query = new Parse.Query(HostelTable);
+        // here you put the objectId that you want to delete
+        const parseHostel = await query.get(hostelId);
+        
+        parseHostel.set('hostelAddress', address);
+        parseHostel.set('numberOfRooms', numOfRooms);
+        parseHostel.set('hostelName', name);
+        const updatedHostel = parseHostel.save()
+        return updatedHostel;
+    }
+
 }

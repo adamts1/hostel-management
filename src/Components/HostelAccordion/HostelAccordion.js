@@ -4,7 +4,7 @@ import { MdEdit, MdDelete } from 'react-icons/md';
 import { AiOutlineFolderView } from 'react-icons/ai';
 import { IoIosArrowDropdown } from 'react-icons/io';
 
-function HostelAccordion({ hostelKey, hostelAddress, hostelName, numberOfRooms, onDelete, onClick }) {
+function HostelAccordion({ hostelKey, hostelAddress, hostelName, numberOfRooms, onDelete, onEdit }) {
     
     return (
         <div className="c-hostelaccordion">
@@ -21,7 +21,7 @@ function HostelAccordion({ hostelKey, hostelAddress, hostelName, numberOfRooms, 
                             <Col sm={12} lg={3}>Address: <span>{hostelAddress}</span></Col>
                             <Col sm={12} lg={3}># Rooms: <span>{numberOfRooms}</span></Col>
                             <Col sm={12} lg={3} className="crud-icons" sm={12}>
-                                <MdEdit onClick={()=>onDelete(hostelKey)} />
+                                <MdEdit onClick={()=>onEdit(hostelKey)} />
                                 <MdDelete onClick={()=>onDelete(hostelName, hostelKey)} />
                                 <AiOutlineFolderView  onClick={()=>onDelete(hostelName, hostelKey)} />
                             </Col>
