@@ -1,5 +1,6 @@
 import './HostelPage.css'
 import NewHostelModel from '../../Components/NewHostelModel/NewHostelModel'
+import WarningModel from '../../Components/WarningModel/WarningModel'
 import HostelAccordion from '../../Components/HostelAccordion/HostelAccordion'
 import { Container, Accordion, Card, Row, Button, Col } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
@@ -8,6 +9,9 @@ import Parse from 'parse';
 
 function AdminMainPage({ activeUser }) {
   const [showNewHostelModel, setShowNewHostelModel] = useState(false);
+  const [showWarningModel, setShowWarningModel] = useState(false);
+  const [hostelName, setHostelName] = useState();
+  const [hostelId, setHostelId] = useState();
   const [hostels, setHostels] = useState([]);
 
   useEffect(() => {
@@ -22,16 +26,23 @@ function AdminMainPage({ activeUser }) {
   }, [activeUser])
 
 
-
   async function handleNewHostel(name, address, numOfRooms) {
     const newHostel = await activeUser.createHostel(name, address, numOfRooms);
     setHostels(hostels.concat(newHostel));
   }
 
   async function handleDeleteHostel() {
-    const removedHostel = await activeUser.deleteHostel();
+    const removedHostel = await activeUser.deleteHostel(hostelId);
+    const remainHohtels = hostels.filter(hoste => hoste.id != removedHostel.id)
+    setHostels(remainHohtels);
   }
 
+
+  async function handleWarningHostel(hostelName, hostelId) {
+    setShowWarningModel(true)
+    setHostelName(hostelName)
+    setHostelId(hostelId)
+  }
 
 
   return (
@@ -55,14 +66,20 @@ function AdminMainPage({ activeUser }) {
                 hostelAddress={hostel.hostelAddress}
                 hostelName={hostel.hostelName}
                 numberOfRooms={hostel.numberOfRooms}
-                onDelete={handleDeleteHostel} />
+                onClick={handleDeleteHostel}
+                onDelete={handleWarningHostel} />
             )}
           </Accordion>
           : <h1>No Hostels Yet..</h1>
         }
 
-
         <NewHostelModel onCreate={handleNewHostel} show={showNewHostelModel} onClose={() => setShowNewHostelModel(false)} />
+        <WarningModel  
+            show={showWarningModel}  
+            onClose={() => setShowWarningModel(false)} 
+            onDelete={handleDeleteHostel} 
+            hostelName={hostelName}
+            />
       </Container>
     </div>
   );

@@ -17,12 +17,16 @@
     background-color: darkcyan;
     border-radius: 10px !important;
     box-shadow: 4px 3px 8px grey;
-    
 }
 
 
 .p-hostelpage .crud-icons svg{
     color: darkcyan !important;
+    cursor: pointer;
+}
+
+.p-hostelpage .crud-icons svg:hover{
+    color: black !important;
 }
 
 .p-hostelpage .crud-icons{

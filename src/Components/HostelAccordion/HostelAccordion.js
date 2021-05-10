@@ -1,17 +1,11 @@
 import './HostelAccordion.css'
-import { Accordion, Card, Button, Row, Col } from 'react-bootstrap';
+import { Accordion, Card, Button, Row, Col, Link } from 'react-bootstrap';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { AiOutlineFolderView } from 'react-icons/ai';
 import { IoIosArrowDropdown } from 'react-icons/io';
 
-
-
-
-
-function HostelAccordion({ hostelKey, hostelAddress, hostelName, numberOfRooms, onDelete }) {
-
-
-
+function HostelAccordion({ hostelKey, hostelAddress, hostelName, numberOfRooms, onDelete, onClick }) {
+    
     return (
         <div className="c-hostelaccordion">
             <Card>
@@ -27,9 +21,9 @@ function HostelAccordion({ hostelKey, hostelAddress, hostelName, numberOfRooms, 
                             <Col sm={12} lg={3}>Address: <span>{hostelAddress}</span></Col>
                             <Col sm={12} lg={3}># Rooms: <span>{numberOfRooms}</span></Col>
                             <Col sm={12} lg={3} className="crud-icons" sm={12}>
-                                <button onClick={onDelete} href="/#"><MdEdit /></button>
-                                <a href="https://developer.mozilla.org/"><MdDelete /></a>
-                                <a href="https://developer.mozilla.org/"><AiOutlineFolderView /></a>
+                                <MdEdit onClick={()=>onDelete(hostelKey)} />
+                                <MdDelete onClick={()=>onDelete(hostelName, hostelKey)} />
+                                <AiOutlineFolderView  onClick={()=>onDelete(hostelName, hostelKey)} />
                             </Col>
                         </Row>
                     </Card.Body>
