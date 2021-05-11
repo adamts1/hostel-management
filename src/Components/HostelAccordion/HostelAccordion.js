@@ -5,7 +5,6 @@ import { AiOutlineFolderView } from 'react-icons/ai';
 import { IoIosArrowDropdown } from 'react-icons/io';
 
 function HostelAccordion({ hostelKey, hostelAddress, hostelName, numberOfRooms, onDelete, onEdit }) {
-    
     return (
         <div className="c-hostelaccordion">
             <Card>

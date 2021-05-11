@@ -1,0 +1,29 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@600&display=swap'); */
+.p-hostelspage{
+
+    height: calc(100vh - 289px);
+    /* font-family: 'Archivo Narrow', sans-serif; */
+    position:absolute;
+    top:50px;
+    bottom:120px;
+    left:0px;
+    right:0px;
+    overflow:auto;
+}
+
+
+.p-hostelspage svg{
+    margin: 0 0 2px 7px;
+}
+
+
+.p-hostelspage #add-new{
+    float: right;
+    height: 49px;
+    font-weight: bold;
+}
+
+.p-hostelspage .container{
+    margin-top: 50px !important;
+}
+

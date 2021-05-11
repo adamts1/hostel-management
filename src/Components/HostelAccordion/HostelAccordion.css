@@ -20,16 +20,16 @@
 }
 
 
-.p-hostelpage .crud-icons svg{
+.p-hostelspage .crud-icons svg{
     color: darkcyan !important;
     cursor: pointer;
 }
 
-.p-hostelpage .crud-icons svg:hover{
+.p-hostelspage .crud-icons svg:hover{
     color: black !important;
 }
 
-.p-hostelpage .crud-icons{
+.p-hostelspage .crud-icons{
     text-align: end !important;
 }
 
@@ -54,7 +54,7 @@
       display: block;
     }
 
-    .p-hostelpage svg {
+    .p-hostelspage svg {
         margin: 0 18px 6px 0px;
         font-size: x-large;
         margin-left: 5px;
@@ -64,14 +64,14 @@
         margin-left: 0px;
     }
 
-    .p-hostelpage #add-new {
+    .p-hostelspage #add-new {
         float: right;
         height: 58px;
         font-weight: bold;
         display: block;
     }
 
-    .p-hostelpage .crud-icons{
+    .p-hostelspage .crud-icons{
         margin-top: 19px;
         text-align: center !important;
     }

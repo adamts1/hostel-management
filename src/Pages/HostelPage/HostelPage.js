@@ -1,132 +1,189 @@
 import './HostelPage.css'
-import CrudHostel from '../../Components/CrudHostel/CrudHostel'
-import WarningModel from '../../Components/WarningModel/WarningModel'
-import HostelModel from '../../Model/HostelModel'
-import HostelAccordion from '../../Components/HostelAccordion/HostelAccordion'
-import { Container, Accordion, Card, Row, Button, Col } from 'react-bootstrap';
-import { useState, useEffect } from 'react';
-import Parse from 'parse';
+import { Card, Container, Row, Button, Col } from 'react-bootstrap';
+import { IoAddCircleOutline } from 'react-icons/io5';
 
+import { useParams } from 'react-router';
 
-function AdminMainPage({ activeUser }) {
-  const [showCrudModel, setShowCrudModel] = useState(false);
-  const [showWarningModel, setShowWarningModel] = useState(false);
-  const [hostelName, setHostelName] = useState();
-  const [hostelAddress, setHostelAddress] = useState();
-  const [hostelId, setHostelId] = useState();
-  const [numOfRooms, setNumOfRooms] = useState([]);
-  const [hostels, setHostels] = useState([]);
-  // Defined if create or edit hostel
-  const [action, setAction] = useState([]);
+function HostelPage() {
 
-
-  useEffect(() => {
-    async function fetchData() {
-      const hostels = await activeUser.getMyHostel();
-      setHostels(hostels);
-    }
-    if (activeUser) {
-      fetchData();
-    }
-  }, [activeUser])
-
-
-  async function handleNewHostel(name, address, numOfRooms) {
-    const newHostel = await activeUser.createHostel(name, address, numOfRooms);
-    setHostels(hostels.concat(newHostel));
-  }
-
-
-  async function handleUpdateHostel(name, address, numOfRooms) {
-
-    const updateddHostel = await HostelModel.updateHostel(name, address, numOfRooms, hostelId);
-    // const updatedHostels = hostels.filter(hostel => hostel.id == updateddHostel.id)
-    const hostels = await activeUser.getMyHostel();
-    setHostels(hostels);
-
-  }
-
-  async function handleDeleteHostel() {
-    setShowWarningModel(false)
-    const removedHostel = await HostelModel.deleteHostel(hostelId);
-    const remainHohtels = hostels.filter(hostel => hostel.id != removedHostel.id)
-    setHostels(remainHohtels);
-
-  }
-
-  // Invoke warning model before delete
-  async function handleWarningHostel(hostelName, hostelId) {
-    setShowWarningModel(true)
-    setHostelName(hostelName)
-    setHostelId(hostelId)
-  }
-
-  // Invoke create hostel model
-  async function setCreateHostelModel() {
-    setAction('create')
-    setShowCrudModel(true)
-
-  }
-
-  // Invoke edit hostel model
-  function setEditHostelModel(hostelId) {
-    setAction('edit')
-    setShowCrudModel(true)
-
-    setHostelId(hostelId)
-  }
-
+  const { index } = useParams();
   return (
     <div className='p-hostelpage'>
       <Container>
         <Row className="p-1 align-items-center">
           <Col>
-            <h1>Hostels</h1>
-          </Col>
-          <Col>
-            <Button id="add-new" variant="outline-secondary" type="submit" onClick={setCreateHostelModel} >Add New Hostel</Button>
+            <h1>Jerusalem Hostel</h1>
           </Col>
         </Row>
         <hr />
-        {hostels.length != 0
-          ? <Accordion defaultActiveKey="0">
-            {hostels.map(hostel =>
-              <HostelAccordion
-                key={hostel.id}
-                hostelKey={hostel.id}
-                hostelAddress={hostel.hostelAddress}
-                hostelName={hostel.hostelName}
-                numberOfRooms={hostel.numberOfRooms}
-                //click on edit icon
-                onEdit={setEditHostelModel}
-                onDelete={handleWarningHostel} />
-            )}
-
-          </Accordion>
-          : <h1>No Hostels Yet..</h1>
-        }
-
-        <CrudHostel
-          onCreate={handleNewHostel}
-          onUpdate={handleUpdateHostel}
-          show={showCrudModel}
-          onClose={() => setShowCrudModel(false)}
-          hostelName={hostelName}
-          hostelAddress={hostelAddress}
-          action={action}
-        />
-
-        <WarningModel
-          show={showWarningModel}
-          onClose={() => setShowWarningModel(false)}
-          onDelete={handleDeleteHostel}
-          hostelName={hostelName}
-        />
+        <div className="cards-warper">
+          <Card
+            bg="info"
+            key="2"
+            text='white'
+            style={{ width: '18rem' }}
+            className="mb-2 add-card"
+          >
+            <Card.Body>
+              <IoAddCircleOutline/>
+              <h5>Add New Room</h5>
+            </Card.Body>
+          </Card>
+          <Card
+            bg="info"
+            key="2"
+            text='white'
+            style={{ width: '18rem' }}
+            className="mb-2"
+          >
+            <Card.Body>
+              <Card.Title>Room Number <span> 30</span></Card.Title>
+              <hr/>
+              <Card.Text>
+                <div><span className="font-weight-bold">Calls: </span><span>0</span></div>
+                <div><span className="font-weight-bold">Tenants: </span><span>5</span></div>
+                <hr/>
+                <p><span className="font-weight-bold">Notes: </span><span>Lorem ipsum sssss</span></p>
+              </Card.Text>
+            </Card.Body>
+          </Card>
+          <Card
+            bg="info"
+            key="2"
+            text='white'
+            style={{ width: '18rem' }}
+            className="mb-2"
+          >
+            <Card.Body>
+              <Card.Title>Room Number <span> 30</span></Card.Title>
+              <hr/>
+              <Card.Text>
+                <div><span className="font-weight-bold">Calls: </span><span>0</span></div>
+                <div><span className="font-weight-bold">Tenants: </span><span>5</span></div>
+                <hr/>
+                <p><span className="font-weight-bold">Notes: </span><span>Lorem ipsum sssss</span></p>
+              </Card.Text>
+            </Card.Body>
+          </Card>
+          <Card
+            bg="info"
+            key="2"
+            text='white'
+            style={{ width: '18rem' }}
+            className="mb-2"
+          >
+            <Card.Body>
+              <Card.Title>Room Number <span> 30</span></Card.Title>
+              <hr/>
+              <Card.Text>
+                <div><span className="font-weight-bold">Calls: </span><span>0</span></div>
+                <div><span className="font-weight-bold">Tenants: </span><span>5</span></div>
+                <hr/>
+                <p><span className="font-weight-bold">Notes: </span><span>Lorem ipsum sssss</span></p>
+              </Card.Text>
+            </Card.Body>
+          </Card>
+          <Card
+            bg="info"
+            key="2"
+            text='white'
+            style={{ width: '18rem' }}
+            className="mb-2"
+          >
+            <Card.Header>Header</Card.Header>
+            <Card.Body>
+              <Card.Title> Card Title </Card.Title>
+              <Card.Text>
+                Some quick example text to build on the card title and make up the bulk
+                of the card's content.
+      </Card.Text>
+            </Card.Body>
+          </Card>
+          <Card
+            bg="info"
+            key="2"
+            text='white'
+            style={{ width: '18rem' }}
+            className="mb-2"
+          >
+            <Card.Header>Header</Card.Header>
+            <Card.Body>
+              <Card.Title> Card Title </Card.Title>
+              <Card.Text>
+                Some quick example text to build on the card title and make up the bulk
+                of the card's content.
+      </Card.Text>
+            </Card.Body>
+          </Card>
+          <Card
+            bg="info"
+            key="2"
+            text='white'
+            style={{ width: '18rem' }}
+            className="mb-2"
+          >
+            <Card.Header>Header</Card.Header>
+            <Card.Body>
+              <Card.Title> Card Title </Card.Title>
+              <Card.Text>
+                Some quick example text to build on the card title and make up the bulk
+                of the card's content.
+      </Card.Text>
+            </Card.Body>
+          </Card>
+          <Card
+            bg="info"
+            key="2"
+            text='white'
+            style={{ width: '18rem' }}
+            className="mb-2"
+          >
+            <Card.Header>Header</Card.Header>
+            <Card.Body>
+              <Card.Title> Card Title </Card.Title>
+              <Card.Text>
+                Some quick example text to build on the card title and make up the bulk
+                of the card's content.
+      </Card.Text>
+            </Card.Body>
+          </Card>
+          <Card
+            bg="info"
+            key="2"
+            text='white'
+            style={{ width: '18rem' }}
+            className="mb-2"
+          >
+            <Card.Header>Header</Card.Header>
+            <Card.Body>
+              <Card.Title> Card Title </Card.Title>
+              <Card.Text>
+                Some quick example text to build on the card title and make up the bulk
+                of the card's content.
+      </Card.Text>
+            </Card.Body>
+          </Card>
+          <Card
+            bg="info"
+            key="2"
+            text='white'
+            style={{ width: '18rem' }}
+            className="mb-2"
+          >
+            <Card.Header>Header</Card.Header>
+            <Card.Body>
+              <Card.Title> Card Title </Card.Title>
+              <Card.Text>
+                Some quick example text to build on the card title and make up the bulk
+                of the card's content.
+      </Card.Text>
+            </Card.Body>
+          </Card>
+        </div>
       </Container>
+
     </div>
   );
 }
 
-export default AdminMainPage;
-
-
+export default HostelPage;

@@ -2,6 +2,7 @@ import './App.css';
 import { HashRouter, Switch, Route, Link } from 'react-router-dom';
 import LandingPage from './Pages/LandingPage/LandingPage'
 import SignInUp from './Pages/SignInUp/SignInUp'
+import HostelsPage from './Pages/HostelsPage/HostelsPage'
 import HostelPage from './Pages/HostelPage/HostelPage'
 import NavBar from './Components/NavBar/NavBar'
 import Footer from './Components/Footer/Footer'
@@ -35,7 +36,12 @@ function App() {
              <SignInUp type="Signup" activeUser={activeUser} onLogin={user => setActiveUser(user)}/>
              <Footer/>
           </Route>
-          <Route exact path="/hostelpage">
+          <Route exact path="/hostelspage">
+             <NavBar activeUser={activeUser} onLogout={logoutHanler}/>
+             <HostelsPage activeUser={activeUser} />
+             <Footer/>
+          </Route>
+          <Route exact path="/hostel/:index">
              <NavBar activeUser={activeUser} onLogout={logoutHanler}/>
              <HostelPage activeUser={activeUser} />
              <Footer/>

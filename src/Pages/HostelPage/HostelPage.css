@@ -1,29 +1,80 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@600&display=swap'); */
 .p-hostelpage{
-
     height: calc(100vh - 289px);
-    /* font-family: 'Archivo Narrow', sans-serif; */
     position:absolute;
     top:50px;
     bottom:120px;
     left:0px;
     right:0px;
-    overflow:auto;
+    overflow:auto
 }
 
 
-.p-hostelpage svg{
-    margin: 0 0 2px 7px;
+
+
+.p-hostelpage .container .cards-warper{
+   display: flex;
+   flex-direction: row;
+   flex-wrap:wrap;
+   justify-content: center;
+} 
+
+
+.p-hostelpage .container .cards-warper .card{
+    margin: 10px;
+    border-radius: 10px !important;
+    box-shadow: 4px 3px 8px grey;
+    background-color: darkcyan !important;
+ } 
+
+
+ .p-hostelpage .container .cards-warper .card .card-title{
+     text-align: center;
+ }
+
+ .p-hostelpage .container {
+     margin-top: 70px;
 }
 
 
-.p-hostelpage #add-new{
-    float: right;
-    height: 49px;
-    font-weight: bold;
+
+ .p-hostelpage .container .cards-warper .card .card-body svg{
+    display: block;
+    margin: 20px auto;
+    font-size: 122px;
+    color: darkcyan;
+    cursor: pointer;
 }
 
-.p-hostelpage .container{
-    margin-top: 50px !important;
-}
+.p-hostelpage .container .cards-warper .add-card{
+    margin: 10px;
+    border-radius: 10px !important;
+    box-shadow: 4px 3px 8px grey;
+    background-color: white !important;
+    border: 5px solid darkcyan;
+ } 
 
+ .p-hostelpage .container .cards-warper .add-card h5{
+    color: darkcyan;
+    text-align: center;
+ } 
+
+
+ .p-hostelpage .container .cards-warper .add-card:hover{
+    color: white;
+    background-color: darkcyan !important;
+    border: 5px solid white;
+ } 
+
+ 
+ .p-hostelpage .container .cards-warper .add-card:hover svg{
+    color: white;
+    background-color: darkcyan !important;
+    /* font-size: 130px; */
+    /* border: 5px solid white; */
+ } 
+
+ .p-hostelpage .container .cards-warper .add-card:hover h5{
+    color: white;
+    /* background-color: darkcyan !important; */
+    /* border: 5px solid white; */
+ } 

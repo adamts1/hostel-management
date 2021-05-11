@@ -1,9 +1,6 @@
 import './LandingPage.css'
 import { Container, Row, Col, Image, Button, Selection } from 'react-bootstrap';
 
-
-
-
 function LandinPage() {
   return (
     <div className='p-landinpage'>
