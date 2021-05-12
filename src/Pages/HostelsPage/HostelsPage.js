@@ -12,10 +12,9 @@ function HostelsPage({ activeUser }) {
   const [showCrudModel, setShowCrudModel] = useState(false);
   const [showWarningModel, setShowWarningModel] = useState(false);
   const [hostelName, setHostelName] = useState();
-  const [hostelAddress, setHostelAddress] = useState();
   const [hostelId, setHostelId] = useState();
-  const [numOfRooms, setNumOfRooms] = useState([]);
   const [hostels, setHostels] = useState([]);
+  const [hostelsInstanse, seThostelsInstanse] = useState([]);
   // Defined if create or edit hostel
   const [action, setAction] = useState([]);
 
@@ -36,9 +35,14 @@ function HostelsPage({ activeUser }) {
     setHostels(hostels.concat(newHostel));
   }
 
+  async function handleUpdateHostel(name, address, numOfRooms) {
+    const updateddHostel = await HostelModel.updateHostel(name, address, numOfRooms, hostelId);
+    const hostels = await activeUser.getMyHostel();
+    setHostels(hostels);
+
+  }
 
   async function handleUpdateHostel(name, address, numOfRooms) {
-
     const updateddHostel = await HostelModel.updateHostel(name, address, numOfRooms, hostelId);
     const hostels = await activeUser.getMyHostel();
     setHostels(hostels);
@@ -47,10 +51,14 @@ function HostelsPage({ activeUser }) {
 
   async function handleDeleteHostel() {
     setShowWarningModel(false)
-    const removedHostel = await HostelModel.deleteHostel(hostelId);
-    const remainHohtels = hostels.filter(hostel => hostel.id != removedHostel.id)
-    setHostels(remainHohtels);
 
+    const HostelTable = Parse.Object.extend('Hostel');
+    const query = new Parse.Query(HostelTable);
+    const parseHostel = await query.get(hostelId);
+    const parseHostelInstance = new HostelModel(parseHostel)
+    const removedHostel = await parseHostelInstance.deleteHostel();
+    const remainHostels = hostels.filter(hostel => hostel.id != removedHostel.id)
+    setHostels(remainHostels);
   }
 
   // Invoke warning model before delete
@@ -64,7 +72,6 @@ function HostelsPage({ activeUser }) {
   async function setCreateHostelModel() {
     setAction('create')
     setShowCrudModel(true)
-
   }
 
   // Invoke edit hostel model
@@ -111,7 +118,7 @@ function HostelsPage({ activeUser }) {
           show={showCrudModel}
           onClose={() => setShowCrudModel(false)}
           hostelName={hostelName}
-          hostelAddress={hostelAddress}
+          // hostelAddress={hostelAddress}
           action={action}
         />
 

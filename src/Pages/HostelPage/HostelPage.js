@@ -7,15 +7,15 @@ import CrudRoom from '../../Components/CrudRoom/CrudRoom'
 import { useParams } from 'react-router';
 import { useState, useEffect } from 'react';
 import Parse from 'parse';
+import RoomCard from '../../Components/RoomCard/RoomCard';
 
 
 function HostelPage() {
-
   const [showCrudModel, setShowCrudModel] = useState(false);
   const [rooms, setRooms] = useState([]);
   const [hostelInstance, setHostelInstance] = useState([]);
-
   const { index } = useParams();
+
 
   useEffect(() => {
     async function getHostelsInstance() {
@@ -23,25 +23,25 @@ function HostelPage() {
       const query = new Parse.Query(HostelTable);
       const parseHostel = await query.get(index);
       const parseHostelInstance = new HostelModel(parseHostel)
-      
+      const rooms =  await parseHostelInstance.getMyRooms();
       setHostelInstance(parseHostelInstance)
+      setRooms(rooms)
     }
-    getHostelsInstance();
-    
-}, [])
+      getHostelsInstance();
+  }, [])
 
-  async function handleNewRoom(roomNumber, maxBeds, pricePerDay) {
-    const newRoom = await hostelInstance.createRoom(roomNumber, maxBeds, pricePerDay);
+
+  async function handleNewRoom(roomNumber, maxBeds, pricePerDay, notes) {
+    const newRoom = await hostelInstance.createRoom(roomNumber, maxBeds, pricePerDay, notes);
+    setRooms(rooms.concat(newRoom));
   }
-
-
 
   return (
     <div className='p-hostelpage'>
       <Container>
         <Row className="p-1 align-items-center">
           <Col>
-            <h1>Jerusalem Hostel</h1>
+            <h1>{hostelInstance.hostelName}</h1>
           </Col>
         </Row>
         <hr />
@@ -52,22 +52,34 @@ function HostelPage() {
             text='white'
             style={{ width: '18rem' }}
             className="mb-2 add-card"
-            onClick={()=>setShowCrudModel(true)}
+            onClick={() => setShowCrudModel(true)}
           >
             <Card.Body>
               <IoAddCircleOutline />
               <h5>Add New Room</h5>
             </Card.Body>
           </Card>
+        
+       
+
+        {rooms.map(room =>
+        <RoomCard 
+          notes={room.notes}
+          roomNumber={room.roomNumber}
+          pricePerDay={room.pricePerDay}
+          maxBeds={room.maxBed}
+         
+          />
+        
+        )}
         </div>
-        <CrudRoom
+         <CrudRoom
           onCreate={handleNewRoom}
-          onClose={()=>setShowCrudModel(false)}
+          onClose={() => setShowCrudModel(false)}
           show={showCrudModel}
         />
       </Container>
     </div>
   );
 }
-
 export default HostelPage;

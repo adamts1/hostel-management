@@ -8,6 +8,7 @@ function CrudRoom({ show, onClose, onCreate}) {
   const [roomNumber, setRoomNumber] = useState();
   const [maxBeds, setMaxBeds] = useState();
   const [pricePerDay, setPricePerDay] = useState();
+  const [notes, setNotes] = useState();
 
 
   function clearForm() {
@@ -18,7 +19,7 @@ function CrudRoom({ show, onClose, onCreate}) {
 
 
   const createRoom = () => {
-    onCreate(roomNumber ,maxBeds, pricePerDay);
+    onCreate(roomNumber ,maxBeds, pricePerDay, notes);
     clearForm();
     onClose();
   }
@@ -35,6 +36,7 @@ function CrudRoom({ show, onClose, onCreate}) {
             <SignInUpInput value={roomNumber} type="string" placeHolder="Room number" onChange={e => setRoomNumber(e.target.value)} />
             <SignInUpInput value={maxBeds} type="number" placeHolder="Maximum amount of beds" onChange={e => setMaxBeds(e.target.value)} />
             <SignInUpInput value={pricePerDay} type="number" placeHolder="Price per day" onChange={e => setPricePerDay(e.target.value)} />
+            <SignInUpInput value={notes} type="string" placeHolder="Notes" onChange={e => setNotes(e.target.value)} />
           </Form.Group>
         </Modal.Body>
         <Modal.Footer className="justify-content-start">

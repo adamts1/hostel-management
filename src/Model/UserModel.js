@@ -20,7 +20,6 @@ export default class UserModel {
         return UserModel.activeUser;
     }
 
-
     static async signup(email, pwd, fname, lname) {
         const user = new Parse.User()
         user.set('username', email);

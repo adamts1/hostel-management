@@ -1,13 +1,11 @@
 import { Card, Container, Row, Button, Col } from 'react-bootstrap';
-
+import { MdEdit, MdDelete } from 'react-icons/md';
+import { AiOutlineFolderView } from 'react-icons/ai';
+import { IoIosArrowDropdown } from 'react-icons/io';
 import './RoomCard.css'
 
-function RoomCard() {
-    const [redirectTo, setRedirectTo] = useState();
+function RoomCard({roomNumber, maxBeds, pricePerDay, notes}) {
 
-    if (redirectTo !== undefined) {
-        return <Redirect to={'/hostel/' + redirectTo} />
-    }
 
     return (
         <div className="c-roomcard">
@@ -19,13 +17,30 @@ function RoomCard() {
                 className="mb-2"
             >
                 <Card.Body>
-                    <Card.Title>Room Number <span> 30</span></Card.Title>
+                    <Card.Title>Room Number <span> {roomNumber}</span></Card.Title>
                     <hr />
                     <Card.Text>
                         <div><span className="font-weight-bold">Calls: </span><span>0</span></div>
-                        <div><span className="font-weight-bold">Tenants: </span><span>5</span></div>
+                        <div><span className="font-weight-bold">Max Beds: </span><span>{maxBeds}</span></div>
+                        <div><span className="font-weight-bold">Price per Day: </span><span>{pricePerDay}</span></div>
+                        <div><span className="font-weight-bold">Tenants: </span><span>{notes}</span></div>
+                        <p><span className="font-weight-bold">Notes: </span><span>{notes}</span></p>
                         <hr />
-                        <p><span className="font-weight-bold">Notes: </span><span>Lorem ipsum sssss</span></p>
+                        <div className="card-icon-wrper">
+                        <Row>
+                        <Col sm={4} className="crud-icons">
+                                <MdEdit/>
+                        </Col>
+                        <Col sm={4} className="crud-icons">   
+                                <MdDelete />
+                        </Col>        
+                        <Col sm={4} className="crud-icons">       
+                                <AiOutlineFolderView />
+                        </Col>
+                        </Row>
+                            
+                        </div>
+                        
                     </Card.Text>
                 </Card.Body>
             </Card>
