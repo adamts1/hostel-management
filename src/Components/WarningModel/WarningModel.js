@@ -6,16 +6,18 @@ import { useState } from 'react';
 
 
 
-function WarningModel({ show, onClose, what, onDelete, hostelName }) {
+function WarningModel({ show, onClose, instanseName, actionOnInstanse, onDelete, hostelName }) {
+
+  
 
     return (
         <div className='c-warningmodel'>
 
             <Modal show={show} onHide={onClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Delete Hostel</Modal.Title>
+                    <Modal.Title>Delete {actionOnInstanse} {instanseName} ?</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Delete {hostelName} ?</Modal.Body>
+                {/* <Modal.Body>Delete {hostelName} ?</Modal.Body> */}
                 <Modal.Footer>
                     <Button variant="secondary" onClick={onClose}>
                         Close

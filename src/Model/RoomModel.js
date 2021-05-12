@@ -11,4 +11,10 @@ export default class RoomlModel {
         this.parseRoom = parseRoom;
     }
 
+
+    async deleteRoom() {
+        const hostel = this.parseRoom.destroy();
+        return hostel;
+    }
+
 }

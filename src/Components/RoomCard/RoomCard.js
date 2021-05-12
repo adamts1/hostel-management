@@ -4,9 +4,8 @@ import { AiOutlineFolderView } from 'react-icons/ai';
 import { IoIosArrowDropdown } from 'react-icons/io';
 import './RoomCard.css'
 
-function RoomCard({roomNumber, maxBeds, pricePerDay, notes}) {
-
-
+function RoomCard({roomNumber, maxBeds, pricePerDay, notes, onDelete, roomId}) {
+    
     return (
         <div className="c-roomcard">
             <Card
@@ -32,15 +31,13 @@ function RoomCard({roomNumber, maxBeds, pricePerDay, notes}) {
                                 <MdEdit/>
                         </Col>
                         <Col sm={4} className="crud-icons">   
-                                <MdDelete />
+                                <MdDelete onClick={()=>onDelete(roomId ,roomNumber, maxBeds, pricePerDay, notes)}/>
                         </Col>        
                         <Col sm={4} className="crud-icons">       
                                 <AiOutlineFolderView />
                         </Col>
                         </Row>
-                            
                         </div>
-                        
                     </Card.Text>
                 </Card.Body>
             </Card>
