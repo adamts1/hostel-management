@@ -3,8 +3,17 @@ import { Accordion, Card, Button, Row, Col, Link } from 'react-bootstrap';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { AiOutlineFolderView } from 'react-icons/ai';
 import { IoIosArrowDropdown } from 'react-icons/io';
+import {Redirect} from 'react-router-dom';
+import { useState } from 'react';
+
 
 function HostelAccordion({ hostelKey, hostelAddress, hostelName, numberOfRooms, onDelete, onEdit }) {
+    const [redirectTo, setRedirectTo] = useState();
+
+    if (redirectTo !== undefined) {
+        return <Redirect to={'/hostel/' + redirectTo}/>
+    }
+    
     return (
         <div className="c-hostelaccordion">
             <Card>
@@ -22,7 +31,7 @@ function HostelAccordion({ hostelKey, hostelAddress, hostelName, numberOfRooms, 
                             <Col sm={12} lg={3} className="crud-icons" sm={12}>
                                 <MdEdit onClick={()=>onEdit(hostelKey)} />
                                 <MdDelete onClick={()=>onDelete(hostelName, hostelKey)} />
-                                <AiOutlineFolderView  onClick={()=>onDelete(hostelName, hostelKey)} />
+                                <AiOutlineFolderView   onClick={() => setRedirectTo(hostelKey)} />
                             </Col>
                         </Row>
                     </Card.Body>

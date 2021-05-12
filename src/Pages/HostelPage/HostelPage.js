@@ -1,12 +1,41 @@
 import './HostelPage.css'
 import { Card, Container, Row, Button, Col } from 'react-bootstrap';
 import { IoAddCircleOutline } from 'react-icons/io5';
-
+import HostelModel from '../../Model/HostelModel'
+import RoomModel from '../../Model/RoomModel'
+import CrudRoom from '../../Components/CrudRoom/CrudRoom'
 import { useParams } from 'react-router';
+import { useState, useEffect } from 'react';
+import Parse from 'parse';
+
 
 function HostelPage() {
 
+  const [showCrudModel, setShowCrudModel] = useState(false);
+  const [rooms, setRooms] = useState([]);
+  const [hostelInstance, setHostelInstance] = useState([]);
+
   const { index } = useParams();
+
+  useEffect(() => {
+    async function getHostelsInstance() {
+      const HostelTable = Parse.Object.extend('Hostel');
+      const query = new Parse.Query(HostelTable);
+      const parseHostel = await query.get(index);
+      const parseHostelInstance = new HostelModel(parseHostel)
+      
+      setHostelInstance(parseHostelInstance)
+    }
+    getHostelsInstance();
+    
+}, [])
+
+  async function handleNewRoom(roomNumber, maxBeds, pricePerDay) {
+    const newRoom = await hostelInstance.createRoom(roomNumber, maxBeds, pricePerDay);
+  }
+
+
+
   return (
     <div className='p-hostelpage'>
       <Container>
@@ -19,169 +48,24 @@ function HostelPage() {
         <div className="cards-warper">
           <Card
             bg="info"
-            key="2"
+            key="1"
             text='white'
             style={{ width: '18rem' }}
             className="mb-2 add-card"
+            onClick={()=>setShowCrudModel(true)}
           >
             <Card.Body>
-              <IoAddCircleOutline/>
+              <IoAddCircleOutline />
               <h5>Add New Room</h5>
             </Card.Body>
           </Card>
-          <Card
-            bg="info"
-            key="2"
-            text='white'
-            style={{ width: '18rem' }}
-            className="mb-2"
-          >
-            <Card.Body>
-              <Card.Title>Room Number <span> 30</span></Card.Title>
-              <hr/>
-              <Card.Text>
-                <div><span className="font-weight-bold">Calls: </span><span>0</span></div>
-                <div><span className="font-weight-bold">Tenants: </span><span>5</span></div>
-                <hr/>
-                <p><span className="font-weight-bold">Notes: </span><span>Lorem ipsum sssss</span></p>
-              </Card.Text>
-            </Card.Body>
-          </Card>
-          <Card
-            bg="info"
-            key="2"
-            text='white'
-            style={{ width: '18rem' }}
-            className="mb-2"
-          >
-            <Card.Body>
-              <Card.Title>Room Number <span> 30</span></Card.Title>
-              <hr/>
-              <Card.Text>
-                <div><span className="font-weight-bold">Calls: </span><span>0</span></div>
-                <div><span className="font-weight-bold">Tenants: </span><span>5</span></div>
-                <hr/>
-                <p><span className="font-weight-bold">Notes: </span><span>Lorem ipsum sssss</span></p>
-              </Card.Text>
-            </Card.Body>
-          </Card>
-          <Card
-            bg="info"
-            key="2"
-            text='white'
-            style={{ width: '18rem' }}
-            className="mb-2"
-          >
-            <Card.Body>
-              <Card.Title>Room Number <span> 30</span></Card.Title>
-              <hr/>
-              <Card.Text>
-                <div><span className="font-weight-bold">Calls: </span><span>0</span></div>
-                <div><span className="font-weight-bold">Tenants: </span><span>5</span></div>
-                <hr/>
-                <p><span className="font-weight-bold">Notes: </span><span>Lorem ipsum sssss</span></p>
-              </Card.Text>
-            </Card.Body>
-          </Card>
-          <Card
-            bg="info"
-            key="2"
-            text='white'
-            style={{ width: '18rem' }}
-            className="mb-2"
-          >
-            <Card.Header>Header</Card.Header>
-            <Card.Body>
-              <Card.Title> Card Title </Card.Title>
-              <Card.Text>
-                Some quick example text to build on the card title and make up the bulk
-                of the card's content.
-      </Card.Text>
-            </Card.Body>
-          </Card>
-          <Card
-            bg="info"
-            key="2"
-            text='white'
-            style={{ width: '18rem' }}
-            className="mb-2"
-          >
-            <Card.Header>Header</Card.Header>
-            <Card.Body>
-              <Card.Title> Card Title </Card.Title>
-              <Card.Text>
-                Some quick example text to build on the card title and make up the bulk
-                of the card's content.
-      </Card.Text>
-            </Card.Body>
-          </Card>
-          <Card
-            bg="info"
-            key="2"
-            text='white'
-            style={{ width: '18rem' }}
-            className="mb-2"
-          >
-            <Card.Header>Header</Card.Header>
-            <Card.Body>
-              <Card.Title> Card Title </Card.Title>
-              <Card.Text>
-                Some quick example text to build on the card title and make up the bulk
-                of the card's content.
-      </Card.Text>
-            </Card.Body>
-          </Card>
-          <Card
-            bg="info"
-            key="2"
-            text='white'
-            style={{ width: '18rem' }}
-            className="mb-2"
-          >
-            <Card.Header>Header</Card.Header>
-            <Card.Body>
-              <Card.Title> Card Title </Card.Title>
-              <Card.Text>
-                Some quick example text to build on the card title and make up the bulk
-                of the card's content.
-      </Card.Text>
-            </Card.Body>
-          </Card>
-          <Card
-            bg="info"
-            key="2"
-            text='white'
-            style={{ width: '18rem' }}
-            className="mb-2"
-          >
-            <Card.Header>Header</Card.Header>
-            <Card.Body>
-              <Card.Title> Card Title </Card.Title>
-              <Card.Text>
-                Some quick example text to build on the card title and make up the bulk
-                of the card's content.
-      </Card.Text>
-            </Card.Body>
-          </Card>
-          <Card
-            bg="info"
-            key="2"
-            text='white'
-            style={{ width: '18rem' }}
-            className="mb-2"
-          >
-            <Card.Header>Header</Card.Header>
-            <Card.Body>
-              <Card.Title> Card Title </Card.Title>
-              <Card.Text>
-                Some quick example text to build on the card title and make up the bulk
-                of the card's content.
-      </Card.Text>
-            </Card.Body>
-          </Card>
         </div>
+        <CrudRoom
+          onCreate={handleNewRoom}
+          onClose={()=>setShowCrudModel(false)}
+          show={showCrudModel}
+        />
       </Container>
-
     </div>
   );
 }

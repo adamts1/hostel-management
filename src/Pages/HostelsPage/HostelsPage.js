@@ -40,7 +40,6 @@ function HostelsPage({ activeUser }) {
   async function handleUpdateHostel(name, address, numOfRooms) {
 
     const updateddHostel = await HostelModel.updateHostel(name, address, numOfRooms, hostelId);
-    // const updatedHostels = hostels.filter(hostel => hostel.id == updateddHostel.id)
     const hostels = await activeUser.getMyHostel();
     setHostels(hostels);
 

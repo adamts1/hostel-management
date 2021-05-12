@@ -39,8 +39,8 @@ export default class UserModel {
         const HostelTable = Parse.Object.extend('Hostel');
         const query = new Parse.Query(HostelTable);
         query.equalTo("userId", this.#parseUser);
-        const parseHostes = await query.find();
-        const hostels = parseHostes.map(parseHoste => new HostelModel(parseHoste));
+        const parseHostels = await query.find();
+        const hostels = parseHostels.map(parseHostel => new HostelModel(parseHostel));
         return hostels;
     }
 
