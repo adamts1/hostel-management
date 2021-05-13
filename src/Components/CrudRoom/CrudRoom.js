@@ -39,11 +39,11 @@ function CrudRoom({ show, onClose, onCreate}) {
             <SignInUpInput value={notes} type="string" placeHolder="Notes" onChange={e => setNotes(e.target.value)} />
           </Form.Group>
         </Modal.Body>
-        <Modal.Footer className="justify-content-start">
+        <Modal.Footer className="justify-content-center">
           <Button variant="secondary" onClick={onClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={createRoom}>Save</Button>
+          <Button className="create" variant="primary" onClick={createRoom}>Save</Button>
         </Modal.Footer>
       </Modal>
 

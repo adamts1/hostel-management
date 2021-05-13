@@ -61,13 +61,13 @@ function CrudHostel({ show, onClose, onCreate, onUpdate, hostelName, hostelAddre
             <SignInUpInput value={nuberOfRooms} type="text" placeHolder="# Rooms" onChange={e => setNuberOfRooms(e.target.value)} />
           </Form.Group>
         </Modal.Body>
-        <Modal.Footer className="justify-content-start">
+        <Modal.Footer className="justify-content-center">
           <Button variant="secondary" onClick={onClose}>
             Close
           </Button>
           {updateOrDelete === 'create'
-        ? <Button variant="primary" onClick={createHostel}>Save Changes</Button>
-        : <Button variant="primary" onClick={updateHostel}>Update</Button>
+        ? <Button className="create" variant="primary" onClick={createHostel}>Create</Button>
+        : <Button className="create" variant="primary" onClick={updateHostel}>Update</Button>
       }
           
           

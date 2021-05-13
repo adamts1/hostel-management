@@ -20,7 +20,7 @@ function RoomSection({onClick, onDelete, rooms}) {
           >
             <Card.Body>
               <IoAddCircleOutline />
-              <h5>Add New Room</h5>
+              <h5>New Room</h5>
             </Card.Body>
           </Card>
           {rooms.map(room =>

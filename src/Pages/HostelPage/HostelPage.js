@@ -98,9 +98,6 @@ function HostelPage() {
           <TenantsSection/>
         }
         {tabKey === 'calls' &&
-
-
-
           <div>calls</div>
         }
 
