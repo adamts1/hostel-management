@@ -1,26 +1,27 @@
-.c-roomcard  .card-body svg{
+.c-tenantcard  .card-body svg{
     margin: 2px auto !important;
-    font-size: 29px  !important;
+    font-size: 32px  !important;
     color: white;
 }
 
-.c-roomcard  .card-icon-wrper{
+.c-tenantcard  .card-icon-wrper{
     opacity:0.5;
  }
 
- .c-roomcard  svg{
+ .c-tenantcard  svg{
     margin: 5px auto !important;
     font-size: 27px !important;
     color: white !important;
  }
 
-.c-roomcard:hover .card-icon-wrper
+ .c-tenantcard:hover .card-icon-wrper
 {
     opacity:1;
     transition:all 0.5s ease;
 }
 
-.c-roomcard svg :hover
+
+.c-tenantcard svg :hover
 {
     color:black;
     transition:all 0.3s ease;

@@ -8,6 +8,7 @@ import { useParams } from 'react-router';
 import { useState, useEffect } from 'react';
 import Parse from 'parse';
 import RoomSection from '../../Components/RoomSection/RoomSection'
+import TenantsSection from '../../Components/TenantsSection/TenantsSection'
 
 
 function HostelPage() {
@@ -94,10 +95,7 @@ function HostelPage() {
             onDelete={handleWarningRoom} />
         }
         {tabKey === 'tenents' &&
-
-
-
-          <div>tenents</div>
+          <TenantsSection/>
         }
         {tabKey === 'calls' &&
 

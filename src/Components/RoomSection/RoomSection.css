@@ -1,0 +1,35 @@
+.c-roomsection .cards-warper .card{
+    background-color: darkcyan !important;
+
+}
+
+.c-roomsection .cards-warper .add-card svg{
+    color: darkcyan;
+}
+
+
+.c-roomsection .cards-warper .add-card{
+    border: 5px solid darkcyan;
+}
+
+
+.c-roomsection.cards-warper .add-card:hover svg{
+    border: 5px solid darkcyan;
+    
+ } 
+
+ .c-roomsection .cards-warper .add-card:hover h5{
+    color: white;
+ } 
+
+ 
+ .c-roomsection .cards-warper .add-card:hover{
+    border: 5px solid white !important;
+    background-color: darkcyan !important;
+ } 
+
+
+
+
+
+

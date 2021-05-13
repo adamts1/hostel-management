@@ -1,0 +1,35 @@
+.c-tenantssection .cards-warper .card{
+    background-color: cornflowerblue !important;
+
+}
+
+.c-tenantssection .cards-warper .add-card svg{
+    color: cornflowerblue;
+}
+
+
+.c-tenantssection .cards-warper .add-card{
+    border: 5px solid cornflowerblue;
+}
+
+
+.c-tenantssection.cards-warper .add-card:hover svg{
+    border: 5px solid cornflowerblue;
+    
+ } 
+
+ .c-tenantssection .cards-warper .add-card:hover h5{
+    color: white;
+ } 
+
+ 
+ .c-tenantssection .cards-warper .add-card:hover{
+    border: 5px solid white !important;
+    background-color: cornflowerblue !important;
+ } 
+
+
+
+
+
+

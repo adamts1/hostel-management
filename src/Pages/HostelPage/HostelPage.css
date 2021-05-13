@@ -8,9 +8,6 @@
     overflow:auto
 }
 
-
-
-
 .p-hostelpage .container .cards-warper{
    display: flex;
    flex-direction: row;
@@ -23,7 +20,7 @@
     margin: 10px;
     border-radius: 10px !important;
     box-shadow: 4px 3px 8px grey;
-    background-color: darkcyan !important;
+
  } 
 
 
@@ -35,13 +32,10 @@
      margin-top: 40px;
 }
 
-
-
  .p-hostelpage .container .cards-warper .card .card-body svg{
     display: block;
     margin: 20px auto;
     font-size: 122px;
-    color: darkcyan;
     cursor: pointer;
 }
 
@@ -50,7 +44,6 @@
     border-radius: 10px !important;
     box-shadow: 4px 3px 8px grey;
     background-color: white !important;
-    border: 5px solid darkcyan;
  } 
 
  .p-hostelpage .container .cards-warper .add-card h5{
@@ -61,22 +54,17 @@
 
  .p-hostelpage .container .cards-warper .add-card:hover{
     color: white;
-    background-color: darkcyan !important;
     border: 5px solid white;
  } 
 
  
  .p-hostelpage .container .cards-warper .add-card:hover svg{
     color: white;
-    background-color: darkcyan !important;
     font-size: 152px;
     margin: 5px auto;
     /* border: 5px solid white; */
  } 
 
- .p-hostelpage .container .cards-warper .add-card:hover h5{
-    color: white;
- } 
 
 
  .p-hostelpage .container .nav-link {
