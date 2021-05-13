@@ -10,7 +10,6 @@ export default class UserModel {
         this.email = parseUser.get("email");
         this.#parseUser = parseUser;
     }
-
     static activeUser = null;
 
 

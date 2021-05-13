@@ -18,13 +18,17 @@ function CrudTenant({ show, onClose, onCreate}) {
   function clearForm() {
     setTenantName("");
     setTenantEmail("");
-    // setPricePerDay("");
-    // setRoomNumber("");
+    setTenantUsername("");
+    setTenantPassword("");
+    setTenantRoom("");
+    setPayment("");
+    setTenantStart("");
+    setTenantEnd("");
   }
 
 
   const createTenant = () => {
-    onCreate(tenantName ,tenantEmail, tenantUsername, tenantRoom, tenantPayment, tenantStart, tenantEnd);
+    onCreate(tenantName ,tenantEmail, tenantUsername,tenantPassword, tenantRoom, tenantPayment, tenantStart, tenantEnd);
     clearForm();
     onClose();
   }
@@ -52,10 +56,10 @@ function CrudTenant({ show, onClose, onCreate}) {
           </Form.Group>
         </Modal.Body>
         <Modal.Footer className="justify-content-center">
-          <Button variant="secondary" onClick={onClose}>
+          <Button onClick={onClose} variant="secondary">
             Close
           </Button>
-          <Button className="create" variant="primary" >Create</Button>
+          <Button onClick={createTenant}  className="create" variant="primary" >Create</Button>
         </Modal.Footer>
       </Modal>
 

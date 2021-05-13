@@ -19,7 +19,6 @@ function SignInUp({ onLogin, activeUser, type }) {
 
   async function login(e) {
     e.preventDefault();
-
     try {
       const activeUser = await UserModel.login(email, pwd);
       onLogin(activeUser);
@@ -31,7 +30,6 @@ function SignInUp({ onLogin, activeUser, type }) {
 
   async function signup(e) {
     e.preventDefault();
-
     const activeUser = UserModel.signup(email, pwd, fname, lname)
     onLogin(activeUser)
 

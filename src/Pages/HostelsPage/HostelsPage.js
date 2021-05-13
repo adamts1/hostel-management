@@ -21,8 +21,14 @@ function HostelsPage({ activeUser }) {
 
   useEffect(() => {
     async function fetchData() {
-      const hostels = await activeUser.getMyHostel();
-      setHostels(hostels);
+      try{
+        const hostels = await activeUser.getMyHostel();
+        setHostels(hostels);
+
+      }catch{
+        console.log("No Hostels")
+      }
+      
     }
     if (activeUser) {
       fetchData();
