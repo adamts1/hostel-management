@@ -7,7 +7,7 @@
  
  
  .c-roomcard .card-body{
-    height: 300px!important;
+    height: 278px!important;
     /* background-color: black; */
   } 
  
@@ -27,7 +27,7 @@
 
  .c-roomcard  svg{
     margin: 5px auto !important;
-    font-size: 35px !important;
+    font-size: 27px !important;
     color: white !important;
  }
 

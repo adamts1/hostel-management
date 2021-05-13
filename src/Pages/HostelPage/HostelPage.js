@@ -1,6 +1,5 @@
 import './HostelPage.css'
-import { Card, Container, Row, Tabs, Col, Tab} from 'react-bootstrap';
-import { IoAddCircleOutline } from 'react-icons/io5';
+import { Card, Container, Row, Tabs, Col, Tab } from 'react-bootstrap';
 import HostelModel from '../../Model/HostelModel'
 import RoomModel from '../../Model/RoomModel'
 import CrudRoom from '../../Components/CrudRoom/CrudRoom'
@@ -8,7 +7,7 @@ import WarningModel from '../../Components/WarningModel/WarningModel'
 import { useParams } from 'react-router';
 import { useState, useEffect } from 'react';
 import Parse from 'parse';
-import RoomCard from '../../Components/RoomCard/RoomCard';
+import RoomSection from '../../Components/RoomSection/RoomSection'
 
 
 function HostelPage() {
@@ -71,71 +70,42 @@ function HostelPage() {
     <div className='p-hostelpage'>
 
       <Container>
-      <Row className="p-1 align-items-center">
+        <Row className="p-1 align-items-center">
           <Col>
             <h1>{hostelInstance.hostelName}</h1>
           </Col>
-        </Row> 
-      <Tabs 
-        id="controlled-tab-example"
-        activeKey={tabKey}
-        onSelect={(k) => setTabKey(k)}>
-        <Tab eventKey="rooms" title="Rooms">
-        </Tab>
-        <Tab eventKey="tenents" title="Tenents">
-        </Tab>
-        <Tab eventKey="calls" title="Calls" >
-        </Tab>
-      </Tabs>
-      <hr/>
+        </Row>
+        <Tabs
+          id="controlled-tab-example"
+          activeKey={tabKey}
+          onSelect={(k) => setTabKey(k)}>
+          <Tab eventKey="rooms" title="Rooms">
+          </Tab>
+          <Tab eventKey="tenents" title="Tenents">
+          </Tab>
+          <Tab eventKey="calls" title="Calls" >
+          </Tab>
+        </Tabs>
+        <hr />
         {tabKey === 'rooms' &&
-          <div className="cards-warper">
-          <Card
-            bg="info"
-            key="1"
-            text='white'
-            style={{ width: '15rem' }}
-            className="mb-2 add-card"
+          <RoomSection
             onClick={() => setShowCrudModel(true)}
-          >
-            <Card.Body>
-              <IoAddCircleOutline />
-              <h5>Add New Room</h5>
-            </Card.Body>
-          </Card>
+            rooms={rooms}
+            onDelete={handleWarningRoom} />
+        }
+        {tabKey === 'tenents' &&
 
 
 
-          {rooms.map(room =>
-            <RoomCard
-              key={room.id}
-              roomId={room.id}
-              notes={room.notes}
-              roomNumber={room.roomNumber}
-              pricePerDay={room.pricePerDay}
-              maxBeds={room.maxBed}
-              onDelete={handleWarningRoom}
+          <div>tenents</div>
+        }
+        {tabKey === 'calls' &&
 
-            />
 
-          )}
-          
-          
-        </div>
-      }
-      {tabKey === 'tenents' &&
-          
-          
-          
-        <div>tenents</div>
-      }
-      {tabKey === 'calls' &&
-          
-          
-          
+
           <div>calls</div>
         }
-        
+
         <CrudRoom
           onCreate={handleNewRoom}
           onClose={() => setShowCrudModel(false)}

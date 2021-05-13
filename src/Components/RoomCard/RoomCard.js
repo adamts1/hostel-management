@@ -27,13 +27,13 @@ function RoomCard({roomNumber, maxBeds, pricePerDay, notes, onDelete, roomId}) {
                         <hr />
                         <div className="card-icon-wrper">
                         <Row>
-                        <Col sm={4} className="crud-icons">
+                        <Col xs={4} className="crud-icons">
                                 <MdEdit/>
                         </Col>
-                        <Col sm={4} className="crud-icons">   
+                        <Col xs={4} className="crud-icons">   
                                 <MdDelete onClick={()=>onDelete(roomId ,roomNumber, maxBeds, pricePerDay, notes)}/>
                         </Col>        
-                        <Col sm={4} className="crud-icons">       
+                        <Col xs={4} className="crud-icons">       
                                 <AiOutlineFolderView />
                         </Col>
                         </Row>
