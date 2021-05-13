@@ -1,5 +1,5 @@
 import './HostelPage.css'
-import { Card, Container, Row, Button, Col } from 'react-bootstrap';
+import { Card, Container, Row, Tabs, Col, Tab} from 'react-bootstrap';
 import { IoAddCircleOutline } from 'react-icons/io5';
 import HostelModel from '../../Model/HostelModel'
 import RoomModel from '../../Model/RoomModel'
@@ -22,6 +22,7 @@ function HostelPage() {
   const [roomNumber, setRoomNumber] = useState();
   const [roomId, setRoomId] = useState();
   const { index } = useParams();
+  const [tabKey, setTabKey] = useState('rooms')
 
 
   useEffect(() => {
@@ -30,11 +31,11 @@ function HostelPage() {
       const query = new Parse.Query(HostelTable);
       const parseHostel = await query.get(index);
       const parseHostelInstance = new HostelModel(parseHostel)
-      const rooms =  await parseHostelInstance.getMyRooms();
+      const rooms = await parseHostelInstance.getMyRooms();
       setHostelInstance(parseHostelInstance)
       setRooms(rooms)
     }
-      getHostelsInstance();
+    getHostelsInstance();
   }, [])
 
 
@@ -52,7 +53,7 @@ function HostelPage() {
     setRoomId(roomId)
   }
 
-  
+
   async function handleDeleteRoom() {
     setShowWarningModel(false)
 
@@ -60,7 +61,7 @@ function HostelPage() {
     const query = new Parse.Query(RoomTable);
     const parseRoom = await query.get(roomId);
     const parseRoomInstance = new RoomModel(parseRoom)
-    
+
     const removedRoom = await parseRoomInstance.deleteRoom();
     const remainRooms = rooms.filter(room => room.id != removedRoom.id)
     setRooms(remainRooms);
@@ -68,19 +69,32 @@ function HostelPage() {
 
   return (
     <div className='p-hostelpage'>
+
       <Container>
-        <Row className="p-1 align-items-center">
+      <Row className="p-1 align-items-center">
           <Col>
             <h1>{hostelInstance.hostelName}</h1>
           </Col>
-        </Row>
-        <hr />
-        <div className="cards-warper">
+        </Row> 
+      <Tabs 
+        id="controlled-tab-example"
+        activeKey={tabKey}
+        onSelect={(k) => setTabKey(k)}>
+        <Tab eventKey="rooms" title="Rooms">
+        </Tab>
+        <Tab eventKey="tenents" title="Tenents">
+        </Tab>
+        <Tab eventKey="calls" title="Calls" >
+        </Tab>
+      </Tabs>
+      <hr/>
+        {tabKey === 'rooms' &&
+          <div className="cards-warper">
           <Card
             bg="info"
             key="1"
             text='white'
-            style={{ width: '18rem' }}
+            style={{ width: '15rem' }}
             className="mb-2 add-card"
             onClick={() => setShowCrudModel(true)}
           >
@@ -89,24 +103,40 @@ function HostelPage() {
               <h5>Add New Room</h5>
             </Card.Body>
           </Card>
-        
-       
 
-        {rooms.map(room =>
-        <RoomCard 
-          key={room.id}
-          roomId={room.id}
-          notes={room.notes}
-          roomNumber={room.roomNumber}
-          pricePerDay={room.pricePerDay}
-          maxBeds={room.maxBed}
-          onDelete={handleWarningRoom}
-         
-          />
-        
-        )}
+
+
+          {rooms.map(room =>
+            <RoomCard
+              key={room.id}
+              roomId={room.id}
+              notes={room.notes}
+              roomNumber={room.roomNumber}
+              pricePerDay={room.pricePerDay}
+              maxBeds={room.maxBed}
+              onDelete={handleWarningRoom}
+
+            />
+
+          )}
+          
+          
         </div>
-         <CrudRoom
+      }
+      {tabKey === 'tenents' &&
+          
+          
+          
+        <div>tenents</div>
+      }
+      {tabKey === 'calls' &&
+          
+          
+          
+          <div>calls</div>
+        }
+        
+        <CrudRoom
           onCreate={handleNewRoom}
           onClose={() => setShowCrudModel(false)}
           show={showCrudModel}
@@ -115,8 +145,8 @@ function HostelPage() {
           show={showWarningModel}
           onClose={() => setShowWarningModel(false)}
           onDelete={handleDeleteRoom}
-          actionOnInstanse= "Room number-"
-          instanseName= {roomNumber}
+          actionOnInstanse="Room number-"
+          instanseName={roomNumber}
         />
       </Container>
     </div>

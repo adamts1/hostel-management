@@ -32,7 +32,7 @@
  }
 
  .p-hostelpage .container {
-     margin-top: 70px;
+     margin-top: 50px;
 }
 
 
@@ -76,6 +76,28 @@
 
  .p-hostelpage .container .cards-warper .add-card:hover h5{
     color: white;
-    /* background-color: darkcyan !important; */
-    /* border: 5px solid white; */
  } 
+
+
+ .p-hostelpage .container .nav-link {
+   padding: 0.7rem 9rem;
+ }
+
+
+ .p-hostelpage .container .nav-tabs {
+   justify-content: space-evenly;
+   font-weight: 700;
+   margin-top: 26px;
+ }
+
+ .p-hostelpage .container .nav-tabs  a{
+   /* color: coral; */
+ }
+
+ @media (max-width: 980px){ 
+   .p-hostelpage .container .nav-link {
+      padding: 0.2rem 1.2rem;
+    }
+
+
+   }

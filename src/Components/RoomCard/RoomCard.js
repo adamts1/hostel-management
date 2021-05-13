@@ -12,7 +12,7 @@ function RoomCard({roomNumber, maxBeds, pricePerDay, notes, onDelete, roomId}) {
                 bg="info"
                 key="2"
                 text='white'
-                style={{ width: '18rem' }}
+                style={{ width: '15rem' }}
                 className="mb-2"
             >
                 <Card.Body>
