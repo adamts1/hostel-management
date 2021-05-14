@@ -5,7 +5,8 @@ import { useEffect, useState } from 'react';
 
 
 function CrudTenant({ show, onClose, onCreate}) {
-  const [tenantName, setTenantName] = useState();
+  const [tenantFName, setTenantFName] = useState();
+  const [tenantLName, setTenantLName] = useState();
   const [tenantEmail, setTenantEmail] = useState();
   const [tenantUsername, setTenantUsername] = useState();
   const [tenantPassword, setTenantPassword] = useState();
@@ -16,7 +17,8 @@ function CrudTenant({ show, onClose, onCreate}) {
   const [tenantEnd, setTenantEnd] = useState();
 
   function clearForm() {
-    setTenantName("");
+    setTenantFName("");
+    setTenantLName("");
     setTenantEmail("");
     setTenantUsername("");
     setTenantPassword("");
@@ -28,7 +30,7 @@ function CrudTenant({ show, onClose, onCreate}) {
 
 
   const createTenant = () => {
-    onCreate(tenantName ,tenantEmail, tenantUsername,tenantPassword, tenantRoom, tenantPayment, tenantStart, tenantEnd);
+    onCreate(tenantFName, tenantLName ,tenantEmail, tenantUsername,tenantPassword, tenantRoom, tenantPayment, tenantStart, tenantEnd);
     clearForm();
     onClose();
   }
@@ -42,7 +44,8 @@ function CrudTenant({ show, onClose, onCreate}) {
         </Modal.Header>
         <Modal.Body>
           <Form.Group>
-            <SignInUpInput value={tenantName} type="string" placeHolder="Name" onChange={e => setTenantName(e.target.value)} />
+            <SignInUpInput value={tenantFName} type="string" placeHolder="First Name" onChange={e => setTenantFName(e.target.value)} />
+            <SignInUpInput value={tenantLName} type="string" placeHolder="Last Name" onChange={e => setTenantLName(e.target.value)} />
             <SignInUpInput value={tenantEmail} type="email" placeHolder="Email" onChange={e => setTenantEmail(e.target.value)} />
             <SignInUpInput value={tenantUsername} type="string" placeHolder="Username" onChange={e => setTenantUsername(e.target.value)} />
             <SignInUpInput value={tenantPassword} type="password" placeHolder="Password" onChange={e => setTenantPassword(e.target.value)}/>

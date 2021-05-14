@@ -18,23 +18,19 @@ function HostelsPage({ activeUser }) {
   // Defined if create or edit hostel
   const [action, setAction] = useState([]);
 
-
   useEffect(() => {
     async function fetchData() {
       try{
         const hostels = await activeUser.getMyHostel();
         setHostels(hostels);
-
       }catch{
         console.log("No Hostels")
       }
-      
     }
     if (activeUser) {
       fetchData();
     }
   }, [activeUser])
-
 
   async function handleNewHostel(name, address, numOfRooms) {
     const newHostel = await activeUser.createHostel(name, address, numOfRooms);
@@ -45,19 +41,10 @@ function HostelsPage({ activeUser }) {
     const updateddHostel = await HostelModel.updateHostel(name, address, numOfRooms, hostelId);
     const hostels = await activeUser.getMyHostel();
     setHostels(hostels);
-
-  }
-
-  async function handleUpdateHostel(name, address, numOfRooms) {
-    const updateddHostel = await HostelModel.updateHostel(name, address, numOfRooms, hostelId);
-    const hostels = await activeUser.getMyHostel();
-    setHostels(hostels);
-
   }
 
   async function handleDeleteHostel() {
     setShowWarningModel(false)
-
     const HostelTable = Parse.Object.extend('Hostel');
     const query = new Parse.Query(HostelTable);
     const parseHostel = await query.get(hostelId);

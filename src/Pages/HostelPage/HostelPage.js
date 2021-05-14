@@ -11,7 +11,7 @@ import RoomSection from '../../Components/RoomSection/RoomSection'
 import TenantsSection from '../../Components/TenantsSection/TenantsSection'
 
 
-function HostelPage() {
+function HostelPage({ activeUser }) {
   const [showCrudModel, setShowCrudModel] = useState(false);
   const [rooms, setRooms] = useState([]);
   const [hostelInstance, setHostelInstance] = useState([]);
@@ -27,8 +27,8 @@ function HostelPage() {
 
   useEffect(() => {
     async function getHostelsInstance() {
-      const HostelTable = Parse.Object.extend('Hostel');
-      const query = new Parse.Query(HostelTable);
+      const hostelTable = Parse.Object.extend('Hostel');
+      const query = new Parse.Query(hostelTable);
       const parseHostel = await query.get(index);
       const parseHostelInstance = new HostelModel(parseHostel)
       const rooms = await parseHostelInstance.getMyRooms();
@@ -95,7 +95,7 @@ function HostelPage() {
             onDelete={handleWarningRoom} />
         }
         {tabKey === 'tenents' &&
-          <TenantsSection/>
+          <TenantsSection activeUser={activeUser}/>
         }
         {tabKey === 'calls' &&
           <div>calls</div>

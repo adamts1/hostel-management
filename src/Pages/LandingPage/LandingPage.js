@@ -8,7 +8,7 @@ function LandinPage() {
         <Row>
           <Col sm={12} lg={6} >
                 <h1>Manage your hostels from anyware !</h1>
-                <p className="text-center">Create your own hostels and and roons, track capacity, system calls, all in one app!</p>
+                <p className="text-center">Create your own hostels and and rooms, track capacity, system calls, all in one app!</p>
               <Row className="justify-content-center">
                 <Button variant="primary" size="lg">
                   Get Started 

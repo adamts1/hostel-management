@@ -3,41 +3,35 @@ import TenantCard from '../TenantCard/TenantCard'
 import { Card } from 'react-bootstrap';
 import { IoAddCircleOutline } from 'react-icons/io5';
 import CrudTenant from '../CrudTenant/CrudTenant'
-import { useState } from 'react';
+import UserModel from '../../Model/UserModel'
+import HostelModel from '../../Model/HostelModel'
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
+
 import Parse from 'parse';
 
-
-
-function TenantsSection() {
+function TenantsSection({activeUser}) {
   const [showCrudModel, setShowCrudModel] = useState()
+  const { index } = useParams();
 
-  async function handleNewTenant(tenantName ,tenantEmail, tenantUsername,tenantPassword, tenantRoom, tenantPayment, tenantStart, tenantEnd) {
-    var user = new Parse.User();
-    user.set("username", tenantUsername);
-    user.set("password", tenantPassword);
-    user.set("tenant", true);
-    user.set("start", tenantStart);
 
-    var sessionToken = Parse.User.current().get("sessionToken");
-    //at this point the "teacher" is the current user
-    //i save this user session for use later
-    user.signUp(null, {
-      success: function (user) {
-        //right now i have successfully signed up a new "student" and am actually logged in as that student
-        Parse.User.become(sessionToken).then(function (user) {
-          // The current user is now set back to the teacher.
-          // Continue doing what you want
-        }, function (error) {
-          // The token could not be validated.
-          alert('error');
-        });
-      },
-      error: function (user, error) {
-        //Show the error message somewhere and let the user try again                    alert("Error: " + error.code + " " + error.message);
+  useEffect(() => {
+    async function fetchTenants() {
+      try{
+        const tenants = await activeUser.getMyTenants(index);
+        console.log(tenants)
+      }catch{
+        console.log("No Tenants")
       }
-    });
-  }
+    }
+    if (activeUser) {
+      fetchTenants();
+    }
+  }, [])
 
+  async function handleNewTenant(tenantFName, tenantLName ,tenantEmail, tenantUsername,tenantPassword, tenantRoom, tenantPayment, tenantStart, tenantEnd) {
+    UserModel.signupTenant(tenantFName, tenantLName ,tenantEmail, tenantUsername,tenantPassword, tenantRoom, tenantPayment, tenantStart, tenantEnd, index)
+  }
 
 return (
   <div className='c-tenantssection'>

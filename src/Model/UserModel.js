@@ -10,9 +10,8 @@ export default class UserModel {
         this.email = parseUser.get("email");
         this.#parseUser = parseUser;
     }
+
     static activeUser = null;
-
-
     static async login(email, pwd) {
         const parseUser = await Parse.User.logIn(email, pwd);
         UserModel.activeUser = new UserModel(parseUser);
@@ -29,9 +28,10 @@ export default class UserModel {
 
         const parseUser =  await user.signUp()
         UserModel.activeUser = new UserModel(parseUser)
-        return UserModel.activeUser
-        
+        return UserModel.activeUser   
     }
+
+
 
     async getMyHostel() {
         const HostelTable = Parse.Object.extend('Hostel');
@@ -40,6 +40,15 @@ export default class UserModel {
         const parseHostels = await query.find();
         const hostels = parseHostels.map(parseHostel => new HostelModel(parseHostel));
         return hostels;
+    }
+
+    async getMyTenants(hostelKey) {
+        const userTable = Parse.Object.extend('User');
+        const query = new Parse.Query(userTable);
+        query.equalTo("hostelKey", hostelKey);
+        const parsetenants = await query.find();
+        // const hostels = parseHostels.map(parseHostel => new HostelModel(parseHostel));
+        return parsetenants;
     }
 
     async createHostel(name, addrees, numOfRooms) {
@@ -54,6 +63,34 @@ export default class UserModel {
         const parseHostel = await newHostel.save();
         const hostel = new HostelModel(parseHostel);
         return hostel;
+    }
+
+    static async signupTenant(tenantFName, tenantLName ,tenantEmail, tenantUsername,tenantPassword, tenantRoom, tenantPayment, tenantStart, tenantEnd, hostelKey) {
+        const user = new Parse.User()
+        user.set("fname", tenantFName);
+        user.set("lname", tenantLName);
+        user.set("email", tenantEmail);
+        user.set("username", tenantUsername);
+        user.set("password", tenantPassword);
+        user.set("room", tenantRoom);
+        user.set("payment", tenantPayment);
+        user.set("username", tenantUsername);
+        user.set("tenant", true);
+        user.set("start", tenantStart);
+        user.set("end", tenantEnd);
+        user.set("hostelKey", hostelKey);
+        
+        var sessionToken = Parse.User.current().get("sessionToken");
+        user.signUp(null, {
+          success: function (user) {
+            Parse.User.become(sessionToken).then(function (user) {
+            }, function (error) {
+              alert('error');
+            });
+          },
+          error: function (user, error) {
+          }
+        });
     }
 
 

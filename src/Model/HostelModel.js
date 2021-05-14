@@ -59,4 +59,6 @@ export default class HostelModel {
         return room;
     }
 
+  
+
 }
