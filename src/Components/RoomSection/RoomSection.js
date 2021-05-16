@@ -22,7 +22,6 @@ function RoomSection({ onClick, onDelete }) {
   const [roomNumber, setRoomNumber] = useState();
   const [roomId, setRoomId] = useState();
 
-
   const { index } = useParams();
 
   useEffect(() => {

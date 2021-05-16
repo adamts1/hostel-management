@@ -1,10 +1,11 @@
 import './CrudTenant.css'
 import SignInUpInput from '../SignInUpInput/SignInUpInput'
-import { Modal, Button, Form, Col, Image } from 'react-bootstrap';
+import { Modal, Button, Form, Col, Image, Dropdown } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
+import RoomDropDown from '../RoomDropDown/RoomDropDown'
 
 
-function CrudTenant({ show, onClose, onCreate}) {
+function CrudTenant({ show, onClose, onCreate }) {
   const [tenantFName, setTenantFName] = useState();
   const [tenantLName, setTenantLName] = useState();
   const [tenantEmail, setTenantEmail] = useState();
@@ -32,25 +33,25 @@ function CrudTenant({ show, onClose, onCreate}) {
 
 
   const createTenant = () => {
-    onCreate(tenantFName, tenantLName ,tenantEmail, tenantUsername,tenantPassword, tenantRoom, tenantPayment, tenantStart, tenantEnd, img);
+    onCreate(tenantFName, tenantLName, tenantEmail, tenantUsername, tenantPassword, tenantRoom, tenantPayment, tenantStart, tenantEnd, img);
     clearForm();
     onClose();
   }
 
   function handleFileChange(e) {
     if (e.target.files.length === 1) {
-        setImg(e.target.files[0]);
+      setImg(e.target.files[0]);
     } else {
-        setImg(null);
+      setImg(null);
     }
-}
+  }
 
 
   return (
     <div className='c-crudtenant'>
       <Modal show={show} onHide={onClose}>
         <Modal.Header closeButton>
-        <Modal.Title>Create New Tenant</Modal.Title>
+          <Modal.Title>Create New Tenant</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form.Group>
@@ -58,22 +59,31 @@ function CrudTenant({ show, onClose, onCreate}) {
             <SignInUpInput value={tenantLName} type="string" placeHolder="Last Name" onChange={e => setTenantLName(e.target.value)} />
             <SignInUpInput value={tenantEmail} type="email" placeHolder="Email" onChange={e => setTenantEmail(e.target.value)} />
             <SignInUpInput value={tenantUsername} type="string" placeHolder="Username" onChange={e => setTenantUsername(e.target.value)} />
-            <SignInUpInput value={tenantPassword} type="password" placeHolder="Password" onChange={e => setTenantPassword(e.target.value)}/>
-            <SignInUpInput value={tenantRoom} type="string" placeHolder="room" onChange={e => setTenantRoom(e.target.value)}/>
-            <SignInUpInput value={tenantPayment} type="string" placeHolder="Payment" onChange={e => setPayment(e.target.value)}/>
-            <SignInUpInput value={tenantStart} type="date" placeHolder="Start" onChange={e => setTenantStart(e.target.value)}/>
-            <SignInUpInput value={tenantEnd} type="date" placeHolder="End" onChange={e => setTenantEnd(e.target.value)}/>
+            <SignInUpInput value={tenantPassword} type="password" placeHolder="Password" onChange={e => setTenantPassword(e.target.value)} />
+            <SignInUpInput value={tenantRoom} type="string" placeHolder="room" onChange={e => setTenantRoom(e.target.value)} />
+            <SignInUpInput value={tenantPayment} type="string" placeHolder="Payment" onChange={e => setPayment(e.target.value)} />
+            <SignInUpInput value={tenantStart} type="date" placeHolder="Start" onChange={e => setTenantStart(e.target.value)} />
+            <SignInUpInput value={tenantEnd} type="date" placeHolder="End" onChange={e => setTenantEnd(e.target.value)} />
+            <RoomDropDown/>
+
+
+
+
+     
+
+
+
             <Col sm={9}>
-                <Form.Control type="file" accept="image/*" onChange={handleFileChange}/>
-            </Col>        
-            <Image src={img ? URL.createObjectURL(img) : ""}/>
+              <Form.Control type="file" accept="image/*" onChange={handleFileChange} />
+            </Col>
+            <Image src={img ? URL.createObjectURL(img) : ""} />
           </Form.Group>
         </Modal.Body>
         <Modal.Footer className="justify-content-center">
           <Button onClick={onClose} variant="secondary">
             Close
           </Button>
-          <Button onClick={createTenant}  className="create" variant="primary" >Create</Button>
+          <Button onClick={createTenant} className="create" variant="primary" >Create</Button>
         </Modal.Footer>
       </Modal>
 
