@@ -8,6 +8,11 @@ export default class UserModel {
         this.fname = parseUser.get("fname");
         this.lname = parseUser.get("lname");
         this.email = parseUser.get("email");
+        this.showEmail = parseUser.get("showEmail");
+        this.room = parseUser.get("room");
+        this.payment = parseUser.get("payment");
+        this.start = parseUser.get("start");
+        this.end = parseUser.get("end");
         this.#parseUser = parseUser;
     }
 
@@ -46,9 +51,11 @@ export default class UserModel {
         const userTable = Parse.Object.extend('User');
         const query = new Parse.Query(userTable);
         query.equalTo("hostelKey", hostelKey);
-        const parsetenants = await query.find();
-        // const hostels = parseHostels.map(parseHostel => new HostelModel(parseHostel));
-        return parsetenants;
+        const parseTenants = await query.find();
+        console.log(parseTenants)
+        const tenants = parseTenants.map(parseTenant => new UserModel(parseTenant));
+        console.log(tenants)
+        return tenants;
     }
 
     async createHostel(name, addrees, numOfRooms) {
@@ -70,6 +77,7 @@ export default class UserModel {
         user.set("fname", tenantFName);
         user.set("lname", tenantLName);
         user.set("email", tenantEmail);
+        user.set("showEmail", tenantEmail);
         user.set("username", tenantUsername);
         user.set("password", tenantPassword);
         user.set("room", tenantRoom);
@@ -81,16 +89,25 @@ export default class UserModel {
         user.set("hostelKey", hostelKey);
         
         var sessionToken = Parse.User.current().get("sessionToken");
-        user.signUp(null, {
-          success: function (user) {
-            Parse.User.become(sessionToken).then(function (user) {
-            }, function (error) {
-              alert('error');
-            });
-          },
-          error: function (user, error) {
-          }
-        });
+        // const parseTenant = user.signUp(null, {
+        //   success: function (user) {
+        //     Parse.User.become(sessionToken).then(function (user) {
+        //     }, function (error) {
+        //       alert('error');
+        //     });
+        //   },
+        //   error: function (user, error) {
+        //   }
+        // });
+        const parseTenant =  await user.signUp()
+
+
+        const userModelTenant = new UserModel(parseTenant)
+        await Parse.User.become(sessionToken)
+
+        return userModelTenant;
+
+
     }
 
 

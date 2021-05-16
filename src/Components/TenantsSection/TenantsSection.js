@@ -12,6 +12,7 @@ import Parse from 'parse';
 
 function TenantsSection({activeUser}) {
   const [showCrudModel, setShowCrudModel] = useState()
+  const [tenants, setTenant] = useState([])
   const { index } = useParams();
 
 
@@ -19,7 +20,7 @@ function TenantsSection({activeUser}) {
     async function fetchTenants() {
       try{
         const tenants = await activeUser.getMyTenants(index);
-        console.log(tenants)
+        setTenant(tenants)
       }catch{
         console.log("No Tenants")
       }
@@ -30,7 +31,8 @@ function TenantsSection({activeUser}) {
   }, [])
 
   async function handleNewTenant(tenantFName, tenantLName ,tenantEmail, tenantUsername,tenantPassword, tenantRoom, tenantPayment, tenantStart, tenantEnd) {
-    UserModel.signupTenant(tenantFName, tenantLName ,tenantEmail, tenantUsername,tenantPassword, tenantRoom, tenantPayment, tenantStart, tenantEnd, index)
+    const tenant = await UserModel.signupTenant(tenantFName, tenantLName ,tenantEmail, tenantUsername,tenantPassword, tenantRoom, tenantPayment, tenantStart, tenantEnd, index)
+    setTenant(tenants.concat(tenant));
   }
 
 return (
@@ -48,9 +50,10 @@ return (
           <h5>New Tenants</h5>
         </Card.Body>
       </Card>
-      <TenantCard />
-      <TenantCard />
-      <TenantCard />
+      {tenants.map(tenant =>
+              <TenantCard
+                {...tenant}/>
+          )}
     </div>
     <CrudTenant
       onClose={() => setShowCrudModel(false)}
