@@ -17,8 +17,6 @@ function TenantCard(props) {
             >
                 <Card.Img variant="top" src={props.img.url()} />
                 <Card.Body>
-                    {/* <Card.Title>Tenant Name <span> {props.fname}</span></Card.Title>
-                    <hr /> */}
                     <Card.Text>
                         <div><span className="font-weight-bold">Name: </span><span>{props.fname}</span></div>
                         <div><span className="font-weight-bold">Room: </span><span>{props.room}</span></div>

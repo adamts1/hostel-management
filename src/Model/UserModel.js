@@ -85,34 +85,21 @@ export default class UserModel {
         user.set("tenant", true);
         user.set("start", tenantStart);
         user.set("end", tenantEnd);
+
+        // Save Hostel as a string for reference
         user.set("hostelKey", hostelKey);
-        console.log(img.name)
-        console.log(img)
+        
         if (img) {
             user.set('img', new Parse.File(img.name, img)); 
-            // user.set('img', img.name); 
         }
-        
         var sessionToken = Parse.User.current().get("sessionToken");
-        // const parseTenant = user.signUp(null, {
-        //   success: function (user) {
-        //     Parse.User.become(sessionToken).then(function (user) {
-        //     }, function (error) {
-        //       alert('error');
-        //     });
-        //   },
-        //   error: function (user, error) {
-        //   }
-        // });
         const parseTenant =  await user.signUp()
 
-
+         // Create tenant user before returning to admin user
         const userModelTenant = new UserModel(parseTenant)
+        // Return to admin user
         await Parse.User.become(sessionToken)
-
         return userModelTenant;
-
-
     }
 
 
