@@ -1,29 +1,16 @@
 import './HostelPage.css'
-import { Card, Container, Row, Tabs, Col, Tab } from 'react-bootstrap';
-import HostelModel from '../../Model/HostelModel'
-import RoomModel from '../../Model/RoomModel'
-import CrudRoom from '../../Components/CrudRoom/CrudRoom'
-import WarningModel from '../../Components/WarningModel/WarningModel'
-import { useParams } from 'react-router';
+import { Container, Row, Tabs, Col, Tab } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-import Parse from 'parse';
 import RoomSection from '../../Components/RoomSection/RoomSection'
 import TenantsSection from '../../Components/TenantsSection/TenantsSection'
-
+import Parse from 'parse';
+import HostelModel from '../../Model/HostelModel'
+import { useParams } from 'react-router';
 
 function HostelPage({ activeUser }) {
-  const [showCrudModel, setShowCrudModel] = useState(false);
-  const [rooms, setRooms] = useState([]);
-  const [hostelInstance, setHostelInstance] = useState([]);
-  const [showWarningModel, setShowWarningModel] = useState();
-  const [notes, setNotes] = useState();
-  const [maxBeds, seTmaxBeds] = useState();
-  const [pricePerDay, setPricePerDay] = useState();
-  const [roomNumber, setRoomNumber] = useState();
-  const [roomId, setRoomId] = useState();
-  const { index } = useParams();
-  const [tabKey, setTabKey] = useState('rooms')
 
+  const [hostelInstance, setHostelInstance] = useState([]);
+  const { index } = useParams();
 
   useEffect(() => {
     async function getHostelsInstance() {
@@ -31,41 +18,13 @@ function HostelPage({ activeUser }) {
       const query = new Parse.Query(hostelTable);
       const parseHostel = await query.get(index);
       const parseHostelInstance = new HostelModel(parseHostel)
-      const rooms = await parseHostelInstance.getMyRooms();
       setHostelInstance(parseHostelInstance)
-      setRooms(rooms)
+     
     }
     getHostelsInstance();
   }, [])
-
-
-  async function handleNewRoom(roomNumber, maxBeds, pricePerDay, notes) {
-    const newRoom = await hostelInstance.createRoom(roomNumber, maxBeds, pricePerDay, notes);
-    setRooms(rooms.concat(newRoom));
-  }
-
-  function handleWarningRoom(roomId, roomNumber, maxBeds, pricePerDay, notes) {
-    setShowWarningModel(true)
-    seTmaxBeds(maxBeds)
-    setNotes(notes)
-    setPricePerDay(pricePerDay)
-    setRoomNumber(roomNumber)
-    setRoomId(roomId)
-  }
-
-
-  async function handleDeleteRoom() {
-    setShowWarningModel(false)
-
-    const RoomTable = Parse.Object.extend('Room');
-    const query = new Parse.Query(RoomTable);
-    const parseRoom = await query.get(roomId);
-    const parseRoomInstance = new RoomModel(parseRoom)
-
-    const removedRoom = await parseRoomInstance.deleteRoom();
-    const remainRooms = rooms.filter(room => room.id != removedRoom.id)
-    setRooms(remainRooms);
-  }
+ 
+  const [tabKey, setTabKey] = useState('rooms')
 
   return (
     <div className='p-hostelpage'>
@@ -73,7 +32,7 @@ function HostelPage({ activeUser }) {
       <Container>
         <Row className="p-1 align-items-center">
           <Col>
-            <h1>{hostelInstance.hostelName}</h1>
+            {/* <h1>{hostelInstance.hostelName}</h1> */}
           </Col>
         </Row>
         <Tabs
@@ -89,10 +48,7 @@ function HostelPage({ activeUser }) {
         </Tabs>
         <hr />
         {tabKey === 'rooms' &&
-          <RoomSection
-            onClick={() => setShowCrudModel(true)}
-            rooms={rooms}
-            onDelete={handleWarningRoom} />
+          <RoomSection activeUser={activeUser}/>
         }
         {tabKey === 'tenents' &&
           <TenantsSection activeUser={activeUser}/>
@@ -100,19 +56,6 @@ function HostelPage({ activeUser }) {
         {tabKey === 'calls' &&
           <div>calls</div>
         }
-
-        <CrudRoom
-          onCreate={handleNewRoom}
-          onClose={() => setShowCrudModel(false)}
-          show={showCrudModel}
-        />
-        <WarningModel
-          show={showWarningModel}
-          onClose={() => setShowWarningModel(false)}
-          onDelete={handleDeleteRoom}
-          actionOnInstanse="Room number-"
-          instanseName={roomNumber}
-        />
       </Container>
     </div>
   );

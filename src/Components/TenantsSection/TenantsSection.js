@@ -15,7 +15,6 @@ function TenantsSection({activeUser}) {
   const [tenants, setTenant] = useState([])
   const { index } = useParams();
 
-
   useEffect(() => {
     async function fetchTenants() {
       try{
