@@ -19,14 +19,19 @@
  } 
 
  .c-tenantssection .cards-warper .add-card:hover h5{
-    color: white;
+    color: white !important;
  } 
 
  
  .c-tenantssection .cards-warper .add-card:hover{
     border: 5px solid white !important;
     background-color: #8B008B !important;
- } 
+ }
+  
+ .c-tenantssection .cards-warper .card-body h5{
+     font-weight: bold;
+     color: #8B008B !important;
+ }
 
 
 

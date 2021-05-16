@@ -1,3 +1,9 @@
+.c-tenantcard{ 
+    display: contents;
+}
+
+
+
 .c-tenantcard  .card-body svg{
     margin: 2px auto !important;
     font-size: 32px  !important;
