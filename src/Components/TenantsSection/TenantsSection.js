@@ -30,8 +30,8 @@ function TenantsSection({activeUser}) {
     }
   }, [])
 
-  async function handleNewTenant(tenantFName, tenantLName ,tenantEmail, tenantUsername,tenantPassword, tenantRoom, tenantPayment, tenantStart, tenantEnd) {
-    const tenant = await UserModel.signupTenant(tenantFName, tenantLName ,tenantEmail, tenantUsername,tenantPassword, tenantRoom, tenantPayment, tenantStart, tenantEnd, index)
+  async function handleNewTenant(tenantFName, tenantLName ,tenantEmail, tenantUsername,tenantPassword, tenantRoom, tenantPayment, tenantStart, tenantEnd, img) {
+    const tenant = await UserModel.signupTenant(tenantFName, tenantLName ,tenantEmail, tenantUsername,tenantPassword, tenantRoom, tenantPayment, tenantStart, tenantEnd, index, img)
     setTenant(tenants.concat(tenant));
   }
 

@@ -40,9 +40,8 @@
 
 
 @media (max-width: 980px){ 
-img {
+.p-landinpage img {
     display: none;
-    /* margin-right: -8.33333333%; */
 }
 
 .brad{

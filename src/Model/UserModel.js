@@ -13,6 +13,7 @@ export default class UserModel {
         this.payment = parseUser.get("payment");
         this.start = parseUser.get("start");
         this.end = parseUser.get("end");
+        this.img = parseUser.get("img");
         this.#parseUser = parseUser;
     }
 
@@ -52,9 +53,7 @@ export default class UserModel {
         const query = new Parse.Query(userTable);
         query.equalTo("hostelKey", hostelKey);
         const parseTenants = await query.find();
-        console.log(parseTenants)
         const tenants = parseTenants.map(parseTenant => new UserModel(parseTenant));
-        console.log(tenants)
         return tenants;
     }
 
@@ -72,7 +71,7 @@ export default class UserModel {
         return hostel;
     }
 
-    static async signupTenant(tenantFName, tenantLName ,tenantEmail, tenantUsername,tenantPassword, tenantRoom, tenantPayment, tenantStart, tenantEnd, hostelKey) {
+    static async signupTenant(tenantFName, tenantLName ,tenantEmail, tenantUsername,tenantPassword, tenantRoom, tenantPayment, tenantStart, tenantEnd, hostelKey, img) {
         const user = new Parse.User()
         user.set("fname", tenantFName);
         user.set("lname", tenantLName);
@@ -87,6 +86,12 @@ export default class UserModel {
         user.set("start", tenantStart);
         user.set("end", tenantEnd);
         user.set("hostelKey", hostelKey);
+        console.log(img.name)
+        console.log(img)
+        if (img) {
+            user.set('img', new Parse.File(img.name, img)); 
+            // user.set('img', img.name); 
+        }
         
         var sessionToken = Parse.User.current().get("sessionToken");
         // const parseTenant = user.signUp(null, {

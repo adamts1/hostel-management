@@ -1,6 +1,6 @@
 import './CrudTenant.css'
 import SignInUpInput from '../SignInUpInput/SignInUpInput'
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Modal, Button, Form, Col, Image } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 
 
@@ -15,6 +15,7 @@ function CrudTenant({ show, onClose, onCreate}) {
   const [tenantPayment, setPayment] = useState();
   const [tenantStart, setTenantStart] = useState();
   const [tenantEnd, setTenantEnd] = useState();
+  const [img, setImg] = useState(null);
 
   function clearForm() {
     setTenantFName("");
@@ -26,14 +27,23 @@ function CrudTenant({ show, onClose, onCreate}) {
     setPayment("");
     setTenantStart("");
     setTenantEnd("");
+    setImg(null);
   }
 
 
   const createTenant = () => {
-    onCreate(tenantFName, tenantLName ,tenantEmail, tenantUsername,tenantPassword, tenantRoom, tenantPayment, tenantStart, tenantEnd);
+    onCreate(tenantFName, tenantLName ,tenantEmail, tenantUsername,tenantPassword, tenantRoom, tenantPayment, tenantStart, tenantEnd, img);
     clearForm();
     onClose();
   }
+
+  function handleFileChange(e) {
+    if (e.target.files.length === 1) {
+        setImg(e.target.files[0]);
+    } else {
+        setImg(null);
+    }
+}
 
 
   return (
@@ -53,9 +63,10 @@ function CrudTenant({ show, onClose, onCreate}) {
             <SignInUpInput value={tenantPayment} type="string" placeHolder="Payment" onChange={e => setPayment(e.target.value)}/>
             <SignInUpInput value={tenantStart} type="date" placeHolder="Start" onChange={e => setTenantStart(e.target.value)}/>
             <SignInUpInput value={tenantEnd} type="date" placeHolder="End" onChange={e => setTenantEnd(e.target.value)}/>
-        
-            <Form.File id="exampleFormControlFile1" label="Upload image " />
-  
+            <Col sm={9}>
+                <Form.Control type="file" accept="image/*" onChange={handleFileChange}/>
+            </Col>        
+            <Image src={img ? URL.createObjectURL(img) : ""}/>
           </Form.Group>
         </Modal.Body>
         <Modal.Footer className="justify-content-center">

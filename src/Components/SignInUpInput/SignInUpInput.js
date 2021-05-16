@@ -10,7 +10,7 @@ function SignInUpInput({type, placeHolder, onChange, value}) {
                 {type === 'date' &&
                 <Form.Label>{placeHolder}</Form.Label>
                 }   
-                <Form.Control value={value} type={type} placeholder={placeHolder} onChange={onChange} />
+                <Form.Control value={value}  type={type} placeholder={placeHolder} onChange={onChange} />
             </Form.Group>
         </div>
     );

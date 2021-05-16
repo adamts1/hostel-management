@@ -5,7 +5,7 @@ import { IoIosArrowDropdown } from 'react-icons/io';
 import './TenantCard.css'
 
 function TenantCard(props) {
-    
+
     return (
         <div className="c-tenantcard">
             <Card
@@ -15,9 +15,10 @@ function TenantCard(props) {
                 style={{ width: '20rem' }}
                 className="mb-2"
             >
+                <Card.Img variant="top" src={props.img.url()} />
                 <Card.Body>
-                    <Card.Title>Tenant Name <span> {props.fname}</span></Card.Title>
-                    <hr />
+                    {/* <Card.Title>Tenant Name <span> {props.fname}</span></Card.Title>
+                    <hr /> */}
                     <Card.Text>
                         <div><span className="font-weight-bold">Name: </span><span>{props.fname}</span></div>
                         <div><span className="font-weight-bold">Room: </span><span>{props.room}</span></div>
@@ -25,19 +26,18 @@ function TenantCard(props) {
                         <div><span className="font-weight-bold">Start: </span><span>{props.start}</span></div>
                         <p><span className="font-weight-bold">End: </span><span>{props.end}</span></p>
                         <p><span className="font-weight-bold">Payment: </span><span>{props.payment}</span></p>
-                        <hr />
                         <div className="card-icon-wrper">
-                        <Row>
-                        <Col xs={4} className="crud-icons">
-                                <MdEdit/>
-                        </Col>
-                        <Col xs={4} className="crud-icons">   
-                                <MdDelete/>
-                        </Col>        
-                        <Col xs={4} className="crud-icons">       
-                                <AiOutlineFolderView />
-                        </Col>
-                        </Row>
+                            <Row>
+                                <Col xs={4} className="crud-icons">
+                                    <MdEdit />
+                                </Col>
+                                <Col xs={4} className="crud-icons">
+                                    <MdDelete />
+                                </Col>
+                                <Col xs={4} className="crud-icons">
+                                    <AiOutlineFolderView />
+                                </Col>
+                            </Row>
                         </div>
                     </Card.Text>
                 </Card.Body>
