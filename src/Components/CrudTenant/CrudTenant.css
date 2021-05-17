@@ -3,6 +3,15 @@
 .modal-content{
     /* font-family: monospace; */
     font-family: 'Roboto', sans-serif;
+    padding-left:0 !important;  
+}
+
+.modal-content .modal-title{
+    flex-grow: 1;
+    text-align: -webkit-center;
+    color: purple;
+    font-weight: bold;
+    padding-left: 51px; 
 }
 
 
@@ -28,14 +37,25 @@
 }
 
 .modal-content p{
-display: inline-block;
-margin-top: 20px;
-padding-left: 12px;
+   display: inline-block;
+   margin-top: 20px;
+   padding-left: 12px;
 }
 
 .file-input-warper{
     padding-left:10px ;
 }
+
+@media (max-width: 980px){ 
+    .modal-content .modal-title{
+        font-size: 17px;
+        margin-top: 1px;
+    }
+
+    .modal-content .modal-header{
+        padding: 5px;
+    }
+    }
 
 
 
