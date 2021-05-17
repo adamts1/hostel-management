@@ -10,6 +10,10 @@ import { useParams } from 'react-router';
 function HostelPage({ activeUser }) {
 
   const [hostelInstance, setHostelInstance] = useState([]);
+  const [tabKey, setTabKey] = useState('rooms')
+  const [rooms, setRooms] = useState([]);
+
+
   const { index } = useParams();
 
   useEffect(() => {
@@ -18,21 +22,20 @@ function HostelPage({ activeUser }) {
       const query = new Parse.Query(hostelTable);
       const parseHostel = await query.get(index);
       const parseHostelInstance = new HostelModel(parseHostel)
+      const rooms = await parseHostelInstance.getMyRooms();
+
       setHostelInstance(parseHostelInstance)
-     
+      setRooms(rooms)
     }
     getHostelsInstance();
   }, [])
- 
-  const [tabKey, setTabKey] = useState('rooms')
 
   return (
     <div className='p-hostelpage'>
-
       <Container>
         <Row className="p-1 align-items-center">
           <Col>
-            {/* <h1>{hostelInstance.hostelName}</h1> */}
+            <h1>{hostelInstance.hostelName}</h1>
           </Col>
         </Row>
         <Tabs
@@ -48,10 +51,10 @@ function HostelPage({ activeUser }) {
         </Tabs>
         <hr />
         {tabKey === 'rooms' &&
-          <RoomSection activeUser={activeUser}/>
+          <RoomSection activeUser={activeUser}  />
         }
         {tabKey === 'tenents' &&
-          <TenantsSection activeUser={activeUser}/>
+          <TenantsSection activeUser={activeUser}  rooms={rooms}/>
         }
         {tabKey === 'calls' &&
           <div>calls</div>

@@ -1,10 +1,15 @@
 import { Dropdown, FormControl} from 'react-bootstrap';
 import React, { useState, useEffect } from 'react';
 
+function RoomDropDown({rooms, value, onClick}) {
+    const [chosenValue, setChosenValue] = useState();
 
-
-function RoomDropDown() {
-
+    const chosenRoomHandler = (e) =>{
+      setChosenValue(e.target.innerHTML);
+      // Send room and room key 
+      onClick(e.target.innerHTML, e.target.id);
+    }
+ 
     const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
         <a
           href=""
@@ -18,7 +23,6 @@ function RoomDropDown() {
           &#x25bc;
         </a>
       ));
-      
       // forwardRef again here!
       // Dropdown needs access to the DOM of the Menu to measure it
       const CustomMenu = React.forwardRef(
@@ -35,7 +39,7 @@ function RoomDropDown() {
               <FormControl
                 autoFocus
                 className="mx-3 my-2 w-auto"
-                placeholder="Type to filter..."
+                placeholder="Search..."
                 onChange={(e) => setValue(e.target.value)}
                 value={value}
               />
@@ -49,20 +53,16 @@ function RoomDropDown() {
           );
         },
       );
-    
     return (
         <Dropdown>
         <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-          Custom toggle
-        </Dropdown.Toggle>
-    
-        <Dropdown.Menu as={CustomMenu}>
-          <Dropdown.Item eventKey="1">Red</Dropdown.Item>
-          <Dropdown.Item eventKey="2">Blue</Dropdown.Item>
-          <Dropdown.Item eventKey="3" active>
-            Orange
-          </Dropdown.Item>
-          <Dropdown.Item eventKey="1">Red-Orange</Dropdown.Item>
+          Choose Room: {chosenValue}
+        </Dropdown.Toggle >
+        <Dropdown.Menu >
+        {rooms.map(room =>
+              // <Dropdown.Item eventKey={room.key} onClick={(e)=>setChosenValue(e.target.innerText)}>{room.roomNumber}</Dropdown.Item>
+              <Dropdown.Item eventKey={room.key} id={room.id} onClick={chosenRoomHandler}>{room.roomNumber}</Dropdown.Item>
+          )}
         </Dropdown.Menu>
       </Dropdown>
     );

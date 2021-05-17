@@ -5,18 +5,19 @@ import { useEffect, useState } from 'react';
 import RoomDropDown from '../RoomDropDown/RoomDropDown'
 
 
-function CrudTenant({ show, onClose, onCreate }) {
+function CrudTenant({ show, onClose, onCreate, rooms }) {
   const [tenantFName, setTenantFName] = useState();
   const [tenantLName, setTenantLName] = useState();
   const [tenantEmail, setTenantEmail] = useState();
   const [tenantUsername, setTenantUsername] = useState();
   const [tenantPassword, setTenantPassword] = useState();
   const [tenantRoom, setTenantRoom] = useState();
-
+  const [tenantRoomKey, setTenantRoomKey] = useState();
   const [tenantPayment, setPayment] = useState();
   const [tenantStart, setTenantStart] = useState();
   const [tenantEnd, setTenantEnd] = useState();
   const [img, setImg] = useState(null);
+
 
   function clearForm() {
     setTenantFName("");
@@ -33,10 +34,18 @@ function CrudTenant({ show, onClose, onCreate }) {
 
 
   const createTenant = () => {
-    onCreate(tenantFName, tenantLName, tenantEmail, tenantUsername, tenantPassword, tenantRoom, tenantPayment, tenantStart, tenantEnd, img);
+    onCreate(tenantFName, tenantLName, tenantEmail, tenantUsername, tenantPassword, tenantRoom, tenantRoomKey, tenantPayment, tenantStart, tenantEnd, img);
     clearForm();
     onClose();
   }
+
+  // Set room (for view) and room key (for reference) as a string in different column in parse db 
+  const handleRoom = (value,key) =>{
+    setTenantRoom(value)
+    setTenantRoomKey(key)
+
+  }
+
 
   function handleFileChange(e) {
     if (e.target.files.length === 1) {
@@ -45,7 +54,6 @@ function CrudTenant({ show, onClose, onCreate }) {
       setImg(null);
     }
   }
-
 
   return (
     <div className='c-crudtenant'>
@@ -60,19 +68,10 @@ function CrudTenant({ show, onClose, onCreate }) {
             <SignInUpInput value={tenantEmail} type="email" placeHolder="Email" onChange={e => setTenantEmail(e.target.value)} />
             <SignInUpInput value={tenantUsername} type="string" placeHolder="Username" onChange={e => setTenantUsername(e.target.value)} />
             <SignInUpInput value={tenantPassword} type="password" placeHolder="Password" onChange={e => setTenantPassword(e.target.value)} />
-            <SignInUpInput value={tenantRoom} type="string" placeHolder="room" onChange={e => setTenantRoom(e.target.value)} />
+            <RoomDropDown rooms={rooms} value={tenantRoom} onClick={(value, key) =>handleRoom(value,key)}/>
             <SignInUpInput value={tenantPayment} type="string" placeHolder="Payment" onChange={e => setPayment(e.target.value)} />
             <SignInUpInput value={tenantStart} type="date" placeHolder="Start" onChange={e => setTenantStart(e.target.value)} />
             <SignInUpInput value={tenantEnd} type="date" placeHolder="End" onChange={e => setTenantEnd(e.target.value)} />
-            <RoomDropDown/>
-
-
-
-
-     
-
-
-
             <Col sm={9}>
               <Form.Control type="file" accept="image/*" onChange={handleFileChange} />
             </Col>

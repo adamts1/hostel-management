@@ -10,17 +10,17 @@ import { useParams } from 'react-router';
 
 import Parse from 'parse';
 
-function TenantsSection({activeUser}) {
+function TenantsSection({ activeUser, rooms}) {
   const [showCrudModel, setShowCrudModel] = useState()
   const [tenants, setTenant] = useState([])
   const { index } = useParams();
 
   useEffect(() => {
     async function fetchTenants() {
-      try{
+      try {
         const tenants = await activeUser.getMyTenants(index);
         setTenant(tenants)
-      }catch{
+      } catch {
         console.log("No Tenants")
       }
     }
@@ -29,37 +29,36 @@ function TenantsSection({activeUser}) {
     }
   }, [])
 
-  async function handleNewTenant(tenantFName, tenantLName ,tenantEmail, tenantUsername,tenantPassword, tenantRoom, tenantPayment, tenantStart, tenantEnd, img) {
-    const tenant = await UserModel.signupTenant(tenantFName, tenantLName ,tenantEmail, tenantUsername,tenantPassword, tenantRoom, tenantPayment, tenantStart, tenantEnd, index, img)
+  async function handleNewTenant(tenantFName, tenantLName, tenantEmail, tenantUsername, tenantPassword, tenantRoom, tenantRoomKey, tenantPayment, tenantStart, tenantEnd, img) {
+    const tenant = await UserModel.signupTenant(tenantFName, tenantLName, tenantEmail, tenantUsername, tenantPassword, tenantRoom, tenantRoomKey, tenantPayment, tenantStart, tenantEnd, index, img)
     setTenant(tenants.concat(tenant));
   }
-
-return (
-  <div className='c-tenantssection'>
-    <div className="cards-warper">
-      <Card
-        bg="info"
-        key="1"
-        text='white'
-        style={{ width: '20rem' }}
-        className="mb-2 add-card"
-      >
-        <Card.Body onClick={() => setShowCrudModel(true)}>
-          <IoAddCircleOutline />
-          <h5>New Tenants</h5>
-        </Card.Body>
-      </Card>
-      {tenants.map(tenant =>
-              <TenantCard
-                {...tenant}/>
+  return (
+    <div className='c-tenantssection'>
+      <div className="cards-warper">
+        <Card
+          bg="info"
+          key="1"
+          text='white'
+          style={{ width: '20rem' }}
+          className="mb-2 add-card"
+        >
+          <Card.Body onClick={() => setShowCrudModel(true)}>
+            <IoAddCircleOutline />
+            <h5>New Tenants</h5>
+          </Card.Body>
+        </Card>
+        {tenants.map(tenant =>
+          <TenantCard {...tenant} />
           )}
+      </div>
+      <CrudTenant
+        onClose={() => setShowCrudModel(false)}
+        show={showCrudModel}
+        onCreate={handleNewTenant}
+        rooms={rooms}
+      />
     </div>
-    <CrudTenant
-      onClose={() => setShowCrudModel(false)}
-      show={showCrudModel}
-      onCreate={handleNewTenant}
-    />
-  </div>
-);
+  );
 }
 export default TenantsSection;

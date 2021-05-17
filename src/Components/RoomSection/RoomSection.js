@@ -11,7 +11,7 @@ import CrudRoom from '../../Components/CrudRoom/CrudRoom'
 import { useParams } from 'react-router';
 
 
-function RoomSection({ onClick, onDelete }) {
+function RoomSection() {
   const [hostelInstance, setHostelInstance] = useState([]);
   const [showCrudModel, setShowCrudModel] = useState(false);
   const [rooms, setRooms] = useState([]);
@@ -21,8 +21,8 @@ function RoomSection({ onClick, onDelete }) {
   const [pricePerDay, setPricePerDay] = useState();
   const [roomNumber, setRoomNumber] = useState();
   const [roomId, setRoomId] = useState();
-
   const { index } = useParams();
+
 
   useEffect(() => {
     async function getHostelsInstance() {

@@ -10,6 +10,7 @@ export default class UserModel {
         this.email = parseUser.get("email");
         this.showEmail = parseUser.get("showEmail");
         this.room = parseUser.get("room");
+        this.roomKey = parseUser.get("roomKey");
         this.payment = parseUser.get("payment");
         this.start = parseUser.get("start");
         this.end = parseUser.get("end");
@@ -71,7 +72,7 @@ export default class UserModel {
         return hostel;
     }
 
-    static async signupTenant(tenantFName, tenantLName ,tenantEmail, tenantUsername,tenantPassword, tenantRoom, tenantPayment, tenantStart, tenantEnd, hostelKey, img) {
+    static async signupTenant(tenantFName, tenantLName ,tenantEmail, tenantUsername,tenantPassword, tenantRoom, tenantRoomKey, tenantPayment, tenantStart, tenantEnd, hostelKey, img) {
         const user = new Parse.User()
         user.set("fname", tenantFName);
         user.set("lname", tenantLName);
@@ -80,6 +81,7 @@ export default class UserModel {
         user.set("username", tenantUsername);
         user.set("password", tenantPassword);
         user.set("room", tenantRoom);
+        user.set("roomKey", tenantRoomKey);
         user.set("payment", tenantPayment);
         user.set("username", tenantUsername);
         user.set("tenant", true);
