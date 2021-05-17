@@ -40,7 +40,7 @@ function CrudTenant({ show, onClose, onCreate, rooms }) {
   }
 
   // Set room (for view) and room key (for reference) as a string in different column in parse db 
-  const handleRoom = (value,key) =>{
+  const handleRoom = (value, key) => {
     setTenantRoom(value)
     setTenantRoomKey(key)
 
@@ -68,14 +68,21 @@ function CrudTenant({ show, onClose, onCreate, rooms }) {
             <SignInUpInput value={tenantEmail} type="email" placeHolder="Email" onChange={e => setTenantEmail(e.target.value)} />
             <SignInUpInput value={tenantUsername} type="string" placeHolder="Username" onChange={e => setTenantUsername(e.target.value)} />
             <SignInUpInput value={tenantPassword} type="password" placeHolder="Password" onChange={e => setTenantPassword(e.target.value)} />
-            <RoomDropDown rooms={rooms} value={tenantRoom} onClick={(value, key) =>handleRoom(value,key)}/>
+            <RoomDropDown rooms={rooms} value={tenantRoom} onClick={(value, key) => handleRoom(value, key)} />
             <SignInUpInput value={tenantPayment} type="string" placeHolder="Payment" onChange={e => setPayment(e.target.value)} />
             <SignInUpInput value={tenantStart} type="date" placeHolder="Start" onChange={e => setTenantStart(e.target.value)} />
             <SignInUpInput value={tenantEnd} type="date" placeHolder="End" onChange={e => setTenantEnd(e.target.value)} />
-            <Col sm={9}>
-              <Form.Control type="file" accept="image/*" onChange={handleFileChange} />
-            </Col>
+            <div className="file-input-warper">
+              <label for="file-input">
+                <img src={'/img/upload.gif'} />
+                <p>Upload profile picture</p>
+              </label>
+            </div>
+            <Form.Control id="file-input" type="file" accept="image/*" onChange={handleFileChange} src={'/img/upload.png'} />
+
+
             <Image src={img ? URL.createObjectURL(img) : ""} />
+
           </Form.Group>
         </Modal.Body>
         <Modal.Footer className="justify-content-center">

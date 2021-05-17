@@ -1,0 +1,30 @@
+.c-roomdropdown{
+    margin-bottom: 14px;
+}
+
+
+.c-roomdropdown  .dropdown{
+    text-align: center;
+}
+
+
+.c-roomdropdown  .dropdown > a{
+        /* padding: 26px; */
+        font-weight: bold;
+        font-size: 21px;
+        color: purple;
+        padding: 30px;
+        display: block;
+        border: 2px purple solid;
+        text-decoration: none;
+}
+
+
+.c-roomdropdown  .dropdown  a{
+    /* padding: 26px; */
+    font-weight: bold;
+    font-size: 21px;
+    color: purple;
+
+}
+

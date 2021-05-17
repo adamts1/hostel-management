@@ -1,7 +1,8 @@
 import { Dropdown, FormControl} from 'react-bootstrap';
 import React, { useState, useEffect } from 'react';
+import './RoomDropDown.css'
 
-function RoomDropDown({rooms, value, onClick}) {
+function RoomDropDown({rooms, onClick}) {
     const [chosenValue, setChosenValue] = useState();
 
     const chosenRoomHandler = (e) =>{
@@ -9,7 +10,7 @@ function RoomDropDown({rooms, value, onClick}) {
       // Send room and room key 
       onClick(e.target.innerHTML, e.target.id);
     }
- 
+
     const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
         <a
           href=""
@@ -54,17 +55,18 @@ function RoomDropDown({rooms, value, onClick}) {
         },
       );
     return (
+      <div className="c-roomdropdown">
         <Dropdown>
         <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
           Choose Room: {chosenValue}
-        </Dropdown.Toggle >
-        <Dropdown.Menu >
+        </Dropdown.Toggle>
+        <Dropdown.Menu as={CustomMenu}>
         {rooms.map(room =>
-              // <Dropdown.Item eventKey={room.key} onClick={(e)=>setChosenValue(e.target.innerText)}>{room.roomNumber}</Dropdown.Item>
               <Dropdown.Item eventKey={room.key} id={room.id} onClick={chosenRoomHandler}>{room.roomNumber}</Dropdown.Item>
           )}
         </Dropdown.Menu>
       </Dropdown>
+      </div>
     );
 }
 

@@ -18,6 +18,28 @@
    
 }
 
+.modal-content input[type='file']{
+    display: none   ;
+}
+
+.modal-content img{
+    height: 35px;
+    margin-bottom: 10px;
+}
+
+.modal-content p{
+display: inline-block;
+margin-top: 20px;
+padding-left: 12px;
+}
+
+.file-input-warper{
+    padding-left:10px ;
+}
+
+
+
+
 
 
     
