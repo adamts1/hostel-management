@@ -29,8 +29,6 @@ import RoomModel from '../../Model/RoomModel'
                         <div><span className="font-weight-bold">Price per Day: </span><span>{room.pricePerDay}</span></div>
                         <div><span className="font-weight-bold">Tenants: </span><span>{room.notes}</span></div>
                         <p><span className="font-weight-bold">Notes: </span><span>{room.notes}</span></p>
-                        
-                        
                     </Card.Text>
                     <Card.Text>
                     <div className="card-icon-wrper">
@@ -47,8 +45,6 @@ import RoomModel from '../../Model/RoomModel'
                         </Col>
                         </Row>
                         </div>
-
-
                     </Card.Text>
                 </Card.Body>
             </Card>

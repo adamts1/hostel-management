@@ -52,6 +52,7 @@ export default class UserModel {
         const userTable = Parse.Object.extend('User');
         const query = new Parse.Query(userTable);
         query.equalTo("hostelKey", hostelKey);
+        query.equalTo("activate", true);
         const parseTenants = await query.find();
         const tenants = parseTenants.map(parseTenant => new UserModel(parseTenant));
         return tenants;
@@ -95,6 +96,13 @@ export default class UserModel {
         if (img) {
             user.set('img', new Parse.File(img.name, img)); 
         }
+        var acl = new Parse.ACL();
+        acl.setPublicWriteAccess(true);
+        acl.setPublicReadAccess(true);
+
+        user.setACL(acl);
+
+        await user.save({ useMasterKey: true });
         var sessionToken = Parse.User.current().get("sessionToken");
         const parseTenant =  await user.signUp()
 
@@ -108,11 +116,10 @@ export default class UserModel {
     async deactivateTenant() {
         
         const tenant = this.#parseUser.set('activate', false);
-        console.log(tenant)
+        this.#parseUser.set('room', "");
+        this.#parseUser.set('roomKey', "");
         const deactivatedTenant =  await tenant.save()
         const removedTenant = new UserModel(deactivatedTenant);
-        console.log(removedTenant)
-
         return removedTenant
     }
 

@@ -32,7 +32,7 @@ function RoomSection() {
 
 
   useEffect(() => {
-    async function getHostelsInstance() {
+      async function getHostelsInstance() {
       const hostelTable = Parse.Object.extend('Hostel');
       const query = new Parse.Query(hostelTable);
       const parseHostel = await query.get(index);
@@ -43,6 +43,7 @@ function RoomSection() {
     }
     getHostelsInstance();
   }, [])
+
 
   async function handleNewRoom(roomNumber, maxBeds, pricePerDay, notes) {
     const newRoom = await hostelInstance.createRoom(roomNumber, maxBeds, pricePerDay, notes);
@@ -104,25 +105,28 @@ function RoomSection() {
         onCreate={handleNewRoom}
         onClose={() => setShowCrudModel(false)}
         show={showCrudModel}
+        
       />
-      <EditRoom
+        {roomInstance
+        ? <EditRoom
         show={showEditModel}
         onClose={() => setShowEditModel(false)}
         onUpdate={handleUpdateRoom}
-        roomNumber={roomNumber}
-        maxBeds={maxBeds}
-        pricePerDay={pricePerDay}
-        notes={notes}
-        roomId={roomId}
+        room={roomInstance}   
       />
-
-      <WarningModel
+        : null
+      }
+      {roomInstance
+        ? <WarningModel
         show={showWarningModel}
         onClose={() => setShowWarningModel(false)}
         onDelete={handleDeleteRoom}
         actionOnInstanse="Room number:  "
-        instanseName={roomNumber}
-      />
+        instanseName={roomInstance.roomNumber}
+      />  
+        : null
+      }
+      
     </div>
   );
 }

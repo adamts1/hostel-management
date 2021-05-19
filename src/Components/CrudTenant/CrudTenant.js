@@ -18,7 +18,6 @@ function CrudTenant({ show, onClose, onCreate, rooms }) {
   const [tenantEnd, setTenantEnd] = useState();
   const [img, setImg] = useState(null);
 
-
   function clearForm() {
     setTenantFName("");
     setTenantLName("");
@@ -32,7 +31,6 @@ function CrudTenant({ show, onClose, onCreate, rooms }) {
     setImg(null);
   }
 
-
   const createTenant = () => {
     onCreate(tenantFName, tenantLName, tenantEmail, tenantUsername, tenantPassword, tenantRoom, tenantRoomKey, tenantPayment, tenantStart, tenantEnd, img);
     clearForm();
@@ -43,9 +41,7 @@ function CrudTenant({ show, onClose, onCreate, rooms }) {
   const handleRoom = (value, key) => {
     setTenantRoom(value)
     setTenantRoomKey(key)
-
   }
-
 
   function handleFileChange(e) {
     if (e.target.files.length === 1) {

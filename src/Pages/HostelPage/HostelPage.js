@@ -30,6 +30,7 @@ function HostelPage({ activeUser }) {
     getHostelsInstance();
   }, [])
 
+
   return (
     <div className='p-hostelpage'>
       <Container>
@@ -54,7 +55,7 @@ function HostelPage({ activeUser }) {
           <RoomSection activeUser={activeUser}  />
         }
         {tabKey === 'tenents' &&
-          <TenantsSection activeUser={activeUser}  rooms={rooms}/>
+          <TenantsSection activeUser={activeUser} />
         }
         {tabKey === 'calls' &&
           <div>calls</div>

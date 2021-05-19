@@ -72,7 +72,6 @@ function HostelsPage({ activeUser }) {
   function setEditHostelModel(hostelId) {
     setAction('edit')
     setShowCrudModel(true)
-
     setHostelId(hostelId)
   }
 

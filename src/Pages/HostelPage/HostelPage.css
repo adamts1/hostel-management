@@ -8,6 +8,10 @@
     overflow:auto
 }
 
+.p-hostelpage h1{
+   font-weight: bold;
+}
+
 .p-hostelpage .container .cards-warper{
    display: flex;
    flex-direction: row;

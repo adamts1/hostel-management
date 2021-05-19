@@ -17,7 +17,6 @@ function CreateRoom({ show, onClose, onCreate}) {
     setRoomNumber("");
   }
 
-
   const createRoom = () => {
     onCreate(roomNumber ,maxBeds, pricePerDay, notes);
     clearForm();

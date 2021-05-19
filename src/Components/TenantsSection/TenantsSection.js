@@ -10,17 +10,19 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import Parse from 'parse';
 
-
-
-function TenantsSection({ activeUser, rooms }) {
+function TenantsSection({ activeUser}) {
   const [showCrudModel, setShowCrudModel] = useState()
   const [showWarningModel, setShowWarningModel] = useState();
   const [tenantFName, seTtenantFName] = useState();
   const [tenantLName, seTtenantLName] = useState();
   const [tenantId, seTtenantId] = useState();
 
+  const [hostelInstance, setHostelInstance] = useState([]);
+  const [rooms, setRooms] = useState([]);
+
   const [tenants, setTenant] = useState([])
   const { index } = useParams();
+
 
   useEffect(() => {
     async function fetchTenants() {
@@ -36,6 +38,20 @@ function TenantsSection({ activeUser, rooms }) {
     }
   }, [])
 
+  
+  useEffect(() => {
+    async function getHostelsInstance() {
+      const hostelTable = Parse.Object.extend('Hostel');
+      const query = new Parse.Query(hostelTable);
+      const parseHostel = await query.get(index);
+      const parseHostelInstance = new HostelModel(parseHostel)
+      const rooms = await parseHostelInstance.getMyRooms();
+      setHostelInstance(parseHostelInstance)
+      setRooms(rooms)
+    }
+    getHostelsInstance();
+  }, [])
+
   async function handleNewTenant(tenantFName, tenantLName, tenantEmail, tenantUsername, tenantPassword, tenantRoom, tenantRoomKey, tenantPayment, tenantStart, tenantEnd, img) {
     const tenant = await UserModel.signupTenant(tenantFName, tenantLName, tenantEmail, tenantUsername, tenantPassword, tenantRoom, tenantRoomKey, tenantPayment, tenantStart, tenantEnd, index, img)
     setTenant(tenants.concat(tenant));
@@ -46,9 +62,6 @@ function TenantsSection({ activeUser, rooms }) {
     seTtenantFName(tenantfName);
     seTtenantLName(tenantlName);
     seTtenantId(tenantId)
-    // setPricePerDay(pricePerDay)
-    // setRoomNumber(roomNumber)
-    // setRoomId(roomId)
   }
 
   async function handleDeleteTenant() {
@@ -57,7 +70,12 @@ function TenantsSection({ activeUser, rooms }) {
     const query =  new Parse.Query(userTable);
     const parseTenant =  await query.get(tenantId);
     const parseRoomInstance =  new UserModel(parseTenant)
-    const removedTenant = await parseRoomInstance.deactivateTenant();
+    await parseRoomInstance.deactivateTenant();
+    const tenant = await activeUser.getMyTenants(index);
+    setTenant(tenant)
+
+
+
   }
 
   return (
@@ -75,24 +93,11 @@ function TenantsSection({ activeUser, rooms }) {
             <h5>New Tenants</h5>
           </Card.Body>
         </Card>
-
-
-
-
-
-
         {tenants.map(tenant =>
           <TenantCard
             {...tenant}
             onDelete={handleWarningTenant} />
         )}
-
-
-
-
-
-
-
       </div>
       <CrudTenant
         onClose={() => setShowCrudModel(false)}
