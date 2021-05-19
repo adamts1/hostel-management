@@ -15,6 +15,7 @@ export default class UserModel {
         this.start = parseUser.get("start");
         this.end = parseUser.get("end");
         this.img = parseUser.get("img");
+        this.activate = parseUser.get("activate");
         this.#parseUser = parseUser;
     }
 
@@ -37,8 +38,6 @@ export default class UserModel {
         UserModel.activeUser = new UserModel(parseUser)
         return UserModel.activeUser   
     }
-
-
 
     async getMyHostel() {
         const HostelTable = Parse.Object.extend('Hostel');
@@ -90,6 +89,8 @@ export default class UserModel {
 
         // Save Hostel as a string for reference
         user.set("hostelKey", hostelKey);
+        // Save Tenant as active true, in case of delete it will change to false 
+        user.set("activate", true);
         
         if (img) {
             user.set('img', new Parse.File(img.name, img)); 
@@ -104,6 +105,16 @@ export default class UserModel {
         return userModelTenant;
     }
 
+    async deactivateTenant() {
+        
+        const tenant = this.#parseUser.set('activate', false);
+        console.log(tenant)
+        const deactivatedTenant =  await tenant.save()
+        const removedTenant = new UserModel(deactivatedTenant);
+        console.log(removedTenant)
+
+        return removedTenant
+    }
 
     static loadActiveUser() {
         UserModel.activeUser = Parse.User.current() ? new UserModel(Parse.User.current()) : null;

@@ -10,7 +10,6 @@ import RoomModel from '../../Model/RoomModel'
 import CrudRoom from '../../Components/CrudRoom/CrudRoom'
 import { useParams } from 'react-router';
 
-
 function RoomSection() {
   const [hostelInstance, setHostelInstance] = useState([]);
   const [showCrudModel, setShowCrudModel] = useState(false);
@@ -22,7 +21,6 @@ function RoomSection() {
   const [roomNumber, setRoomNumber] = useState();
   const [roomId, setRoomId] = useState();
   const { index } = useParams();
-
 
   useEffect(() => {
     async function getHostelsInstance() {
@@ -36,7 +34,6 @@ function RoomSection() {
     }
     getHostelsInstance();
   }, [])
-
 
   async function handleNewRoom(roomNumber, maxBeds, pricePerDay, notes) {
     const newRoom = await hostelInstance.createRoom(roomNumber, maxBeds, pricePerDay, notes);
@@ -54,8 +51,8 @@ function RoomSection() {
 
   async function handleDeleteRoom() {
     setShowWarningModel(false)
-    const RoomTable = Parse.Object.extend('Room');
-    const query = new Parse.Query(RoomTable);
+    const roomTable = Parse.Object.extend('Room');
+    const query = new Parse.Query(roomTable);
     const parseRoom = await query.get(roomId);
     const parseRoomInstance = new RoomModel(parseRoom)
     const removedRoom = await parseRoomInstance.deleteRoom();
@@ -101,7 +98,7 @@ function RoomSection() {
         show={showWarningModel}
         onClose={() => setShowWarningModel(false)}
         onDelete={handleDeleteRoom}
-        actionOnInstanse="Room number-"
+        actionOnInstanse="Room number:  "
         instanseName={roomNumber}
       />
     </div>

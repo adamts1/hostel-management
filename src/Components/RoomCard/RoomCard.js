@@ -1,11 +1,13 @@
 import { Card, Container, Row, Button, Col } from 'react-bootstrap';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { AiOutlineFolderView } from 'react-icons/ai';
-import { IoIosArrowDropdown } from 'react-icons/io';
+import EditRoom from '../EditRoom/EditRoom'
+import { useEffect, useState } from 'react';
 import './RoomCard.css'
 
 function RoomCard({roomNumber, maxBeds, pricePerDay, notes, onDelete, roomId}) {
-    
+    const [showEditModel, setShowEditModel] = useState(false);
+
     return (
         <div className="c-roomcard">
             <Card
@@ -28,7 +30,7 @@ function RoomCard({roomNumber, maxBeds, pricePerDay, notes, onDelete, roomId}) {
                         <div className="card-icon-wrper">
                         <Row>
                         <Col xs={4} className="crud-icons">
-                                <MdEdit/>
+                                <MdEdit  onClick={()=>setShowEditModel(true)} />
                         </Col>
                         <Col xs={4} className="crud-icons">   
                                 <MdDelete onClick={()=>onDelete(roomId ,roomNumber, maxBeds, pricePerDay, notes)}/>
@@ -41,7 +43,14 @@ function RoomCard({roomNumber, maxBeds, pricePerDay, notes, onDelete, roomId}) {
                     </Card.Text>
                 </Card.Body>
             </Card>
-
+            <EditRoom 
+                show={showEditModel}
+                onClose={()=>setShowEditModel(false)}
+                roomNumber={roomNumber}
+                maxBeds={maxBeds}
+                pricePerDay={pricePerDay}
+                notes={notes}
+                />
         </div>
     );
 }

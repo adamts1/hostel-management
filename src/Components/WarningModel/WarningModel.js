@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 
 
-function WarningModel({ show, onClose, instanseName, actionOnInstanse, onDelete, hostelName }) {
+function WarningModel({ show, onClose, instanseName, actionOnInstanse, onDelete }) {
 
   
 
@@ -15,7 +15,7 @@ function WarningModel({ show, onClose, instanseName, actionOnInstanse, onDelete,
 
             <Modal show={show} onHide={onClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Delete {actionOnInstanse} {instanseName} ?</Modal.Title>
+                    <Modal.Title>Remove {actionOnInstanse} {instanseName} ?</Modal.Title>
                 </Modal.Header>
                 {/* <Modal.Body>Delete {hostelName} ?</Modal.Body> */}
                 <Modal.Footer>

@@ -5,13 +5,20 @@ import { IoAddCircleOutline } from 'react-icons/io5';
 import CrudTenant from '../CrudTenant/CrudTenant'
 import UserModel from '../../Model/UserModel'
 import HostelModel from '../../Model/HostelModel'
+import WarningModel from '../../Components/WarningModel/WarningModel'
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
-
 import Parse from 'parse';
 
-function TenantsSection({ activeUser, rooms}) {
+
+
+function TenantsSection({ activeUser, rooms }) {
   const [showCrudModel, setShowCrudModel] = useState()
+  const [showWarningModel, setShowWarningModel] = useState();
+  const [tenantFName, seTtenantFName] = useState();
+  const [tenantLName, seTtenantLName] = useState();
+  const [tenantId, seTtenantId] = useState();
+
   const [tenants, setTenant] = useState([])
   const { index } = useParams();
 
@@ -33,6 +40,26 @@ function TenantsSection({ activeUser, rooms}) {
     const tenant = await UserModel.signupTenant(tenantFName, tenantLName, tenantEmail, tenantUsername, tenantPassword, tenantRoom, tenantRoomKey, tenantPayment, tenantStart, tenantEnd, index, img)
     setTenant(tenants.concat(tenant));
   }
+
+  function handleWarningTenant(tenantfName, tenantlName, tenantId) {
+    setShowWarningModel(true)
+    seTtenantFName(tenantfName);
+    seTtenantLName(tenantlName);
+    seTtenantId(tenantId)
+    // setPricePerDay(pricePerDay)
+    // setRoomNumber(roomNumber)
+    // setRoomId(roomId)
+  }
+
+  async function handleDeleteTenant() {
+    setShowWarningModel(false)
+    const userTable =  Parse.Object.extend('User');
+    const query =  new Parse.Query(userTable);
+    const parseTenant =  await query.get(tenantId);
+    const parseRoomInstance =  new UserModel(parseTenant)
+    const removedTenant = await parseRoomInstance.deactivateTenant();
+  }
+
   return (
     <div className='c-tenantssection'>
       <div className="cards-warper">
@@ -48,15 +75,37 @@ function TenantsSection({ activeUser, rooms}) {
             <h5>New Tenants</h5>
           </Card.Body>
         </Card>
+
+
+
+
+
+
         {tenants.map(tenant =>
-          <TenantCard {...tenant} />
-          )}
+          <TenantCard
+            {...tenant}
+            onDelete={handleWarningTenant} />
+        )}
+
+
+
+
+
+
+
       </div>
       <CrudTenant
         onClose={() => setShowCrudModel(false)}
         show={showCrudModel}
         onCreate={handleNewTenant}
         rooms={rooms}
+      />
+      <WarningModel
+        show={showWarningModel}
+        onClose={() => setShowWarningModel(false)}
+        onDelete={handleDeleteTenant}
+        actionOnInstanse="Tenant:  "
+        instanseName={tenantFName +" "+tenantLName}
       />
     </div>
   );

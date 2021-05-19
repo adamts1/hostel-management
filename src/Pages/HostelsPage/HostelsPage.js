@@ -15,7 +15,8 @@ function HostelsPage({ activeUser }) {
   const [hostelId, setHostelId] = useState();
   const [hostels, setHostels] = useState([]);
   const [hostelsInstanse, seThostelsInstanse] = useState([]);
-  // Defined if create or edit hostel
+  
+  // Define if create or edit hostel
   const [action, setAction] = useState([]);
 
   useEffect(() => {
@@ -38,7 +39,7 @@ function HostelsPage({ activeUser }) {
   }
 
   async function handleUpdateHostel(name, address, numOfRooms) {
-    const updateddHostel = await HostelModel.updateHostel(name, address, numOfRooms, hostelId);
+    await HostelModel.updateHostel(name, address, numOfRooms, hostelId);
     const hostels = await activeUser.getMyHostel();
     setHostels(hostels);
   }
@@ -100,11 +101,9 @@ function HostelsPage({ activeUser }) {
                 onEdit={setEditHostelModel}
                 onDelete={handleWarningHostel} />
             )}
-
           </Accordion>
           : <h1>No Hostels Yet..</h1>
         }
-
         <CrudHostel
           onCreate={handleNewHostel}
           onUpdate={handleUpdateHostel}
@@ -114,7 +113,6 @@ function HostelsPage({ activeUser }) {
           // hostelAddress={hostelAddress}
           action={action}
         />
-
         <WarningModel
           show={showWarningModel}
           onClose={() => setShowWarningModel(false)}
@@ -127,5 +125,3 @@ function HostelsPage({ activeUser }) {
 }
 
 export default HostelsPage;
-
-

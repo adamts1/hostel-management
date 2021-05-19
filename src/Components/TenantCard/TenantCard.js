@@ -18,7 +18,7 @@ function TenantCard(props) {
                 <Card.Img variant="top" src={props.img.url()} />
                 <Card.Body>
                     <Card.Text>
-                        <div><span className="font-weight-bold">Name: </span><span>{props.fname}</span></div>
+                        <div><span className="font-weight-bold">Name: </span><span>{props.fname + " " + props.lname}</span></div>
                         <div><span className="font-weight-bold">Room: </span><span>{props.room}</span></div>
                         <div><span className="font-weight-bold">Email: </span><span>{props.showEmail}</span></div>
                         <div><span className="font-weight-bold">Start: </span><span>{props.start}</span></div>
@@ -28,9 +28,9 @@ function TenantCard(props) {
                             <Row>
                                 <Col xs={4} className="crud-icons">
                                     <MdEdit />
-                                </Col>
+                                </Col>  
                                 <Col xs={4} className="crud-icons">
-                                    <MdDelete />
+                                    <MdDelete onClick={()=>props.onDelete(props.fname, props.lname, props.id)} />
                                 </Col>
                                 <Col xs={4} className="crud-icons">
                                     <AiOutlineFolderView />
