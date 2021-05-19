@@ -1,0 +1,43 @@
+
+
+.tenant-table{
+    border: 2px solid black !important;
+}
+
+.tenant-table td{
+       vertical-align: 0 !important; 
+       font-weight: bolder;
+       text-align: center;
+      
+}
+
+.tenant-table button {
+
+    height: 40px !important;
+    width: 140px !important;
+    margin: 0 auto;
+    display: block;
+}
+.tenant-table th{
+     background-color: darkcyan; 
+     color: white;
+}
+
+.add-tenant {
+    width: 100% !important;
+}
+
+.tenant-table  input[type=checkbox]
+{
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  padding: 10px;
+}
+
+.form-check-input {
+    
+    margin-left: 0 !important;
+}
+

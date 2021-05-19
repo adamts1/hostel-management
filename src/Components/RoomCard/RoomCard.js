@@ -3,11 +3,35 @@ import { MdEdit, MdDelete } from 'react-icons/md';
 import { AiOutlineFolderView } from 'react-icons/ai';
 import { useEffect, useState } from 'react';
 import Parse from 'parse';
+import { useParams } from 'react-router';
+
 import './RoomCard.css'
 import RoomModel from '../../Model/RoomModel'
+import { X } from 'react-bootstrap-icons';
 
 // function RoomCard({roomNumber, maxBeds, pricePerDay, notes, onDelete, roomId, editClick}) {
-    function RoomCard({room, editClick, onDelete}) {
+    function RoomCard({room, editClick, onDelete, activeUser}) {
+
+        const [tenants, setTenant] = useState([])
+        const [tenantsString, setTenantsString] = useState([])
+        const { index } = useParams();
+
+
+        useEffect(() => {
+            async function fetchTenants() {
+              try {
+                const tenants = await activeUser.getRoomTenants(room.id);
+                setTenant(tenants)
+                setTenantsString(tenants.map(tenants => tenants.fname+", "))
+
+              } catch {
+                console.log("No Tenants")
+              }
+            }
+            if (activeUser) {
+              fetchTenants();
+            }
+          }, [])
 
 
 
@@ -27,7 +51,7 @@ import RoomModel from '../../Model/RoomModel'
                         <div><span className="font-weight-bold">Calls: </span><span>0</span></div>
                         <div><span className="font-weight-bold">Max Beds: </span><span>{room.maxBed}</span></div>
                         <div><span className="font-weight-bold">Price per Day: </span><span>{room.pricePerDay}</span></div>
-                        <div><span className="font-weight-bold">Tenants: </span><span>{room.notes}</span></div>
+                        <div><span className="font-weight-bold">Tenants: </span><span></span>{tenantsString}</div>
                         <p><span className="font-weight-bold">Notes: </span><span>{room.notes}</span></p>
                     </Card.Text>
                     <Card.Text>

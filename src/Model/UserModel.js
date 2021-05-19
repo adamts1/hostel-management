@@ -58,6 +58,15 @@ export default class UserModel {
         return tenants;
     }
 
+    async getRoomTenants(roomlKey) {
+        const userTable = Parse.Object.extend('User');
+        const query = new Parse.Query(userTable);
+        query.equalTo("roomKey", roomlKey);
+        const parseTenants = await query.find();
+        const tenants = parseTenants.map(parseTenant => new UserModel(parseTenant));
+        return tenants;
+    }
+
     async createHostel(name, addrees, numOfRooms) {
         const HostelTable = Parse.Object.extend('Hostel');
         const newHostel= new HostelTable();
@@ -114,12 +123,12 @@ export default class UserModel {
     }
 
     async deactivateTenant() {
-        
         const tenant = this.#parseUser.set('activate', false);
         this.#parseUser.set('room', "");
         this.#parseUser.set('roomKey', "");
         const deactivatedTenant =  await tenant.save()
         const removedTenant = new UserModel(deactivatedTenant);
+
         return removedTenant
     }
 

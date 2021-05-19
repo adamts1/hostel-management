@@ -13,19 +13,13 @@ import EditRoom from '../EditRoom/EditRoom'
 
 
 
-function RoomSection() {
+function RoomSection({ activeUser }) {
   const [hostelInstance, setHostelInstance] = useState([]);
   const [rooms, setRooms] = useState([]);
 
   const [showCrudModel, setShowCrudModel] = useState(false);
   const [showWarningModel, setShowWarningModel] = useState();
   const [showEditModel, setShowEditModel] = useState(false);
-
-  const [notes, setNotes] = useState();
-  const [maxBeds, seTmaxBeds] = useState();
-  const [pricePerDay, setPricePerDay] = useState();
-  const [roomNumber, setRoomNumber] = useState();
-  const [roomId, setRoomId] = useState();
   const [roomInstance, setRoomInstance] = useState();
 
   const { index } = useParams();
@@ -69,7 +63,7 @@ function RoomSection() {
 
   
   async function handleUpdateRoom(roomNumber,maxBeds, pricePerDay, notes) {
-    const updateRoom = await roomInstance.updateRoom(roomNumber, maxBeds, pricePerDay, notes);
+    await roomInstance.updateRoom(roomNumber, maxBeds, pricePerDay, notes);
     const rooms = await hostelInstance.getMyRooms();
     setRooms(rooms)
   }
@@ -96,7 +90,7 @@ function RoomSection() {
             room={room}
             onDelete={handleWarningRoom}
             editClick={showEditClick}
-
+            activeUser={activeUser}
           />
         )}
 
@@ -112,7 +106,8 @@ function RoomSection() {
         show={showEditModel}
         onClose={() => setShowEditModel(false)}
         onUpdate={handleUpdateRoom}
-        room={roomInstance}   
+        room={roomInstance} 
+        activeUser={activeUser} 
       />
         : null
       }
