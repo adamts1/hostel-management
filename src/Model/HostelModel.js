@@ -43,13 +43,13 @@ export default class HostelModel {
     }
 
 
-    async createRoom(roomNumber, pricePerDay, maxBed, notes) {
+    async createRoom(roomNumber, maxBeds, pricePerDay, notes) {
         const RoomTable = Parse.Object.extend('Room');
         const newRoom = new RoomTable();
 
         newRoom.set('roomNumber', roomNumber);
         newRoom.set('pricePerDay', pricePerDay);
-        newRoom.set('maxBed', maxBed);
+        newRoom.set('maxBeds', maxBeds);
         newRoom.set('notes', notes);
         newRoom.set('hostelId', this.parseHostel);
 

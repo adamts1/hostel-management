@@ -5,7 +5,7 @@ export default class RoomlModel {
     constructor(parseRoom) {
         this.id = parseRoom.id;
         this.pricePerDay = parseRoom.get("pricePerDay");
-        this.maxBed = parseRoom.get("maxBed");
+        this.maxBed = parseRoom.get("maxBeds");
         this.roomNumber = parseRoom.get("roomNumber");
         this.notes = parseRoom.get("notes");
         this.parseRoom = parseRoom;

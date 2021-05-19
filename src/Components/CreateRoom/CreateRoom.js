@@ -1,10 +1,10 @@
-import './CrudRoom.css'
+import './CreateRoom.css'
 import SignInUpInput from '../SignInUpInput/SignInUpInput'
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 
 
-function CrudRoom({ show, onClose, onCreate}) {
+function CreateRoom({ show, onClose, onCreate}) {
   const [roomNumber, setRoomNumber] = useState();
   const [maxBeds, setMaxBeds] = useState();
   const [pricePerDay, setPricePerDay] = useState();
@@ -51,4 +51,4 @@ function CrudRoom({ show, onClose, onCreate}) {
   );
 }
 
-export default CrudRoom;
+export default CreateRoom;

@@ -3,11 +3,14 @@ import SignInUpInput from '../SignInUpInput/SignInUpInput'
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 
-function EditRoom({show, onClose, roomNumber, maxBeds, pricePerDay, notes, onUpdate}) {
-    const [roomNumberState, setRoomNumber] = useState(roomNumber);
-    const [maxBedsState, setMaxBeds] = useState(maxBeds);
-    const [pricePerDayState, setPricePerDay] = useState(pricePerDay);
-    const [NotesState, setNotes] = useState(notes);
+// function EditRoom({show, onClose, roomNumber, maxBeds, pricePerDay, notes, onUpdate}) {
+function EditRoom({show, onClose, roomNumber, maxBeds, pricePerDay, notes, onUpdate, roomId}) {
+    const [roomNumberState, setRoomNumber] = useState("");
+    const [maxBedsState, setMaxBeds] = useState("");
+    const [pricePerDayState, setPricePerDay] = useState("");
+    const [NotesState, setNotes] = useState("");
+
+
 
     function clearForm() {
         setRoomNumber("");

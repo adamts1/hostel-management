@@ -4,6 +4,15 @@
     color: white;
 }
 
+.c-roomcard  .content{
+ height:150px;
+}
+
+.c-roomcard  .card-title{
+    height:40px;
+   }
+
+
 .c-roomcard  .card-icon-wrper{
     opacity:0.5;
  }

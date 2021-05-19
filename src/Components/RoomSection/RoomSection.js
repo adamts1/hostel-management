@@ -7,20 +7,27 @@ import { useState, useEffect } from 'react';
 import Parse from 'parse';
 import HostelModel from '../../Model/HostelModel'
 import RoomModel from '../../Model/RoomModel'
-import CrudRoom from '../../Components/CrudRoom/CrudRoom'
+import CreateRoom from '../CreateRoom/CreateRoom'
 import { useParams } from 'react-router';
+import EditRoom from '../EditRoom/EditRoom'
+
 
 
 function RoomSection() {
   const [hostelInstance, setHostelInstance] = useState([]);
-  const [showCrudModel, setShowCrudModel] = useState(false);
   const [rooms, setRooms] = useState([]);
+
+  const [showCrudModel, setShowCrudModel] = useState(false);
   const [showWarningModel, setShowWarningModel] = useState();
+  const [showEditModel, setShowEditModel] = useState(false);
+
   const [notes, setNotes] = useState();
   const [maxBeds, seTmaxBeds] = useState();
   const [pricePerDay, setPricePerDay] = useState();
   const [roomNumber, setRoomNumber] = useState();
   const [roomId, setRoomId] = useState();
+  const [roomInstance, setRoomInstance] = useState();
+
   const { index } = useParams();
 
 
@@ -37,30 +44,33 @@ function RoomSection() {
     getHostelsInstance();
   }, [])
 
-
   async function handleNewRoom(roomNumber, maxBeds, pricePerDay, notes) {
     const newRoom = await hostelInstance.createRoom(roomNumber, maxBeds, pricePerDay, notes);
     setRooms(rooms.concat(newRoom));
   }
 
-  function handleWarningRoom(roomId, roomNumber, maxBeds, pricePerDay, notes) {
+  function handleWarningRoom(room) {
     setShowWarningModel(true)
-    seTmaxBeds(maxBeds)
-    setNotes(notes)
-    setPricePerDay(pricePerDay)
-    setRoomNumber(roomNumber)
-    setRoomId(roomId)
+    setRoomInstance(room)
   }
 
   async function handleDeleteRoom() {
     setShowWarningModel(false)
-    const roomTable = Parse.Object.extend('Room');
-    const query = new Parse.Query(roomTable);
-    const parseRoom = await query.get(roomId);
-    const parseRoomInstance = new RoomModel(parseRoom)
-    const removedRoom = await parseRoomInstance.deleteRoom();
+    const removedRoom = await roomInstance.deleteRoom();
     const remainRooms = rooms.filter(room => room.id != removedRoom.id)
     setRooms(remainRooms);
+  }
+
+  function showEditClick(room){
+    setShowEditModel(true)
+    setRoomInstance(room)
+  }
+
+  
+  async function handleUpdateRoom(roomNumber,maxBeds, pricePerDay, notes) {
+    const updateRoom = await roomInstance.updateRoom(roomNumber, maxBeds, pricePerDay, notes);
+    const rooms = await hostelInstance.getMyRooms();
+    setRooms(rooms)
   }
 
   return (
@@ -80,22 +90,30 @@ function RoomSection() {
           </Card.Body>
         </Card>
         {rooms.map(room =>
+
           <RoomCard
-            key={room.id}
-            roomId={room.id}
-            notes={room.notes}
-            roomNumber={room.roomNumber}
-            pricePerDay={room.pricePerDay}
-            maxBeds={room.maxBed}
+            room={room}
             onDelete={handleWarningRoom}
+            editClick={showEditClick}
+
           />
         )}
 
       </div>
-      <CrudRoom
+      <CreateRoom
         onCreate={handleNewRoom}
         onClose={() => setShowCrudModel(false)}
         show={showCrudModel}
+      />
+      <EditRoom
+        show={showEditModel}
+        onClose={() => setShowEditModel(false)}
+        onUpdate={handleUpdateRoom}
+        roomNumber={roomNumber}
+        maxBeds={maxBeds}
+        pricePerDay={pricePerDay}
+        notes={notes}
+        roomId={roomId}
       />
 
       <WarningModel
