@@ -17,4 +17,15 @@ export default class RoomlModel {
         return hostel;
     }
 
+    async updateRoom(roomNumber, maxBeds, pricePerDay, notes) {
+        const room = this.parseRoom;
+        room.set("roomNumber", roomNumber);
+        room.set("maxBeds", maxBeds);
+        room.set("pricePerDay", pricePerDay);
+        room.set("notes", notes);
+        const updatedRoom = await room.save();
+        return updatedRoom;
+    }
+
+
 }

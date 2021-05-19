@@ -40,7 +40,6 @@ function CrudHostel({ show, onClose, onCreate, onUpdate, hostelName, hostelAddre
     onUpdate(name, address, nuberOfRooms);
     clearForm();
     onClose();
-
   } 
 
   return (

@@ -3,10 +3,20 @@ import { MdEdit, MdDelete } from 'react-icons/md';
 import { AiOutlineFolderView } from 'react-icons/ai';
 import EditRoom from '../EditRoom/EditRoom'
 import { useEffect, useState } from 'react';
+import Parse from 'parse';
 import './RoomCard.css'
+import RoomModel from '../../Model/RoomModel'
 
 function RoomCard({roomNumber, maxBeds, pricePerDay, notes, onDelete, roomId}) {
     const [showEditModel, setShowEditModel] = useState(false);
+
+    async function handleUpdateRoom(roomNumber, maxBeds, pricePerDay, Notes) {
+        const roomTable = Parse.Object.extend('Room');
+        const query = new Parse.Query(roomTable);
+        const parseRoom = await query.get(roomId);
+        const RoomInstance = new RoomModel(parseRoom)
+        const updateRoom = await RoomInstance.updateRoom(roomNumber, maxBeds, pricePerDay, Notes);
+      }
 
     return (
         <div className="c-roomcard">
@@ -46,6 +56,7 @@ function RoomCard({roomNumber, maxBeds, pricePerDay, notes, onDelete, roomId}) {
             <EditRoom 
                 show={showEditModel}
                 onClose={()=>setShowEditModel(false)}
+                onUpdate={handleUpdateRoom}
                 roomNumber={roomNumber}
                 maxBeds={maxBeds}
                 pricePerDay={pricePerDay}
