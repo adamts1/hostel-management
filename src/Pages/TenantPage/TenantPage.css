@@ -1,0 +1,40 @@
+.p-tenantpage{
+    height: calc(100vh - 289px);
+    position:absolute;
+    top:50px;
+    bottom:120px;
+    left:0px;
+    right:0px;
+    overflow:auto;
+}
+
+
+.p-tenantpage svg{
+    margin: 0 0 2px 7px;
+}
+
+
+.p-tenantpage #add-new{
+    float: right;
+    height: 49px;
+    font-weight: bold;
+}
+
+.p-tenantpage .container{
+    margin-top: 50px !important;
+}
+
+.summary-box{
+    height: 307px;
+    width: 459px;
+    border: orangered 2px solid;
+    margin-top: 123px;
+    margin-left: 63px;
+}
+
+.p-tenantpage  img {
+    height: 200px;
+    object-fit: cover;
+    margin-top: 42px;
+}
+

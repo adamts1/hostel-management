@@ -4,6 +4,7 @@ import LandingPage from './Pages/LandingPage/LandingPage'
 import SignInUp from './Pages/SignInUp/SignInUp'
 import HostelsPage from './Pages/HostelsPage/HostelsPage'
 import HostelPage from './Pages/HostelPage/HostelPage'
+import TenantPage from './Pages/TenantPage/TenantPage'
 import NavBar from './Components/NavBar/NavBar'
 import Footer from './Components/Footer/Footer'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -18,7 +19,6 @@ function App() {
     setActiveUser(null);
     Parse.User.logOut();
   }
-  
   return (
     <div className="App">
       <HashRouter>
@@ -34,6 +34,11 @@ function App() {
           </Route>
           <Route exact path="/signup">
              <SignInUp type="Signup" activeUser={activeUser} onLogin={user => setActiveUser(user)}/>
+             <Footer/>
+          </Route>
+          <Route exact path="/tenant/:index">
+             <NavBar activeUser={activeUser} onLogout={logoutHanler}/>
+             <TenantPage activeUser={activeUser}/>
              <Footer/>
           </Route>
           <Route exact path="/hostelspage">

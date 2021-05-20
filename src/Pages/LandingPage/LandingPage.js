@@ -20,7 +20,7 @@ function LandinPage() {
               
           </Col>
           <Col sm={0} lg={6}>
-          <Image src={'img/hostel.png'}/>  
+          <Image src={pathPre +'/img/hostel.png'}/>  
           </Col>
         </Row>
       </Container>

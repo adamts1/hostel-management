@@ -13,9 +13,18 @@ function SignInUp({ onLogin, activeUser, type }) {
   const [lname, setLname] = useState("");
   const [showInvalidLogin, setShowInvalidLogin] = useState(false);
 
+
+
   if (activeUser) {
-    return <Redirect to="/hostelspage" />
+    if (activeUser["tenant"]) {
+      const tenantUrl = "/tenant/"+activeUser["id"]
+      return <Redirect to={tenantUrl}/>  
+    }else{
+      return <Redirect to="/hostelspage"/>  
+    }
+    
   }
+
 
   async function login(e) {
     e.preventDefault();

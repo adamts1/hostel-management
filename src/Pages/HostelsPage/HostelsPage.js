@@ -109,7 +109,6 @@ function HostelsPage({ activeUser }) {
           show={showCrudModel}
           onClose={() => setShowCrudModel(false)}
           hostelName={hostelName}
-          // hostelAddress={hostelAddress}
           action={action}
         />
         <WarningModel

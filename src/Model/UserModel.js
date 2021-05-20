@@ -16,6 +16,7 @@ export default class UserModel {
         this.end = parseUser.get("end");
         this.img = parseUser.get("img");
         this.activate = parseUser.get("activate");
+        this.tenant = parseUser.get("tenant");
         this.#parseUser = parseUser;
     }
 
@@ -126,6 +127,12 @@ export default class UserModel {
         const tenant = this.#parseUser.set('room', "ddddS");;
         console.log(tenant)
         // return(tenant)
+    }
+
+    async getTenant() {
+        const tenant = this.#parseUser;
+        const tenantUserModel = new UserModel(tenant);
+        return tenantUserModel
     }
 
     async deactivateTenant() {
