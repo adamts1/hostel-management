@@ -122,6 +122,12 @@ export default class UserModel {
         return userModelTenant;
     }
 
+    async updateTenantRoom(tenantToUpdate) {
+        const tenant = this.#parseUser.set('room', "ddddS");;
+        console.log(tenant)
+        // return(tenant)
+    }
+
     async deactivateTenant() {
         const tenant = this.#parseUser.set('activate', false);
         this.#parseUser.set('room', "");

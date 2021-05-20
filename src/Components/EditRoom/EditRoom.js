@@ -2,6 +2,8 @@ import './EditRoom.css'
 import SignInUpInput from '../SignInUpInput/SignInUpInput'
 import { Modal, Button, Form, Table, ToggleButton } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+
 
 // function EditRoom({show, onClose, roomNumber, maxBeds, pricePerDay, notes, onUpdate}) {
 function EditRoom({ show, onClose, onUpdate, room, activeUser }) {
@@ -9,7 +11,11 @@ function EditRoom({ show, onClose, onUpdate, room, activeUser }) {
   const [maxBedsState, setMaxBeds] = useState("");
   const [pricePerDayState, setPricePerDay] = useState("");
   const [notesState, setNotes] = useState("");
-  const [tenants, setTenant] = useState([])
+  const [tenants, setTenants] = useState([])
+  const [allTenants, setAllTenants] = useState([])
+  const [availebleTenants, setAvailebleTenants] = useState([])
+  const [showAddTenant, setShowAddTenant] = useState(false)
+  const { index } = useParams();
 
   useEffect(() => {
     try {
@@ -21,14 +27,20 @@ function EditRoom({ show, onClose, onUpdate, room, activeUser }) {
     } catch {
       console.log("No Tenant")
     }
-  }, [room])
+  }, [room.id])
 
   // Get All Tenants referaned by room for edit room Model
   useEffect(() => {
     async function fetchTenants() {
       try {
+        // Get all tenant related to current room 
         const tenants = await activeUser.getRoomTenants(room.id);
-        setTenant(tenants)
+        setTenants(tenants)
+        // Get all tenants 
+        const allTenants = await activeUser.getMyTenants(index);
+        // Reduice related tenant from all to get the availeble tenant 
+        const availebleTenants = allTenants.filter((elem) => !tenants.find(({ id }) => elem.id === id));
+        setAvailebleTenants(availebleTenants)
 
       } catch {
         console.log("No Tenants")
@@ -39,7 +51,6 @@ function EditRoom({ show, onClose, onUpdate, room, activeUser }) {
     }
   }, [room.id])
 
-
   function clearForm() {
     setRoomNumber("");
     setMaxBeds("");
@@ -49,18 +60,39 @@ function EditRoom({ show, onClose, onUpdate, room, activeUser }) {
 
 
   const updateRoom = () => {
-    onUpdate(roomNumberState, maxBedsState, pricePerDayState, notesState);
+    onUpdate(roomNumberState, maxBedsState, pricePerDayState, notesState, tenants);
     clearForm();
     onClose();
   }
 
-  const handleUpdateRoomTenant = (roomId) => {
-    const result = tenants.filter(tenant => tenant.id != roomId);
-    setTenant(result)
+
+  const handleUpdateRoomClose = () => {
+    onClose();
+    async function fetchTenants() {
+      const tenants = await activeUser.getRoomTenants(room.id);
+      setShowAddTenant(false)
+      setTenants(tenants)
+      const allTenants = await activeUser.getMyTenants(index);
+      // Reduice related tenant from all to get the availeble tenant 
+      const availebleTenants = allTenants.filter((elem) => !tenants.find(({ id }) => elem.id === id));
+      setAvailebleTenants(availebleTenants)
+    }
+    fetchTenants()
   }
 
+  const handleRemoveTenant = (curentTenant) => {
+    const result = tenants.filter(tenant => tenant.id != curentTenant.id);
+    setTenants(result)
+    setAvailebleTenants(availebleTenants.concat(curentTenant));
+  }
 
-
+  
+  const handleAddTenant = (curentTenant) => {
+    const result = availebleTenants.filter(tenant => tenant.id != curentTenant.id);
+    setTenants(tenants.concat(curentTenant))
+    setAvailebleTenants(result)
+    
+  }
 
   return (
     <div className='c-crudhostel'>
@@ -78,21 +110,35 @@ function EditRoom({ show, onClose, onUpdate, room, activeUser }) {
             <Table hover className="tenant-table" >
               <tbody>
                 {tenants.map(tenant =>
-                  <tr>
+                  <tr key={tenant.id}>
                     <td id={tenant.id}>{tenant.fname + " " + tenant.lname}   </td>
-                    <td>  <Button variant="outline-secondary" onClick={()=>handleUpdateRoomTenant(tenant.id)}>Remove </Button></td>
+                    <td><Button variant="outline-secondary" onClick={() => handleRemoveTenant(tenant)}> Remove </Button></td>
                   </tr>
                 )}
               </tbody>
             </Table>
             <div>
-                <Button className="add-tenant" variant="outline-success" >Add Tenant</Button>{' '}
-              </div>
+              <Button className="add-tenant" variant="outline-success" onClick={() => { setShowAddTenant(!showAddTenant) }} > Add Tenants </Button>
+            </div>
+            {showAddTenant
+              ? <Table hover className="tenant-table" >
+                <tbody>
+                  {availebleTenants.map(tenant =>
+                    <tr key={tenant.id}>
+                      <td id={tenant.id}>{tenant.fname + " " + tenant.lname}   </td>
+                      <td>  <Button variant="outline-success" onClick={() => handleAddTenant(tenant)}> Add </Button></td>
+                    </tr>
+                  )}
+                </tbody>
+              </Table>
+              : null
+            }
+
           </Form.Group>
         </Modal.Body>
         <Modal.Footer className="justify-content-center">
-          <Button variant="secondary" onClick={onClose}> Close </Button>
-          <Button className="Edit" variant="primary" onClick={updateRoom} >Edit</Button>
+          <Button variant="secondary" onClick={handleUpdateRoomClose}> Close </Button>
+          <Button className="Edit" variant="primary" onClick={updateRoom} > Edit </Button>
         </Modal.Footer>
       </Modal>
     </div>

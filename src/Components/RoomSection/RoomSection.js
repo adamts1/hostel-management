@@ -62,11 +62,20 @@ function RoomSection({ activeUser }) {
   }
 
   
-  async function handleUpdateRoom(roomNumber,maxBeds, pricePerDay, notes) {
+  async function handleUpdateRoom(roomNumber,maxBeds, pricePerDay, notes, tenants) {
+    tenants.map(tenant => handleUpdateTenantRoom(tenant))
     await roomInstance.updateRoom(roomNumber, maxBeds, pricePerDay, notes);
     const rooms = await hostelInstance.getMyRooms();
     setRooms(rooms)
   }
+
+  async function handleUpdateTenantRoom(tenant){
+    await tenant.updateTenantRoom(tenant);
+    
+
+
+  }
+
 
   return (
     <div className='c-roomsection'>
