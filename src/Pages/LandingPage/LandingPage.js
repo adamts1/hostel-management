@@ -2,6 +2,9 @@ import './LandingPage.css'
 import { Container, Row, Col, Image, Button, Selection } from 'react-bootstrap';
 
 function LandinPage() {
+  const pathPre = process.env.PUBLIC_URL;
+  console.log(process.env.PUBLIC_URL)
+
   return (
     <div className='p-landinpage'>
       <Container>
@@ -17,7 +20,7 @@ function LandinPage() {
               
           </Col>
           <Col sm={0} lg={6}>
-          <Image src={'/img/hostel.png'}/>  
+          <Image src={'img/hostel.png'}/>  
           </Col>
         </Row>
       </Container>

@@ -10,7 +10,6 @@ function EditRoom({ show, onClose, onUpdate, room, activeUser }) {
   const [pricePerDayState, setPricePerDay] = useState("");
   const [notesState, setNotes] = useState("");
   const [tenants, setTenant] = useState([])
-  const [tenantsString, setTenantsString] = useState([])
 
   useEffect(() => {
     try {
@@ -55,6 +54,13 @@ function EditRoom({ show, onClose, onUpdate, room, activeUser }) {
     onClose();
   }
 
+  const handleUpdateRoomTenant = (roomId) => {
+    const result = tenants.filter(tenant => tenant.id != roomId);
+    setTenant(result)
+  }
+
+
+
 
   return (
     <div className='c-crudhostel'>
@@ -73,14 +79,11 @@ function EditRoom({ show, onClose, onUpdate, room, activeUser }) {
               <tbody>
                 {tenants.map(tenant =>
                   <tr>
-                    <td>{tenant.fname + " " + tenant.lname}   </td>
-                    <td>  <Button variant="outline-secondary">Remove </Button></td>
+                    <td id={tenant.id}>{tenant.fname + " " + tenant.lname}   </td>
+                    <td>  <Button variant="outline-secondary" onClick={()=>handleUpdateRoomTenant(tenant.id)}>Remove </Button></td>
                   </tr>
                 )}
               </tbody>
-              
-              
-
             </Table>
             <div>
                 <Button className="add-tenant" variant="outline-success" >Add Tenant</Button>{' '}
