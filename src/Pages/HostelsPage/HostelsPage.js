@@ -7,7 +7,6 @@ import { Container, Accordion, Card, Row, Button, Col } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import Parse from 'parse';
 
-
 function HostelsPage({ activeUser }) {
   const [showCrudModel, setShowCrudModel] = useState(false);
   const [showWarningModel, setShowWarningModel] = useState(false);

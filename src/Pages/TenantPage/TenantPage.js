@@ -9,6 +9,28 @@ import { useState, useEffect } from 'react';
 function TenantPage({ activeUser }) {
   const { index } = useParams();
   const [showCreateCall, setShowCreateCall] = useState(false);
+  const [calls, setCalls] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try{
+        const calls = await activeUser.getMyCalls();
+        setCalls(calls);
+      }catch{
+        console.log("No Calls")
+      }
+    }
+    if (activeUser) {
+      fetchData();
+    }
+  }, [activeUser])
+
+
+  async function handleNewHostel(title, urgenLevel ,description) {
+    console.log(activeUser)
+    const newCall = await activeUser.createCall(title, urgenLevel ,description);
+    setCalls(calls.concat(newCall));
+  }
 
 
   return (
@@ -24,10 +46,9 @@ function TenantPage({ activeUser }) {
             <Button id="add-new" variant="outline-secondary" type="submit" onClick={() => setShowCreateCall(true)}  >Open Call</Button>
           </Col>
         </Row>
-      <CallAccordion/>
-      <CallAccordion/>
-      <CallAccordion/>
-      <CallAccordion/>
+        {calls.map(call =>
+              <CallAccordion/>
+            )}      
       </Col>
       <Col sm={12} lg={6}>
       <div className="summary-box">
@@ -49,6 +70,7 @@ function TenantPage({ activeUser }) {
       <CreateCall
         show={showCreateCall}
         onClose={() => setShowCreateCall(false)}
+        onCreate={handleNewHostel}
       />
     </Container>
     </div>

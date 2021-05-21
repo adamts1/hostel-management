@@ -1,5 +1,6 @@
 import Parse from 'parse';
 import HostelModel from '../Model/HostelModel'
+import CallModel from '../Model/CallModel'
 
 export default class UserModel {
     #parseUser  // storing the parseUser object as a private field (might need to use it)
@@ -82,6 +83,29 @@ export default class UserModel {
         return hostel;
     }
 
+    async createCall(title, urgenLevel ,description) {
+        const callTable = Parse.Object.extend('Call');
+        const newCall= new callTable();
+
+        newCall.set('title', title);
+        newCall.set('urgenLevel', urgenLevel);
+        newCall.set('description', description);
+        newCall.set('tenantId', this.#parseUser);
+
+        const parseCall = await newCall.save();
+        const call = new CallModel(parseCall);
+        return call;
+    }
+
+    async getMyCalls() {
+        const callTable = Parse.Object.extend('Call');
+        const query = new Parse.Query(callTable);
+        query.equalTo("tenantId", this.#parseUser);
+        const parseCalls = await query.find();
+        const calls = parseCalls.map(parseCall => new CallModel(parseCall));
+        return calls;
+    }
+
     static async signupTenant(tenantFName, tenantLName ,tenantEmail, tenantUsername,tenantPassword, tenantRoom, tenantRoomKey, tenantPayment, tenantStart, tenantEnd, hostelKey, img) {
         const user = new Parse.User()
         user.set("fname", tenantFName);
@@ -141,7 +165,6 @@ export default class UserModel {
         this.#parseUser.set('roomKey', "");
         const deactivatedTenant =  await tenant.save()
         const removedTenant = new UserModel(deactivatedTenant);
-
         return removedTenant
     }
 
