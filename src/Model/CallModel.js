@@ -5,7 +5,7 @@ export default class CallModel {
     constructor(parseCall) {
         this.id = parseCall.id;
         this.title = parseCall.get("title");
-        this.urgenLevel = parseCall.get("urgenLevel");
+        this.urgentLevel = parseCall.get("urgentLevel");
         this.description = parseCall.get("description");
         this.parseCall = parseCall;
     }

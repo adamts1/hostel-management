@@ -2,7 +2,7 @@ import './TenantPage.css';
 import { useParams } from 'react-router';
 import CreateCall from '../../Components/CreateCall/CreateCall'
 import CallAccordion from '../../Components/CallAccordion/CallAccordion'
-import { Container, Image, Card, Row, Button, Col } from 'react-bootstrap';
+import { Container, Accordion, Card, Row, Button, Col, Image } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 
 
@@ -25,19 +25,16 @@ function TenantPage({ activeUser }) {
     }
   }, [activeUser])
 
-
-  async function handleNewHostel(title, urgenLevel ,description) {
-    console.log(activeUser)
-    const newCall = await activeUser.createCall(title, urgenLevel ,description);
+  async function handleNewHostel(title, urgentLevel ,description) {
+    const newCall = await activeUser.createCall(title, urgentLevel ,description);
     setCalls(calls.concat(newCall));
   }
-
 
   return (
     <div className="p-tenantpage">
       <Container>
       <Row>
-      <Col sm={12} lg={6}>
+      <Col sm={12} lg={12}>
         <Row className="p-1 align-items-center">
           <Col>
             <h1>Hello {[activeUser["fname"]+"!"]}</h1>
@@ -46,9 +43,14 @@ function TenantPage({ activeUser }) {
             <Button id="add-new" variant="outline-secondary" type="submit" onClick={() => setShowCreateCall(true)}  >Open Call</Button>
           </Col>
         </Row>
+        <Accordion defaultActiveKey="0">
+
         {calls.map(call =>
-              <CallAccordion/>
+              <CallAccordion
+                call= {call}
+              />
             )}      
+            </Accordion>
       </Col>
       <Col sm={12} lg={6}>
       <div className="summary-box">

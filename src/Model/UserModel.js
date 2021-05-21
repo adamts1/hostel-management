@@ -83,15 +83,13 @@ export default class UserModel {
         return hostel;
     }
 
-    async createCall(title, urgenLevel ,description) {
+    async createCall(title, urgentLevel ,description) {
         const callTable = Parse.Object.extend('Call');
         const newCall= new callTable();
-
         newCall.set('title', title);
-        newCall.set('urgenLevel', urgenLevel);
+        newCall.set('urgentLevel', urgentLevel);
         newCall.set('description', description);
         newCall.set('tenantId', this.#parseUser);
-
         const parseCall = await newCall.save();
         const call = new CallModel(parseCall);
         return call;

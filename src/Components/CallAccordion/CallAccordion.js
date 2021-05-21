@@ -1,5 +1,5 @@
 import './CallAccordion.css'
-import { Accordion, Card, Button, Row, Col, Link } from 'react-bootstrap';
+import { Accordion, Card, Button, Row, Col } from 'react-bootstrap';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { AiOutlineFolderView } from 'react-icons/ai';
 import { IoIosArrowDropdown } from 'react-icons/io';
@@ -7,28 +7,25 @@ import {Redirect} from 'react-router-dom';
 import { useState } from 'react';
 
 
-function CallAccordion() {
+function CallAccordion({call}) {
+
 
     return (
         <div className="c-callaccordion">
             <Card>
-                <Card.Header>
-                    <Accordion.Toggle as={Button} variant="link" eventKey="1">
-                        <IoIosArrowDropdown color="white" /> <span>title</span>
+            <Card.Header>
+                    <Accordion.Toggle as={Button} variant="link" eventKey={call.id}>
+                        <IoIosArrowDropdown color="white" /> <span>{call.title}</span>
                     </Accordion.Toggle>
                 </Card.Header>
-                <Accordion.Collapse eventKey="1">
+                <Accordion.Collapse eventKey={call.id}>
                     <Card.Body>
                         <Row>
-                            <Col sm={12} lg={2}>Title: <span>Title</span></Col>
-                            <Col sm={12} lg={2}>Description: <span>Description</span></Col>
-                            <Col sm={12} lg={2}>Urgency Level: <span>Urgency Level</span></Col>
-                            <Col sm={12} lg={2}>Status: <span>Status</span></Col>
-                            <Col sm={12} lg={2}>Note: <span>Note</span></Col>
-                            <Col sm={12} lg={2} className="crud-icons" sm={12}>
-                                <MdEdit/>
-                                <MdDelete/>
-                                <AiOutlineFolderView/>
+                                <Col sm={12} lg={3}>Title: <span>{call.title}</span></Col>
+                                <Col sm={12} lg={3}>Description: <span>{call.description}</span></Col>
+                                <Col sm={12} lg={3}>Urgency Level: <span>{call.urgentLevel}</span></Col>
+                                <Col sm={12} lg={3} className="crud-icons" sm={12}>
+                            <Button variant="secondary"><span>Remove Call</span></Button>
                             </Col>
                         </Row>
                     </Card.Body>

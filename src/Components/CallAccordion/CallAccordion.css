@@ -11,6 +11,13 @@
     font-weight: bold;
     font-size: 19px;
 }
+.c-callaccordion .col-lg-3{
+    padding-top: 5px;
+}
+
+.c-callaccordion  .crud-icons{
+    padding-top: 0 !important;
+}
 
 
 .c-callaccordion .card-header{
@@ -41,6 +48,11 @@
 
 .c-callaccordion span{
     font-weight: bold;
+}
+
+.c-callaccordion button span{
+    font-size: 15px;
+    font-weight: 600;
 }
 
 .c-callaccordion .card-header span{
