@@ -12,7 +12,6 @@ import { useParams } from 'react-router';
 import EditRoom from '../EditRoom/EditRoom'
 
 
-
 function RoomSection({ activeUser }) {
   const [hostelInstance, setHostelInstance] = useState([]);
   const [rooms, setRooms] = useState([]);
@@ -47,6 +46,7 @@ function RoomSection({ activeUser }) {
   function handleWarningRoom(room) {
     setShowWarningModel(true)
     setRoomInstance(room)
+    console.log(room)
   }
 
   async function handleDeleteRoom() {
@@ -61,7 +61,6 @@ function RoomSection({ activeUser }) {
     setRoomInstance(room)
   }
 
-  
   async function handleUpdateRoom(roomNumber,maxBeds, pricePerDay, notes, tenants) {
     tenants.map(tenant => handleUpdateTenantRoom(tenant))
     await roomInstance.updateRoom(roomNumber, maxBeds, pricePerDay, notes);
@@ -71,11 +70,7 @@ function RoomSection({ activeUser }) {
 
   async function handleUpdateTenantRoom(tenant){
     await tenant.updateTenantRoom(tenant);
-    
-
-
   }
-
 
   return (
     <div className='c-roomsection'>
@@ -130,7 +125,6 @@ function RoomSection({ activeUser }) {
       />  
         : null
       }
-      
     </div>
   );
 }

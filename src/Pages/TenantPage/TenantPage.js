@@ -2,6 +2,8 @@ import './TenantPage.css';
 import { useParams } from 'react-router';
 import CreateCall from '../../Components/CreateCall/CreateCall'
 import CallAccordion from '../../Components/CallAccordion/CallAccordion'
+import WarningModel from '../../Components/WarningModel/WarningModel'
+import CallModel from '../../Model/CallModel'
 import { Container, Accordion, Card, Row, Button, Col, Image } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 
@@ -9,7 +11,11 @@ import { useState, useEffect } from 'react';
 function TenantPage({ activeUser }) {
   const { index } = useParams();
   const [showCreateCall, setShowCreateCall] = useState(false);
+
+  const [callInstance, setCallInstance] = useState();
+
   const [calls, setCalls] = useState([]);
+  const [showWarningModel, setShowWarningModel] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -25,13 +31,53 @@ function TenantPage({ activeUser }) {
     }
   }, [activeUser])
 
-  async function handleNewHostel(title, urgentLevel ,description) {
+  async function handleNewCall(title, urgentLevel ,description) {
     const newCall = await activeUser.createCall(title, urgentLevel ,description);
     setCalls(calls.concat(newCall));
   }
 
+    // Invoke warning model before delete
+    async function handleWarningCall(call) {
+      
+      setCallInstance(call)
+      setShowWarningModel(true)
+
+    }
+
+    async function handleDeleteCall() {
+      setShowWarningModel(false)
+      const removedCall = await callInstance.deleteCall();
+      const remainCall = calls.filter(call => call.id != removedCall.id)
+      setCalls(remainCall);
+    }
+
   return (
     <div className="p-tenantpage">
+      <div className="summary-box">
+      <Row>
+      <Col xs={12}>
+        <Image src={activeUser["img"].url()} rounded    />  
+      </Col>
+      <Col xs={12} className="profile-content">   
+     <div>
+        <span className='title'>Full Name: </span><span>{activeUser["fname"] +" "+activeUser["lname"]}</span>
+     </div>
+     <div>
+        <span className='title'>Start date: </span><span>{activeUser["start"]}</span>
+      </div>
+      <div>
+        <span className='title'>End date: </span><span>{activeUser["end"]}</span>
+      </div>  
+      <div>
+        <span className='title'>Payment: </span><span> {activeUser["payment"]}</span>
+      </div>
+      <div>
+        <span className='title'>Open Calls: </span><span>  {calls.length}</span>
+      </div>
+        </Col>
+     
+    </Row>
+      </div>
       <Container>
       <Row>
       <Col sm={12} lg={12}>
@@ -43,38 +89,36 @@ function TenantPage({ activeUser }) {
             <Button id="add-new" variant="outline-secondary" type="submit" onClick={() => setShowCreateCall(true)}  >Open Call</Button>
           </Col>
         </Row>
-        <Accordion defaultActiveKey="0">
-
+        {calls.length != 0
+        ? <Accordion defaultActiveKey="0">
         {calls.map(call =>
               <CallAccordion
                 call= {call}
+                onDelete={handleWarningCall}
               />
             )}      
             </Accordion>
-      </Col>
-      <Col sm={12} lg={6}>
-      <div className="summary-box">
-      <Row>
-      <Col xs={6} lg={6}>
-        <h4>Full Name: {activeUser["fname"] +" "+activeUser["lname"]}</h4>
-        <h4>Start date: {activeUser["start"]}</h4>
-        <h4>End date: {activeUser["end"]}</h4>
-        <h4>Payment: {activeUser["payment"]}</h4>
-        <h4>Open Calls: 1</h4>
-        </Col>
-        <Col xs={6} lg={6}>
-        <Image src={activeUser["img"].url()} thumbnail  />  
-      </Col>
-    </Row>
-      </div>
+      : <h2 className="no-data">No Calls...)</h2>
+      }
+        
       </Col>
       </Row>
       <CreateCall
         show={showCreateCall}
         onClose={() => setShowCreateCall(false)}
-        onCreate={handleNewHostel}
+        onCreate={handleNewCall}
       />
     </Container>
+    {callInstance
+    ?<WarningModel
+          show={showWarningModel}
+          onClose={() => setShowWarningModel(false)}
+          onDelete={handleDeleteCall}
+          actionOnInstanse="Call of:  "
+          instanseName={callInstance.title}
+        />
+        :null
+    }
     </div>
   );
 }

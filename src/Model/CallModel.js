@@ -9,4 +9,9 @@ export default class CallModel {
         this.description = parseCall.get("description");
         this.parseCall = parseCall;
     }
+
+    async deleteCall() {
+        const call = this.parseCall.destroy();
+        return call;
+    }
 }

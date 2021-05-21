@@ -10,9 +10,15 @@
 
 .c-navbar .brand a{
     color: #5E6C84;
-
 }
 
+
+.c-navbar span{
+
+    font-weight: bold;
+    margin-right: 22px;
+    color: black;
+}
 
 .c-navbar button{
     margin-right: 10px;

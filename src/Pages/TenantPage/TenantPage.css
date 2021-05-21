@@ -8,9 +8,13 @@
     overflow:auto;
 }
 
-
 .p-tenantpage svg{
     margin: 0 0 2px 7px;
+}
+
+.p-tenantpage .container{
+    max-width: 900px;
+    padding: 15px
 }
 
 
@@ -25,16 +29,46 @@
 }
 
 .summary-box{
-    height: 307px;
-    width: 459px;
-    border: orangered 2px solid;
-    margin-top: 123px;
-    margin-left: 63px;
+    height: 500px;
+    width: 236px;
+    position: absolute;
+    top: 135px;
+    left: 39px;
+    background-color: #E7E9EB;
+}
+
+.summary-box .title{
+    font-weight: bold;
 }
 
 .p-tenantpage  img {
-    height: 200px;
+    display: block;
+    height: 169px;
     object-fit: cover;
-    margin-top: 42px;
+    background-color: #E7E9EB;
+
+    margin: 5px auto;
+    border: 2px black solid;
 }
+
+.p-tenantpage .profile-content{
+    padding: 25px;
+    font-weight: bolder;
+
+}
+
+.no-data{
+    margin: 20px;
+    color: green;
+}
+
+
+@media (max-width: 980px){ 
+
+    .p-tenantpage .summary-box{
+        display: none;
+    
+    }
+
+    }
 

@@ -7,9 +7,6 @@ import { useState } from 'react';
 
 
 function WarningModel({ show, onClose, instanseName, actionOnInstanse, onDelete }) {
-
-  
-
     return (
         <div className='c-warningmodel'>
 

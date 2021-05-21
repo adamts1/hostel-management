@@ -7,7 +7,7 @@ import {Redirect} from 'react-router-dom';
 import { useState } from 'react';
 
 
-function CallAccordion({call}) {
+function CallAccordion({call, onDelete}) {
 
 
     return (
@@ -25,7 +25,7 @@ function CallAccordion({call}) {
                                 <Col sm={12} lg={3}>Description: <span>{call.description}</span></Col>
                                 <Col sm={12} lg={3}>Urgency Level: <span>{call.urgentLevel}</span></Col>
                                 <Col sm={12} lg={3} className="crud-icons" sm={12}>
-                            <Button variant="secondary"><span>Remove Call</span></Button>
+                            <Button variant="secondary" onClick={()=>onDelete(call)} ><span>Remove Call</span></Button>
                             </Col>
                         </Row>
                     </Card.Body>

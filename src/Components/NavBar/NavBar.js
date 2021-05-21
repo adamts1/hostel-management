@@ -16,6 +16,7 @@ function NavBar({onLogout, activeUser}) {
                     <div className="float-right buttons">
                         {!activeUser ?<Link to="/login"> <Button variant="outline-light text-dark">Log in</Button></Link>: null}
                         {!activeUser ?<Link to="/signup"><Button variant="primary text-white">Sign up</Button></Link>: null}
+                        {activeUser ? <span>Hello <span>{activeUser.fname} !</span></span>: null }
                         {activeUser ?<Link to="/"><Button variant="outline-light text-dark" onClick={onLogout}>Logout</Button></Link>: null}
                     </div>
                 </Navbar>
