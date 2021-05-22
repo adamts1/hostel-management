@@ -7,7 +7,7 @@ function Footer() {
   return (
     <div className='c-footer'>
         <footer  class="text-white text-dark">
-          <div>
+          <div className="footer-personal-data">
             <ul>
               <li className='global-footer-list-item'>
                 <a>Facebook</a>

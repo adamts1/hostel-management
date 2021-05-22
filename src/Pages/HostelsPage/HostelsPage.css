@@ -25,3 +25,17 @@
     margin-top: 50px !important;
 }
 
+
+@media (max-width: 1200px){ 
+    .p-hostelpage .container .nav-link {
+       padding: 1.0rem 1.2rem;
+     }
+ 
+     .p-hostelspage{
+       height: calc(100vh - 216px);
+   
+   }
+ 
+ 
+    }
+

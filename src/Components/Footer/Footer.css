@@ -51,12 +51,21 @@ footer{
 
 
 
-@media (max-width: 320px){ 
-
+@media (max-width: 980px){ 
+    
+    .c-footer {
+        height:140px !important;
+    }
     .c-footer footer ul li{
         display: flow-root;
         color: #5E6C84;
         /* margin: 10px 2rem; */
     }
+
+    .footer-personal-data {
+        
+    display: none;
+    }
+    
 
     }

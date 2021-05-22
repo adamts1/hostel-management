@@ -89,5 +89,10 @@
       padding: 1.0rem 1.2rem;
     }
 
+    .p-hostelpage{
+      height: calc(100vh - 216px);
+  
+  }
+
 
    }
