@@ -118,7 +118,10 @@ function EditRoom({ show, onClose, onUpdate, room, activeUser }) {
               </tbody>
             </Table>
             <div>
-              <Button className="add-tenant" variant="outline-success" onClick={() => { setShowAddTenant(!showAddTenant) }} > Add Tenants </Button>
+              {showAddTenant  
+              ?<Button className="add-tenant" variant="outline-info" onClick={() => { setShowAddTenant(!showAddTenant) }} >Close Availeble Tenants </Button>
+              :<Button className="add-tenant" variant="outline-success" onClick={() => { setShowAddTenant(!showAddTenant) }} >Open Availeble Tenants </Button>
+              }
             </div>
             {showAddTenant
               ? <Table hover className="tenant-table" >

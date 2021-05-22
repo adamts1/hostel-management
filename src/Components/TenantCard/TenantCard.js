@@ -26,15 +26,13 @@ function TenantCard(props) {
                         <p><span className="font-weight-bold">Payment: </span><span>{props.payment}</span></p>
                         <div className="card-icon-wrper">
                             <Row>
-                                <Col xs={4} className="crud-icons">
+                                <Col xs={6} className="crud-icons">
                                     <MdEdit />
                                 </Col>  
-                                <Col xs={4} className="crud-icons">
+                                <Col xs={6} className="crud-icons">
                                     <MdDelete onClick={()=>props.onDelete(props.fname, props.lname, props.id)} />
                                 </Col>
-                                <Col xs={4} className="crud-icons">
-                                    <AiOutlineFolderView />
-                                </Col>
+                              
                             </Row>
                         </div>
                     </Card.Text>

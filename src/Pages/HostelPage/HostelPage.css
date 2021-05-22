@@ -95,8 +95,12 @@
 
     .p-hostelpage{
       height: calc(100vh - 216px);
-  
-  }
+    }
+
+    .p-hostelpage .container .nav-tabs {
+     
+      margin-top: 2px;
+    }
 
 
    }

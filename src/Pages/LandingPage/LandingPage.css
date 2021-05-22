@@ -40,6 +40,12 @@
 
 
 @media (max-width: 980px){ 
+
+
+.p-landinpage{
+    margin-top: -96px;
+}
+    
 .p-landinpage img {
     display: none;
 }

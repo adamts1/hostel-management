@@ -56,15 +56,13 @@ import { X } from 'react-bootstrap-icons';
                     <div className="card-icon-wrper">
                     <hr />
                         <Row>
-                        <Col xs={4} className="crud-icons">
+                        <Col xs={6} className="crud-icons">
                                 <MdEdit  onClick={()=>editClick(room)} />
                         </Col>
-                        <Col xs={4} className="crud-icons">   
+                        <Col xs={6} className="crud-icons">   
                                 <MdDelete onClick={()=>onDelete(room)}/>
                         </Col>        
-                        <Col xs={4} className="crud-icons">       
-                                <AiOutlineFolderView />
-                        </Col>
+                   
                         </Row>
                         </div>
                     </Card.Text>
