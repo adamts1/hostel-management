@@ -106,6 +106,17 @@ export default class UserModel {
         return calls;
     }
 
+
+    async getHostelCalls(hostelKey) {
+        const callTable = Parse.Object.extend('Call');
+        const query = new Parse.Query(callTable);
+        query.equalTo("hostelKey", hostelKey);
+        const parseCalls = await query.find();
+        const calls = parseCalls.map(parseCall => new CallModel(parseCall));
+        
+        return calls;
+    }
+
     static async signupTenant(tenantFName, tenantLName ,tenantEmail, tenantUsername,tenantPassword, tenantRoom, tenantRoomKey, tenantPayment, tenantStart, tenantEnd, hostelKey, img) {
         const user = new Parse.User()
         user.set("fname", tenantFName);

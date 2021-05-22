@@ -58,7 +58,7 @@ function HostelPage({ activeUser }) {
           <TenantsSection activeUser={activeUser} />
         }
         {tabKey === 'calls' &&
-          <CallsSection/>
+          <CallsSection activeUser={activeUser}/>
         }
       </Container>
     </div>
