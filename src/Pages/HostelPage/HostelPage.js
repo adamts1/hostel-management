@@ -15,15 +15,6 @@ function HostelPage({ activeUser }) {
   const [rooms, setRooms] = useState([]);
   const { index } = useParams();
 
-  // const [redirectTo, setRedirectTo] = useState();
-
-  // if (redirectTo !== undefined) {
-  //     return <Redirect to={'/hostelspage'}/>
-  // }
-  
-
-
-
 
   useEffect(() => {
     async function getHostelsInstance() {
@@ -53,7 +44,7 @@ function HostelPage({ activeUser }) {
           onSelect={(k) => setTabKey(k)}>
           <Tab eventKey="rooms" title="Rooms">
           </Tab>
-          <Tab eventKey="tenents" title="Tenents">
+          <Tab eventKey="tenants" title="Tenants">
           </Tab>
           <Tab eventKey="calls" title="Calls" >
           </Tab>
@@ -62,7 +53,7 @@ function HostelPage({ activeUser }) {
         {tabKey === 'rooms' &&
           <RoomSection activeUser={activeUser}  />
         }
-        {tabKey === 'tenents' &&
+        {tabKey === 'tenants' &&
           <TenantsSection activeUser={activeUser} />
         }
         {tabKey === 'calls' &&

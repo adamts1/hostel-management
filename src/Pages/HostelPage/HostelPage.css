@@ -12,6 +12,10 @@
    font-weight: bold;
 }
 
+.p-hostelpage a{
+   color: black;
+}
+
 .p-hostelpage .container .cards-warper{
    display: flex;
    flex-direction: row;

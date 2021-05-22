@@ -33,7 +33,7 @@
 
 .summary-box{
     height: 500px;
-    width: 236px;
+    /* width: 236px; */
     position: absolute;
     top: 48px;
     right: 139px;
