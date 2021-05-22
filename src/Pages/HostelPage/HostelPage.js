@@ -3,6 +3,7 @@ import { Container, Row, Tabs, Col, Tab } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import RoomSection from '../../Components/RoomSection/RoomSection'
 import TenantsSection from '../../Components/TenantsSection/TenantsSection'
+import CallsSection from '../../Components/CallsSection/CallsSection'
 import Parse from 'parse';
 import HostelModel from '../../Model/HostelModel'
 import { useParams } from 'react-router';
@@ -23,7 +24,6 @@ function HostelPage({ activeUser }) {
       const parseHostel = await query.get(index);
       const parseHostelInstance = new HostelModel(parseHostel)
       const rooms = await parseHostelInstance.getMyRooms();
-
       setHostelInstance(parseHostelInstance)
       setRooms(rooms)
     }
@@ -58,7 +58,7 @@ function HostelPage({ activeUser }) {
           <TenantsSection activeUser={activeUser} />
         }
         {tabKey === 'calls' &&
-          <div>calls</div>
+          <CallsSection/>
         }
       </Container>
     </div>

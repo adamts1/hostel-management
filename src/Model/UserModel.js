@@ -18,6 +18,7 @@ export default class UserModel {
         this.img = parseUser.get("img");
         this.activate = parseUser.get("activate");
         this.tenant = parseUser.get("tenant");
+        this.hostelKey = parseUser.get("hostelKey");
         this.#parseUser = parseUser;
     }
 
@@ -89,6 +90,7 @@ export default class UserModel {
         newCall.set('title', title);
         newCall.set('urgentLevel', urgentLevel);
         newCall.set('description', description);
+        newCall.set('hostelKey', this.hostelKey);
         newCall.set('tenantId', this.#parseUser);
         const parseCall = await newCall.save();
         const call = new CallModel(parseCall);

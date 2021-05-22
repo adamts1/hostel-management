@@ -59,9 +59,9 @@ function SignInUp({ onLogin, activeUser, type }) {
                 <SignInUpInput type="text" placeHolder="First Name" value={fname} onChange={e => setFname(e.target.value)} />
                 <SignInUpInput type="text" placeHolder="Last Name" value={lname} onChange={e => setLname(e.target.value)} />
 
-                <Form.Group controlId="formBasicCheckbox">
+                {/* <Form.Group controlId="formBasicCheckbox">
                   <Form.Check type="checkbox" label="Remember Me" />
-                </Form.Group>
+                </Form.Group> */}
 
                 <hr />
                 <Link to="/login"><span><a href="">Already have an account? Log In</a></span></Link>

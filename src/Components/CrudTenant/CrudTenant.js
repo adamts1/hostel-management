@@ -18,6 +18,8 @@ function CrudTenant({ show, onClose, onCreate, rooms }) {
   const [tenantEnd, setTenantEnd] = useState();
   const [img, setImg] = useState(null);
 
+  const pathPre = process.env.PUBLIC_URL;
+
   function clearForm() {
     setTenantFName("");
     setTenantLName("");
@@ -70,11 +72,11 @@ function CrudTenant({ show, onClose, onCreate, rooms }) {
             <SignInUpInput value={tenantEnd} type="date" placeHolder="End" onChange={e => setTenantEnd(e.target.value)} />
             <div className="file-input-warper">
               <label for="file-input">
-                <img src={'/img/upload.gif'} />
+                <img src={pathPre+'/img/upload.gif'} />
                 <p>Upload profile picture</p>
               </label>
             </div>
-            <Form.Control id="file-input" type="file" accept="image/*" onChange={handleFileChange} src={'/img/upload.png'} />
+            <Form.Control id="file-input" type="file" accept="image/*" onChange={handleFileChange}  />
 
 
             <Image src={img ? URL.createObjectURL(img) : ""} />
