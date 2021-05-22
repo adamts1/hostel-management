@@ -13,9 +13,17 @@ function HostelPage({ activeUser }) {
   const [hostelInstance, setHostelInstance] = useState([]);
   const [tabKey, setTabKey] = useState('rooms')
   const [rooms, setRooms] = useState([]);
-
-
   const { index } = useParams();
+
+  // const [redirectTo, setRedirectTo] = useState();
+
+  // if (redirectTo !== undefined) {
+  //     return <Redirect to={'/hostelspage'}/>
+  // }
+  
+
+
+
 
   useEffect(() => {
     async function getHostelsInstance() {
@@ -36,7 +44,7 @@ function HostelPage({ activeUser }) {
       <Container>
         <Row className="p-1 align-items-center">
           <Col>
-            <h1>{hostelInstance.hostelName}</h1>
+            <h1><a href='https://adamts1.github.io/hostel-management/#/hostelspage'>{hostelInstance.hostelName} </a></h1>
           </Col>
         </Row>
         <Tabs

@@ -11,7 +11,10 @@ function NavBar({onLogout, activeUser}) {
                 <Navbar className="p-3">
                     <div className='brand'>
                         <BsHouseFill className="iconWarper" className="icon" />
-                        <Navbar.Brand href="#home">HOSTEL MANAGMENT</Navbar.Brand>
+                        {activeUser
+                        ?<Navbar.Brand href="https://adamts1.github.io/hostel-management/#/hostelspage">HOSTEL MANAGMENT</Navbar.Brand>
+                        :<Navbar.Brand href="https://adamts1.github.io/hostel-management/">HOSTEL MANAGMENT</Navbar.Brand>
+                        }
                     </div>
                     <div className="float-right buttons">
                         {!activeUser ?<Link to="/login"> <Button variant="outline-light text-dark">Log in</Button></Link>: null}
