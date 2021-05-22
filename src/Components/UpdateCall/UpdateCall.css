@@ -1,0 +1,12 @@
+.modal-dialog input[type=radio]{
+    margin-left: 20px !important;
+    
+}
+
+.modal-dialog .radio-warper {
+    margin: 20px;
+    text-align: start;
+    font-weight: bold;
+    font-size: 18px;
+
+}

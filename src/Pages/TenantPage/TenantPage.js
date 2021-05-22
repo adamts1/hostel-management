@@ -53,7 +53,10 @@ function TenantPage({ activeUser }) {
 
   return (
     <div className="p-tenantpage">
-      <div className="summary-box">
+      <Container>
+        <Row>
+        <Col sm={12} lg={4}>
+        <div className="summary-box">
         <Row>
           <Col xs={12}>
             <Image src={activeUser["img"].url()} rounded />
@@ -78,12 +81,11 @@ function TenantPage({ activeUser }) {
 
         </Row>
       </div>
-      <Container>
-        <Row>
-          <Col sm={12} lg={12}>
+      </Col>
+          <Col sm={12} lg={8} className="call-accordion">
             <Row className="p-1 align-items-center">
               <Col>
-                <h1>Hello {[activeUser["fname"] + "!"]}</h1>
+                <h1>My Calls</h1>
               </Col>
               <Col>
                 <Button id="add-new" variant="outline-secondary" type="submit" onClick={() => setShowCreateCall(true)}  >Open Call</Button>
@@ -95,6 +97,7 @@ function TenantPage({ activeUser }) {
                   <CallAccordion
                     call={call}
                     onDelete={handleWarningCall}
+                    role={"tenant"}
                   />
                 )}
               </Accordion>

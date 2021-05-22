@@ -1,8 +1,12 @@
 
 .c-callaccordion .card{
- 
     padding: 10px;
     border: none;
+}
+
+.update-status{
+    background-color: #008B8B !important;
+    margin-top: 12px;
 }
 
 .c-callaccordion button{
@@ -21,8 +25,7 @@
 
 
 .c-callaccordion .card-header{
-    /* background-image: linear-gradient(orangered, red); */
-    background-image: linear-gradient(grey, black);
+    /* background-image: linear-gradient(grey, black); */
     border-radius: 10px !important;
     box-shadow: 4px 3px 8px grey;
 }

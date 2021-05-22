@@ -33,8 +33,6 @@ import { X } from 'react-bootstrap-icons';
             }
           }, [])
 
-
-
     return (
         <div className="c-roomcard">
             <Card

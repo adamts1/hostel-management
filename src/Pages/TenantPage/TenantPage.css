@@ -12,11 +12,14 @@
     margin: 0 0 2px 7px;
 }
 
-.p-tenantpage .container{
-    max-width: 900px;
-    padding: 15px
-}
+    /* .p-tenantpage .container{
+        max-width: 900px;
+        padding: 15px
+    } */
 
+.p-tenantpage  .call-accordion{   
+    margin-left: 253px;
+}
 
 .p-tenantpage #add-new{
     float: right;
@@ -32,8 +35,8 @@
     height: 500px;
     width: 236px;
     position: absolute;
-    top: 135px;
-    left: 39px;
+    top: 48px;
+    right: 139px;
     background-color: #E7E9EB;
 }
 
@@ -68,6 +71,10 @@
     .p-tenantpage .summary-box{
         display: none;
     
+    }
+
+    .p-tenantpage  .call-accordion{   
+        margin-left: 0;
     }
 
     }

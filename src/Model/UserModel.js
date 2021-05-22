@@ -78,7 +78,6 @@ export default class UserModel {
         newHostel.set('hostelAddress', addrees);
         newHostel.set('numberOfRooms', numOfRooms);
         newHostel.set('userId', this.#parseUser);
-
         const parseHostel = await newHostel.save();
         const hostel = new HostelModel(parseHostel);
         return hostel;
@@ -91,6 +90,7 @@ export default class UserModel {
         newCall.set('urgentLevel', urgentLevel);
         newCall.set('description', description);
         newCall.set('hostelKey', this.hostelKey);
+        newCall.set('status', "sent");
         newCall.set('tenantId', this.#parseUser);
         const parseCall = await newCall.save();
         const call = new CallModel(parseCall);
