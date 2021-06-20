@@ -1,5 +1,7 @@
 import './LandingPage.css'
 import { Container, Row, Col, Image, Button, Selection } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
 
 function LandinPage() {
   const pathPre = process.env.PUBLIC_URL;
@@ -13,9 +15,7 @@ function LandinPage() {
                 <h1>Manage your hostels from anyware !</h1>
                 <p className="text-center">Create your own hostels and and rooms, track capacity, system calls, all in one app!</p>
               <Row className="justify-content-center">
-                <Button variant="primary" size="lg">
-                  Get Started 
-                </Button>
+                <Link to="/login"> <Button>Get Started</Button></Link>
               </Row>
               
           </Col>

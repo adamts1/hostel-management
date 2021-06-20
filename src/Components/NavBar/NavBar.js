@@ -1,6 +1,6 @@
 import './NavBar.css'
 import { Navbar, Nav, NavDropdown, Button } from 'react-bootstrap';
-import { HashRouter, Switch, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { BsHouseFill } from 'react-icons/bs';
 
 

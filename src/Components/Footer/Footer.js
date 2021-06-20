@@ -10,16 +10,13 @@ function Footer() {
           <div className="footer-personal-data">
             <ul>
               <li className='global-footer-list-item'>
-                <a>Facebook</a>
+                <a href="https://www.linkedin.com/in/adam-tsityat-05340a124/">LinkdIn</a>
               </li>
               <li className='global-footer-list-item'>
-                <a>LinkdIn</a>
+                <a href="https://adamts1.github.io/my-interactive-resume/">Personal Website</a>
               </li>
               <li className='global-footer-list-item'>
-                <a>Personal Website</a>
-              </li>
-              <li className='global-footer-list-item'>
-                <a>GitHub</a>
+                <a href="https://github.com/adamts1/">GitHub</a>
               </li>
             </ul>
           </div>
