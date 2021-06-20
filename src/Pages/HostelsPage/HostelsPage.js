@@ -33,6 +33,7 @@ function HostelsPage({ activeUser }) {
   }, [activeUser])
 
   async function handleNewHostel(name, address, numOfRooms) {
+    console.log(activeUser)
     const newHostel = await activeUser.createHostel(name, address, numOfRooms);
     setHostels(hostels.concat(newHostel));
   }

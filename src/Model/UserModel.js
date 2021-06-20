@@ -26,6 +26,7 @@ export default class UserModel {
     static async login(email, pwd) {
         const parseUser = await Parse.User.logIn(email, pwd);
         UserModel.activeUser = new UserModel(parseUser);
+        console.log(UserModel.activeUser, "login")
         return UserModel.activeUser;
     }
 
@@ -39,6 +40,7 @@ export default class UserModel {
 
         const parseUser =  await user.signUp()
         UserModel.activeUser = new UserModel(parseUser)
+        console.log(UserModel.activeUser, "SignUp")
         return UserModel.activeUser   
     }
 
@@ -80,6 +82,7 @@ export default class UserModel {
         newHostel.set('userId', this.#parseUser);
         const parseHostel = await newHostel.save();
         const hostel = new HostelModel(parseHostel);
+        console.log(hostel)
         return hostel;
     }
 

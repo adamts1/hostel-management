@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 
 function LandinPage() {
   const pathPre = process.env.PUBLIC_URL;
-  console.log(process.env.PUBLIC_URL)
 
   return (
     <div className='p-landinpage'>

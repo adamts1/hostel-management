@@ -39,9 +39,8 @@ function SignInUp({ onLogin, activeUser, type }) {
 
   async function signup(e) {
     e.preventDefault();
-    const activeUser = UserModel.signup(email, pwd, fname, lname)
+    const activeUser = await UserModel.signup(email, pwd, fname, lname)
     onLogin(activeUser)
-
   }
 
   if (type === "Signup") {
@@ -58,11 +57,6 @@ function SignInUp({ onLogin, activeUser, type }) {
                 <SignInUpInput type="password" placeHolder="Enter Password" value={pwd} onChange={e => setPwd(e.target.value)} />
                 <SignInUpInput type="text" placeHolder="First Name" value={fname} onChange={e => setFname(e.target.value)} />
                 <SignInUpInput type="text" placeHolder="Last Name" value={lname} onChange={e => setLname(e.target.value)} />
-
-                {/* <Form.Group controlId="formBasicCheckbox">
-                  <Form.Check type="checkbox" label="Remember Me" />
-                </Form.Group> */}
-
                 <hr />
                 <Link to="/login"><span><a href="">Already have an account? Log In</a></span></Link>
                 <Button variant="primary" type="submit">
